@@ -646,10 +646,13 @@ section {
 .about .content ul li {
   padding: 0 0 10px 30px;
   position: relative;
+  
+  
 }
 
 .about .content ul i {
   position: absolute;
+  
   font-size: 20px;
   left: 0;
   top: -3px;
@@ -1174,7 +1177,7 @@ section {
 .portfolio .portfolio-wrap .portfolio-info h4 {
   font-size: 18px;
   font-weight: 600;
-  padding-right: 50px;
+  /* padding-right: 50px; */
 }
 
 .portfolio .portfolio-wrap .portfolio-info h4 a {
@@ -1190,7 +1193,7 @@ section {
   color: #6c757d;
   font-size: 14px;
   margin-bottom: 0;
-  padding-right: 50px;
+  /* padding-right: 50px; */
 }
 
 .portfolio .portfolio-wrap:hover img {

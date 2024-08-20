@@ -11,6 +11,10 @@ class inicioController {
     paciente(req,res) {
         res.render("paciente.ejs");
     }
+
+    vlibras(req,res) {
+        res.render("vlibras.ejs");
+    }
 }
 
 module.exports = inicioController;
