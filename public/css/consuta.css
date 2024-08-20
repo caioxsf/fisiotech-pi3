@@ -1,0 +1,54 @@
+
+.form-container {
+    max-width: 600px;
+    padding: 20px;
+    margin: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0px 15px rgba(0, 0, 0, 0.1);
+    background-color: white;
+}
+
+.form-label {
+    font-size: 14px;
+}
+
+.form-check-label {
+    font-size: 14px;
+}
+
+.container
+{
+    text-align: center;
+}
+
+.form-control,.form-select
+{
+    font-size: 13px;
+}
+
+.form-container-div
+{
+    padding-top: 100px;
+}
+
+.btn-container
+{
+    width: 200px;
+}
+
+.btn-primary 
+{
+    border-color: #0A3530;
+    background-color: #06231C;
+}
+.btn-primary:hover
+{
+    background-color: #0A3530;
+    border-color: #0A3530;
+}
+
+.btn-primary::before
+{
+    background-color: white;
+}

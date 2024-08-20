@@ -1,0 +1,116 @@
+.container-tabela
+{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+    margin-top: 25px;
+}
+
+.tab
+{
+    border-collapse: collapse;
+    text-align: center;
+}
+
+th,td
+{
+    padding: 5px;
+}
+
+th
+{
+    background-color: #0A3530;
+    color: white;
+    border-left: 1px solid white;
+}
+td
+{
+    background-color: white;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.418);
+    
+}
+
+tr
+{
+    box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
+}
+
+.btn-pai
+{
+    display: flex;
+    justify-content: center;
+}
+.btn-exclusao
+{
+    margin-bottom: 50px;
+    background-color: lightcoral;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    transition: 0.2s ease-in-out;
+    color: white;
+}
+
+.btn-exclusao:hover
+{
+    color: white;
+    background-color: rgb(243, 87, 87);
+} 
+
+.input-ch
+{
+    display: none;
+}
+
+@media screen and (max-width: 1230px)
+{
+
+    .input-ch
+    {
+        position: relative;
+        top: 70px;
+        background-color: #0A3530;
+        color: white;
+        padding: 3px;
+        text-align: center;
+        cursor: pointer;
+        display: block;
+        transition: 0.2s ease-in-out;
+    }
+
+    .input-ch:hover
+    {
+        background-color: #13534c;
+    }
+
+    th
+    {
+        display: none;
+        color: #0A3530;
+    }  
+
+    td
+    {
+        display: grid;
+
+        gap: .5rem;
+        grid-template-columns: 12ch auto;
+        text-align: center;
+    }
+
+    td,td
+    {
+        width: 400px;
+        margin: 0;
+        padding: 0px;
+    }
+
+    td::before
+    {
+        content: attr(data-th) " ";
+        font-weight: bold;
+        background-color: #0A3530;
+        color: white;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.493);
+    }
+}

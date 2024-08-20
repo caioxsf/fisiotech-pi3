@@ -1,0 +1,85 @@
+
+<body background="/img/background/bg.png">
+      
+      <div class="d-flex justify-content-center form-container-div">
+        
+        <form class="row g-3 form-container" onsubmit="event.preventDefault()">
+          <h1 class="d-flex justify-content-center">Agendar Consulta</h1>
+          <div class="col-md-6">
+            <label for="nome" class="form-label">Nome Completo</label>
+            <input type="text" class="form-control" id="nome" onblur="validarNomes(this)">
+            
+          </div>
+          <div class="col-md-6">
+            <label for="telefone" class="form-label">Telefone</label>
+            <input type="text" class="form-control" id="telefone" onblur="mascara('(##)#####-####',this,event)">
+          </div>
+          <div class="col-6">
+            <label for="email" class="form-label">E-mail</label>
+            <input type="text" class="form-control" id="email" onblur="validarEmail(this)">
+          </div>
+    
+          <div class="col-6">
+            <label for="servico" class="form-label">Serviço desejado</label>
+            <select id="servico" class="form-select" onblur="borda(this)">
+              <option disabled selected>Selecione uma opção</option>
+              <option value="Avaliação Fisioterapêutica">Avaliação Fisioterapêutica</option>
+              <option value="Fisioterapia Ortopédica ">Fisioterapia Ortopédica</option>
+              <option value="Fisioterapia Neurológica">Fisioterapia Neurológica</option>
+              <option value="Fisioterapia Respiratória">Fisioterapia Respiratória</option>
+              <option value="Fisioterapia Geriátrica">Fisioterapia Geriátrica</option>
+              <option value="Fisioterapia Pediátrica">Fisioterapia Pediátrica</option>
+              <option value="Fisioterapia Aquática">Fisioterapia Aquática</option>
+            </select>
+          </div>
+          <div class="col-6">
+            <label for="data" class="form-label">Data</label>
+            <input type="date" class="form-control" id="data" onblur="validarDataConsulta(this)">
+          </div>
+          <div class="col-6">
+            <label for="hora" class="form-label">Horário ( 8:00 - 17:00 )</label>
+            <input type="time" class="form-control" id="hora" onblur="validarHoraConsulta(this)">
+          </div>
+
+          <div class="mb-3">
+            <label for="obs" class="form-label">Observações</label>
+            <textarea class="form-control" id="obs" rows="4"></textarea>
+          </div>
+          
+          <div class="col-12 d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary btn-container" id="btn-add">Cadastrar</button>
+          </div>
+          <label for="ckTodos" class="input-ch" id="input-ch-todos">Selecionar Todos</label>
+        </form>
+      </div>
+
+      <div class="container-tabela">
+
+        <table id="grid" class="tab" style="display: none;">
+        <thead>
+          <tr>
+              <th class="coluna"><input type="checkbox" id="ckTodos" onchange=""></th>
+              <th class="coluna">Nome</th>
+              <th class="coluna">Telefone</th>
+              <th class="coluna">Email</th>
+              <th class="coluna">Serviço</th>
+              <th class="coluna">Data</th>
+              <th class="coluna">Horário</th>
+              <th class="coluna">Obs</th>
+              <th class="coluna x"> </th>
+
+          </tr>
+        </thead>
+
+          <tbody id="tb-body">
+              <!-- tabela vai ser criada aqui -->
+          </tbody>
+
+        </table>
+      </div>
+
+      <div id="chSelecionarTodos" class="btn-pai">		
+        <input type="button" value="Excluir Selecionados" id="btnExcluirSelecionados" class="btn-exclusao" style="display: none;">
+      </div>
+
+    </body>
