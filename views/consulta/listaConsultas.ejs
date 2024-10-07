@@ -1,0 +1,42 @@
+<link rel="stylesheet" href="/css/consulta/listaConsulta.css">
+<script src="/js/consulta/excluirConsulta.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<% if(consultas.length > 0)  {%>
+    <h2 style="text-align: center; margin-top: 25px;">Consultas marcadas!</h2>
+    <div class="container-lista">
+    
+        <% for(let i=0;i<consultas.length;i++) { %>
+            <% if (consultas[i].data) { %>
+                <% 
+                    const datadata = new Date(consultas[i].data); 
+                    const dia = String(datadata.getDate()).padStart(2, '0'); 
+                    const mes = String(datadata.getMonth() + 1).padStart(2, '0');
+                    const ano = datadata.getFullYear();
+                    consultas[i].data = `${dia}/${mes}/${ano}`;
+                %>
+            <% } %>
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                  <h5 class="card-title"><%= consultas[i].nome %></h5>
+                  <p class="card-text"><%= consultas[i].data %>, <%= consultas[i].hora %></p>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item"><i class="fa fa-phone" aria-hidden="true"></i> <%= consultas[i].telefone %></li>
+                  <li class="list-group-item"><i class="fa fa-envelope" aria-hidden="true"></i> <%= consultas[i].email %></li>
+                  <li class="list-group-item"><i class="fa fa-briefcase" aria-hidden="true"></i> <%= consultas[i].servico_id %></li>
+                  <li class="list-group-item"><i class="fa fa-search-minus" aria-hidden="true"></i> <%= consultas[i].obs %></li>
+                </ul>
+                <div class="card-body">
+                    
+                  <a href="/consulta/editar/<%= consultas[i].id %>" class="card-link  btn btn-primary" style="background-color: lightskyblue; border: lightblue;">Editar</a>
+                  <button type="button" class="card-link btn btn-danger btn-excluir" data-id="<%= consultas[i].id %>" data-nome="<%= consultas[i].nome %>">Excluir</button>
+                </div>
+              </div>
+        <% } %>
+        
+    </div>
+<% } else { %>
+    <div class="container-lista"><h2 style="margin-top: 220px;">Nenhuma consulta cadastrada!</h2></div>
+<% } %>
+

@@ -18,8 +18,10 @@
   },
   "homepage": "https://github.com/caioxsf/fisiotech-pi3#readme",
   "dependencies": {
+    "cookie-parser": "^1.4.6",
     "ejs": "^3.1.10",
-    "express": "^4.19.2",
-    "express-ejs-layouts": "^2.5.1"
+    "express": "^4.21.0",
+    "express-ejs-layouts": "^2.5.1",
+    "mysql2": "^3.11.3"
   }
 }

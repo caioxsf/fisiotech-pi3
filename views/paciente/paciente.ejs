@@ -1,0 +1,164 @@
+<body background="/img/background/bg.png">
+  <script src="/js/paciente/cadastroPaciente.js"></script>
+<div class="d-flex justify-content-center form-container-div">
+  <!-- onsubmit="event.preventDefault()" -->
+  <% if(typeof pacienteAlteracao == 'undefined') { %>
+    <form class="row g-3 form-container" >
+      
+      
+      <h1 class="d-flex justify-content-center">Cadastro de Paciente</h1>
+        <div class="col-md-6">
+          <label for="nome" class="form-label">Nome Completo</label>
+          <input type="text" class="form-control" id="nome" name="nome" onblur="validarNomes(this)">
+        </div>
+        <div class="col-md-6">
+          <label for="telefone" class="form-label">Telefone</label>
+          <input type="text" class="form-control" id="telefone" name="telefone" onblur="mascara('(##)#####-####',this,event)">
+        </div>
+        <div class="col-12">
+          <label for="email" class="form-label">E-mail</label>
+          <input type="email" class="form-control" id="email" name="email" onblur="validarEmail(this)">
+        </div>
+        <div class="col-6">
+          <label for="nascimento" class="form-label">Data de nascimento</label>
+          <input type="date" class="form-control" id="nascimento" name="nascimento" onblur="validarData(this)">
+        </div>
+        <div class="col-6">
+          <label for="cpf" class="form-label">CPF</label>
+          <input type="text" class="form-control" id="cpf" name="cpf" onblur="mascara('###.###.###-##',this,event)">
+        </div>
+        <div class="col-6">
+          <label for="endereco" class="form-label">Endereço</label>
+          <input type="text" class="form-control" id="endereco" name="endereco" onblur="validarNomes(this)">
+        </div>
+        <div class="col-6">
+          <label for="bairro" class="form-label">Bairro</label>
+          <input type="text" class="form-control" id="bairro" name="bairro" onblur="validarNomes(this)">
+        </div>
+        <div class="col-md-3">
+          <label for="sexo" class="form-label">Sexo</label>
+          <select id="sexo" name="sexo" class="form-select" onblur="borda(this)">
+            <option disabled selected>Selecione uma opção</option>
+  
+            <% for(let i=0;i<sexo.length;i++) { %>
+              <option value="<%= sexo[i].id %>"><%= sexo[i].nome %></option>
+            <% } %>
+  
+          </select>
+        </div>
+        <div class="col-md-3">
+          <label for="cidade" class="form-label">Cidade</label>
+          <input type="text" class="form-control" id="cidade" name="cidade" onblur="validarCidade(this)">
+        </div>
+        <div class="col-md-3">
+          <label for="estado" class="form-label">Estado</label>
+          <select id="estado" name="estado"  estado class="form-select" onblur="borda(this)">
+            
+            <option disabled selected>Selecione uma opção</option>
+            <% for(let i=0;i<estados.length;i++) { %>
+              <option value="<%= estados[i].id %>"><%= estados[i].nome %></option>
+            <% } %>
+  
+          </select>
+        </div>
+        <div class="col-md-3">
+          <label for="cep" class="form-label">CEP</label>
+          <input type="text" class="form-control" id="cep" name="cep" onblur="mascara('#####-###',this,event)">
+        </div>
+        <div class="col-12 d-flex justify-content-center">
+          <button type="button" class="btn btn-primary btn-container btn-add">Cadastrar</button>
+          
+        </div>
+        <a href="/paciente/lista" style="text-align: center;">Ver pacientes cadastrados</a>
+    </form>
+
+    <% } else { %>
+
+    <form class="row g-3 form-container" >
+        <div class="mb-3" hidden>
+          <input type="text" class="form-control" id="id" name="id" value="<%= pacienteAlteracao.id %>">
+        </div>
+        <h1 class="d-flex justify-content-center">Editar paciente</h1>
+        <div class="col-md-6">
+          <label for="nome" class="form-label">Nome Completo</label>
+          <input type="text" class="form-control" id="nome" name="nome" onblur="validarNomes(this)"  value="<%= pacienteAlteracao.nome %>">
+        </div>
+        <div class="col-md-6">
+          <label for="telefone" class="form-label">Telefone</label>
+          <input type="text" class="form-control" id="telefone" name="telefone" onblur="mascara('(##)#####-####',this,event)" value="<%=pacienteAlteracao.telefone%>">
+        </div>
+        <div class="col-12">
+          <label for="email" class="form-label">E-mail</label>
+          <input type="email" class="form-control" id="email" name="email" onblur="validarEmail(this)" value="<%=pacienteAlteracao.email%>">
+        </div>
+        <div class="col-6">
+          
+          <label for="nascimento" class="form-label">Data de nascimento</label>
+          <input type="date" class="form-control" id="nascimento" name="nascimento" onblur="validarData(this)" value="<%= new Date(pacienteAlteracao.nascimento).toISOString().substring(0, 10) %>">
+
+        </div>
+        <div class="col-6">
+          <label for="cpf" class="form-label">CPF</label>
+          <input type="text" class="form-control" id="cpf" name="cpf" onblur="mascara('###.###.###-##',this,event)" value="<%=pacienteAlteracao.cpf%>">
+        </div>
+        <div class="col-6">
+          <label for="endereco" class="form-label">Endereço</label>
+          <input type="text" class="form-control" id="endereco" name="endereco" onblur="validarNomes(this)" value="<%=pacienteAlteracao.endereco%>">
+        </div>
+        <div class="col-6">
+          <label for="bairro" class="form-label">Bairro</label>
+          <input type="text" class="form-control" id="bairro" name="bairro" onblur="validarNomes(this)" value="<%=pacienteAlteracao.bairro%>">
+        </div>
+        <div class="col-md-3">
+          <label for="sexo" class="form-label">Sexo</label>
+          <select id="sexo" name="sexo" class="form-select" onblur="borda(this)">
+            <option disabled value="0">Selecione uma opção</option>
+
+                <% for(let i=0;i<sexo.length;i++) { %>
+                <% if(sexo[i].id == pacienteAlteracao.sexo_id) { %>
+                  <option selected value="<%= sexo[i].id %>"><%= sexo[i].nome %></option>
+                <% } else { %>
+                  <option value="<%= sexo[i].id %>"><%= sexo[i].nome %></option>
+                <% } %>
+            <% } %>
+
+          </select>
+        </div>
+        <div class="col-md-3">
+          <label for="cidade" class="form-label">Cidade</label>
+          <input type="text" class="form-control" id="cidade" name="cidade" onblur="validarCidade(this)" value="<%=pacienteAlteracao.cidade%>">
+        </div>
+        <div class="col-md-3">
+          <label for="estado" class="form-label">Estado</label>
+          <select id="estado" name="estado" class="form-select" onblur="borda(this)">
+            
+            <option disabel value="0">Selecione uma opção</option>
+            <% for(let i=0;i<estados.length;i++) { %>
+              <% if(estados[i].id == pacienteAlteracao.estado_id) { %>
+                <option selected value="<%= estados[i].id %>"><%= estados[i].nome %></option>
+              <% } else { %>
+                <option value="<%= estados[i].id %>"><%= estados[i].nome %></option>
+              <% } %>
+          <% } %>
+  
+          </select>
+        </div>
+        <div class="col-md-3">
+          <label for="cep" class="form-label">CEP</label>
+          <input type="text" class="form-control" id="cep" name="cep" onblur="mascara('#####-###',this,event)" value="<%=pacienteAlteracao.cep%>">
+        </div>
+        <div class="col-12 d-flex justify-content-center">
+          <button type="button" class="btn btn-primary btn-container btn-add" data-alteracao="true">Atualizar</button>
+          
+        </div>
+        <a href="/paciente/lista" style="text-align: center;">Ver pacientes cadastrados</a>
+    </form>
+    <% } %>
+    
+ </div>
+
+ 
+  
+</body>
+
+

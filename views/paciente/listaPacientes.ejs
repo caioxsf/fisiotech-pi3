@@ -1,0 +1,46 @@
+<link rel="stylesheet" href="/css/paciente/listaPaciente.css">
+<script src="/js/paciente/excluirPaciente.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<% if(pacientes.length > 0) { %>
+    <h2 style="text-align: center; margin-top: 25px;">Pacientes cadastrados!</h2>
+    <div class="container-lista">
+        <% for(let i=0;i<pacientes.length;i++) { %>
+        <div class="card" style="width: 18rem;">
+            <img src="/img/paciente/fotosemperfil.png" class="card-img-top card-img-perfil">
+    
+            <% if (pacientes[i].nascimento) { %>
+                <% 
+                    const dataNascimento = new Date(pacientes[i].nascimento); 
+                    const dia = String(dataNascimento.getDate()).padStart(2, '0'); 
+                    const mes = String(dataNascimento.getMonth() + 1).padStart(2, '0');
+                    const ano = dataNascimento.getFullYear();
+                    pacientes[i].nascimento = `${dia}/${mes}/${ano}`;
+                %>
+            <% } %>
+    
+            <div class="card-body">
+                <h5 class="card-title"><%= pacientes[i].nome %></h5>
+                <p class="card-text"><%= pacientes[i].endereco%>, <%=pacientes[i].bairro%>, <%=pacientes[i].cidade%> (<%=pacientes[i].estado_id%>), <%=pacientes[i].cep%> %></p>
+                <p class="card-text"><i class="fa fa-id-card" aria-hidden="true"></i> <%= pacientes[i].id %></p>
+            <div class="rolagem-y-card">
+                
+              <p class="card-text"><i class="fa fa-phone" aria-hidden="true"></i> <%= pacientes[i].telefone %></p>
+              <p class="card-text"><i class="fa fa-envelope" aria-hidden="true"></i> <%= pacientes[i].email %></p>   
+              <p class="card-text"><i class="fa fa-calendar" aria-hidden="true"></i> <%= pacientes[i].nascimento%></p> 
+              <p class="card-text"><i class="fa fa-id-card" aria-hidden="true"></i> <%= pacientes[i].cpf%></p> 
+              <p class="card-text"><i class="fa fa-user" aria-hidden="true"></i> <%= pacientes[i].sexo_id%></p> 
+    
+            </div>
+              
+              <a href="/paciente/editar/<%= pacientes[i].id %>" class="btn btn-primary" style="margin-top: 20px; background-color: lightskyblue; border-color: lightskyblue; color: darkblue;">Editar</a>
+              <button type="button" class="btn btn-danger btn-excluir" data-id="<%= pacientes[i].id %>" data-nome="<%= pacientes[i].nome %>" style="margin-top: 20px;">Excluir</button>
+            </div>
+        </div>
+        <% } %>
+    </div>
+<% } else {%>
+    <div class="container-lista"><h2 style="margin-top: 220px;">Nenhum paciente cadastrado!</h2></div>
+<% } %>
+
+

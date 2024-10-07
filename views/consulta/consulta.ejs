@@ -1,0 +1,106 @@
+<script src="/js/consulta/cadastroConsulta.js"></script>
+<body background="/img/background/bg.png">
+    
+    <div class="d-flex justify-content-center form-container-div">
+        <% if(typeof consultaAlteracao == 'undefined') { %>
+          <form class="row g-3 form-container">
+            <h1 class="d-flex justify-content-center">Agendar Consulta</h1>
+            <div class="col-md-6">
+              <label for="nome" class="form-label">Nome Completo</label>
+              <input type="text" class="form-control" id="nome" name="nome" onblur="validarNomes(this)">
+              
+            </div>
+            <div class="col-md-6">
+              <label for="telefone" class="form-label">Telefone</label>
+              <input type="text" class="form-control" id="telefone" name="telefone" onblur="mascara('(##)#####-####',this,event)">
+            </div>
+            <div class="col-6">
+              <label for="email" class="form-label">E-mail</label>
+              <input type="text" class="form-control" id="email" name="email" onblur="validarEmail(this)">
+            </div>
+      
+            <div class="col-6">
+              <label for="servico" class="form-label">Serviço desejado</label>
+              <select id="servico" name="servico" class="form-select" onblur="borda(this)">
+                <option disabled selected>Selecione uma opção</option>
+                <% for (let i=0;i<serv.length;i++) { %>
+                  <option value="<%= serv[i].id%>"><%= serv[i].nome %></option>
+                <% } %>
+              </select>
+            </div>
+            <div class="col-6">
+              <label for="data" class="form-label">Data</label>
+              <input type="date" class="form-control" id="data" name="data"onblur="validarDataConsulta(this)">
+            </div>
+            <div class="col-6">
+              <label for="hora" class="form-label">Horário ( 8:00 - 17:00 )</label>
+              <input type="time" class="form-control" id="hora" name="hora"onblur="validarHoraConsulta(this)">
+            </div>
+  
+            <div class="mb-3">
+              <label for="obs" class="form-label">Observações</label>
+              <textarea class="form-control" id="obs" name="obs" rows="4"></textarea>
+            </div>
+            
+            <div class="col-12 d-flex justify-content-center">
+              <button type="button" class="btn btn-primary btn-container btn-add">Cadastrar</button>
+            </div>
+            <a href="/consulta/lista" style="text-align: center;">Ver consultas cadastradas</a>
+          </form>
+        <% } else  { %>
+          <form class="row g-3 form-container">
+            <h1 class="d-flex justify-content-center">Atualizar Consulta</h1>
+            <div class="col-md-6">
+              <div class="mb-3" hidden>
+                <input type="text" class="form-control" id="id" name="id" value="<%= consultaAlteracao.id %>">
+              </div>
+              <label for="nome" class="form-label">Nome Completo</label>
+              <input type="text" class="form-control" id="nome" name="nome" value="<%= consultaAlteracao.nome %>" onblur="validarNomes(this)" >
+              
+            </div>
+            <div class="col-md-6">
+              <label for="telefone" class="form-label">Telefone</label>
+              <input type="text" class="form-control" id="telefone" name="telefone" value="<%= consultaAlteracao.telefone %>" onblur="mascara('(##)#####-####',this,event)">
+            </div>
+            <div class="col-6">
+              <label for="email" class="form-label">E-mail</label>
+              <input type="text" class="form-control" id="email" name="email" onblur="validarEmail(this)" value="<%= consultaAlteracao.email %>">
+            </div>
+      
+            <div class="col-6">
+              <label for="servico" class="form-label">Serviço desejado</label>
+              <select id="servico" name="servico" class="form-select" onblur="borda(this)">
+                <option disabled value="0">Selecione uma opção</option>
+                <% for(let i=0;i<serv.length;i++) { %>
+                 <% if(serv[i].id == consultaAlteracao.servico_id) { %>
+                    <option selected value="<%= serv[i].id%>"><%= serv[i].nome %></option>
+                 <% } else { %>
+                    <option value="<%= serv[i].id%>"><%= serv[i].nome %></option>
+                 <% } %>
+                 <% } %>
+              </select>
+            </div>
+            <div class="col-6">
+              <label for="data" class="form-label">Data</label>
+              <input type="date" class="form-control" id="data" name="data"onblur="validarDataConsulta(this)" value="<%= new Date(consultaAlteracao.data).toISOString().substring(0, 10) %>">
+            </div>
+            <div class="col-6">
+              <label for="hora" class="form-label">Horário ( 8:00 - 17:00 )</label>
+              <input type="time" class="form-control" id="hora" name="hora"onblur="validarHoraConsulta(this)" value="<%= consultaAlteracao.hora %>">
+            </div>
+  
+            <div class="mb-3">
+              <label for="obs" class="form-label">Observações</label>
+              <textarea class="form-control" id="obs" name="obs" rows="4"><%= consultaAlteracao.obs %></textarea>
+            </div>
+            
+            <div class="col-12 d-flex justify-content-center">
+              <button type="button" class="btn btn-primary btn-container btn-add" data-alteracao="true">Atualizar</button>
+            </div>
+            <a href="/consulta/lista" style="text-align: center;">Ver consultas cadastradas</a>
+          </form>
+        <% } %>
+        
+    </div>
+
+    </body>

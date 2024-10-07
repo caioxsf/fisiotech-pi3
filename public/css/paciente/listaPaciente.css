@@ -1,0 +1,19 @@
+.container-lista {
+    width: 1800px;
+    height: 700px;
+    overflow-y: auto;
+    margin: 20px;
+    padding: 20px;
+    
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    gap: 30px;
+}
+
+.rolagem-y-card {
+    max-height: 150px; /* Define uma altura máxima para o corpo do cartão */
+    overflow-y: auto; /* Permite a rolagem vertical */
+}
