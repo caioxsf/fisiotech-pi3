@@ -24,9 +24,9 @@
     
         background-color: transparent;
         border: none;
-        position: relative;
-        left: 200px;
-        bottom: 625px;
+        position: absolute;
+        top: 20px;
+        right: 8px;
         width: 50px;
 }
 

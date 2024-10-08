@@ -20,6 +20,26 @@ function validarNomes ()
     }   
 }
 
+function validarBairro ()
+{
+    var nome = event.target.value;
+    var arr = nome.split(" ");
+
+    if(arr)
+    {
+        event.target.style.border= "1px solid green";
+
+        return true;
+    }
+    else
+    {
+        event.target.style.border = "1px solid red";
+        event.target.setAttribute('placeholder', 'Digite o campo corretamente!');
+        event.target.value = "";
+    }   
+}
+
+
 // mascara() usado para fazer a verificação do campo Telefone, CPF e CEP.
 function mascara(m,t,e){
     var cursor = t.selectionStart;
