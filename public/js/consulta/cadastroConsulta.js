@@ -20,6 +20,8 @@ document.addEventListener('DOMContentLoaded', function(){
         let hora = document.getElementById('hora');
         let obs = document.getElementById('obs');
 
+        console.log(data, hora);
+
         if(nome && telefone && email && servico && data && hora && obs) {
             let obj = {
                 nome: nome.value,

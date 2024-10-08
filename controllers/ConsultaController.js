@@ -12,8 +12,10 @@ class ConsultaController {
 
     async consultaCadastro(req,res) {
         let ok;
+
         if(req.body.nome && req.body.telefone && req.body.email && req.body.servico && req.body.data && req.body.hora && req.body.obs) {
             let consulta = new ConsultaModel();
+
             consulta.nome = req.body.nome;
             consulta.telefone = req.body.telefone;
             consulta.email = req.body.email;

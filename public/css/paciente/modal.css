@@ -1,0 +1,52 @@
+.modal-container  {
+    display: flex;
+    flex-direction: row;
+    margin: 20px;
+    justify-content: center;
+    gap: 30px;
+    
+    
+}
+
+.card-title {
+    text-align: center;
+}
+
+.abrir {
+    border: none;
+    background-color: #0A3530;
+    color: white;
+    border-radius: 0 0 5px 5px;
+    padding: 5px;
+}
+
+.fechar {
+    
+        background-color: transparent;
+        border: none;
+        position: relative;
+        left: 200px;
+        bottom: 625px;
+        width: 50px;
+}
+
+.btn-excluir {
+    position: relative;
+    left: 240px;
+}
+
+.btn-editar {
+    position: relative;
+    left: 8px;
+}
+
+.texto::backdrop {
+    background: rgba(0, 0, 0, 0.5); /* Fundo escuro quando o modal é aberto */
+}
+
+dialog {
+    border: none;
+    border-radius: 10px;
+}
+
+

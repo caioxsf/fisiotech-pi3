@@ -129,7 +129,6 @@ class ConsultaModel {
                 row[0]['fk_serv_id'],
                 row[0]['con_data'],
                 row[0]['con_hora'],
-                row[0]['pac_bairro'],
                 row[0]['con_obs']
             )
         }
@@ -149,6 +148,7 @@ class ConsultaModel {
         let resultado = await db.ExecutaComandoNonQuery(sql,valores);
         return resultado;
     }
+
 }
 
 module.exports = ConsultaModel;
