@@ -11,16 +11,15 @@ document.addEventListener('DOMContentLoaded', function(){
     }
 
     function cadastrarConsulta () {
-        //debugger
-        let nome = document.getElementById('nome');
+        
+        let nome = document.getElementById('nomepacientes');
+
         let telefone = document.getElementById('telefone');
         let email = document.getElementById('email');
         let servico = document.getElementById('servico');
         let data = document.getElementById('data');
         let hora = document.getElementById('hora');
         let obs = document.getElementById('obs');
-
-        console.log(data, hora);
 
         if(nome && telefone && email && servico && data && hora && obs) {
             let obj = {
@@ -48,6 +47,8 @@ document.addEventListener('DOMContentLoaded', function(){
             .then(function(resposta) {
                 if(resposta.ok) {
                     alert(resposta.msg);
+                    
+
                 }
                 else {
                     alert(resposta.msg);
@@ -97,6 +98,7 @@ document.addEventListener('DOMContentLoaded', function(){
             .then(function(resposta) {
                 if(resposta.ok) {
                     alert(resposta.msg);
+                
                 }
                 else {
                     alert(resposta.msg);
@@ -105,6 +107,7 @@ document.addEventListener('DOMContentLoaded', function(){
             .catch (function(e) {
                 console.error('erro no fatch: ' + e);
             })
+            
         }
     }
 

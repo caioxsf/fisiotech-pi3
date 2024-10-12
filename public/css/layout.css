@@ -1,0 +1,21 @@
+
+
+.logout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: 60px;
+    display: flex;
+    align-items: center;
+}
+
+.nome-logout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: 135px;
+    display: flex;
+    align-items: center;
+}

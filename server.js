@@ -22,6 +22,7 @@ app.use("/paciente", routerPaciente);
 app.use("/consulta", routerConsulta);
 app.use("/login", routerLogin);
 
+
 app.listen(5000, function() {
     console.log("servidor iniciado!");
 })

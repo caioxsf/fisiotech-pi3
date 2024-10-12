@@ -18,7 +18,7 @@
             <% } %>
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
-                  <h5 class="card-title"><%= consultas[i].nome %></h5>
+                  <h5 class="card-title"><%= consultas[i].nome_id %></h5>
                   <p class="card-text"><%= consultas[i].data %>, <%= consultas[i].hora %></p>
                 </div>
                 <ul class="list-group list-group-flush">
@@ -39,4 +39,6 @@
 <% } else { %>
     <div class="container-lista"><h2 style="margin-top: 220px;">Nenhuma consulta cadastrada!</h2></div>
 <% } %>
+
+
 

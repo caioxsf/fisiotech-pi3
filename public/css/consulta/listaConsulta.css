@@ -1,10 +1,9 @@
 .container-lista {
-    width: 1800px;
-    height: 700px;
+    height: 600px;
     overflow-y: auto;
     margin: 20px;
     padding: 20px;
-    
+
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;

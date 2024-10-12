@@ -4,7 +4,7 @@ const db = new Database();
 class ConsultaModel {
 
     #id
-    #nome
+    #nome_id
     #telefone
     #email
     #servico_id
@@ -12,9 +12,9 @@ class ConsultaModel {
     #hora
     #obs
 
-    constructor(id,nome,telefone,email,servico_id,data,hora,obs) {
+    constructor(id,nome_id,telefone,email,servico_id,data,hora,obs) {
         this.#id = id;
-        this.#nome = nome;
+        this.#nome_id = nome_id;
         this.#telefone = telefone;
         this.#email = email;
         this.#servico_id = servico_id;
@@ -30,11 +30,11 @@ class ConsultaModel {
         this.#id = value;
     }
 
-    get nome() {
-        return this.#nome;
+    get nome_id() {
+        return this.#nome_id;
     }
-    set nome(value) {
-        this.#nome = value;
+    set nome_id(value) {
+        this.#nome_id = value;
     }
 
     get telefone() {
@@ -80,15 +80,16 @@ class ConsultaModel {
     }
 
     async cadastrarConsulta () {
-        let sql = `insert into consulta (con_nome,con_telefone,con_email,fk_serv_id,con_data,con_hora,con_obs) values (?,?,?,?,?,?,?)`;
-        let valores = [this.#nome, this.#telefone, this.#email, this.#servico_id, this.#data, this.#hora, this.#obs];
+        let sql = `insert into consulta (fk_pac_id_paciente,con_telefone,con_email,fk_serv_id,con_data,con_hora,con_obs) values (?,?,?,?,?,?,?)`;
+        let valores = [this.#nome_id, this.#telefone, this.#email, this.#servico_id, this.#data, this.#hora, this.#obs];
         let resultado = await db.ExecutaComandoNonQuery(sql,valores);
         return resultado;
     }
 
     async listarConsulta () {
-        let sql = `select * from consulta con
+        let sql = `select *  from consulta con
         inner join servico_consulta sv on con.fk_serv_id = sv.serv_id
+        inner join paciente pac on con.fk_pac_id_paciente = pac.pac_id_paciente
         `;
 
         let resultado = await db.ExecutaComando(sql);
@@ -96,7 +97,7 @@ class ConsultaModel {
         for(let registro of resultado) {
             listaConsulta.push(new ConsultaModel (
                 registro['con_id'],
-                registro['con_nome'],
+                registro['pac_nome'],
                 registro['con_telefone'],
                 registro['con_email'],
                 registro['serv_nome'],
@@ -106,6 +107,19 @@ class ConsultaModel {
             ));
         }
         return listaConsulta;
+    }
+
+    async verificarConsultaMesmoDiaMesmoHorario (data,hora) {
+        let sql = ` select con_data, con_hora from consulta
+                    where con_data = ? and con_hora = ?`;
+
+        let valores = [data,hora];
+        let resultado = await db.ExecutaComando(sql,valores);
+        if(resultado.length > 0) {
+            return resultado[0];
+        }
+        else
+            return null;
     }
 
     async excluirConsulta (id) {
@@ -123,7 +137,7 @@ class ConsultaModel {
         if(row.length > 0) {
             return new ConsultaModel(
                 row[0]['con_id'],
-                row[0]['con_nome'],
+                row[0]['nome_id'],
                 row[0]['con_telefone'],
                 row[0]['con_email'],
                 row[0]['fk_serv_id'],
@@ -136,7 +150,7 @@ class ConsultaModel {
     }
 
     async editarConsulta () {
-        let sql = `update consulta set  con_nome = ?,
+        let sql = `update consulta set  fk_pac_id_paciente = ?,
                                         con_telefone = ?,
                                         con_email = ?,
                                         fk_serv_id = ?,
@@ -144,7 +158,7 @@ class ConsultaModel {
                                         con_hora = ?,
                                         con_obs = ?
                                         where con_id = ? `;
-        let valores = [this.#nome, this.#telefone, this.#email, this.#servico_id, this.#data, this.#hora, this.#obs, this.#id];
+        let valores = [this.#nome_id, this.#telefone, this.#email, this.#servico_id, this.#data, this.#hora, this.#obs, this.#id];
         let resultado = await db.ExecutaComandoNonQuery(sql,valores);
         return resultado;
     }

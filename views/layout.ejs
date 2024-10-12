@@ -30,9 +30,20 @@
   <link rel="stylesheet" href="/css/consuta.css">
   <link rel="stylesheet" href="/css/paciente.css">
   <link rel="stylesheet" href="/css/tabela_paciente.css">
+  <link rel="stylesheet" href="/css/layout.css">
   <link href="/css/main.css" rel="stylesheet">
 
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
+
+  <style>
+    
+
+    .logout {
+      position: absolute;
+    }
+  </style>
 
 <body>
 
@@ -53,7 +64,9 @@
   </section><!-- End Top Bar -->
 
   <header id="header" class="header d-flex align-items-center">
-
+    
+      
+    
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
       <a href="/" class="logo d-flex align-items-center">
         <h1>Fisio<span>tech</span></h1>
@@ -66,11 +79,26 @@
           <li><a href="/#vlibras">VLibras</a></li>
           <li><a href="/#equipe">Equipe</a></li>
           <li><a href="/#contato">Contato</a></li>
-          <li><a href="/paciente">Paciente</a></li>
-          <li><a href="/consulta">Consulta</a></li>
-        </ul>
+          <% if (usuario.perfil_id == 1) { %>
+            <li><a href="/paciente">Paciente</a></li>
+            <li><a href="/consulta">Consulta</a></li>
+          <% } %>
+
+          <li></li>
+
+        </ul>  
+        
+        
       </nav><!-- .navbar -->
 
+        <% if(usuario.perfil_id == 1 || usuario.perfil_id == 2 ) { %>
+          <a style="color: rgb(202, 202, 202);" class="nome-logout"><%= usuario.login %></a>
+          <a style="color: rgb(202, 202, 202); padding: 5px; border-radius: 5px;" href="/login/logout" class="logout"><i class="fas fa-sign-out-alt fa-lg"></i>ﾠSair</a>
+        <% } else if (usuario.perfil_id != 1 || usuario.perfil_id != 2 ) { %>
+          <a style="color: rgb(202, 202, 202); padding: 5px; border-radius: 5px;" href="/login" class="logout"><i class="fas fa-sign-in-alt "></i>ﾠEntrar</a>
+        <% } %>
+      
+      
       <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
       <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
 

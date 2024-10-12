@@ -1,5 +1,6 @@
 const ConsultaModel = require("../models/ConsultaModel");
 const ServicosModel = require("../models/ServicosModel");
+const PacienteModel = require("../models/PacienteModel");
 
 class ConsultaController {
 
@@ -7,31 +8,41 @@ class ConsultaController {
         let listaServicos = new ServicosModel();
         listaServicos = await listaServicos.listarServicos();
 
-        res.render('consulta/consulta.ejs', {serv: listaServicos})
+        let pacienteModel = new PacienteModel();
+        let listaPaciente = await pacienteModel.listarPaciente();
+
+        res.render('consulta/consulta.ejs', {serv: listaServicos, lista_pacientes: listaPaciente})
     }
 
     async consultaCadastro(req,res) {
         let ok;
-
-        if(req.body.nome && req.body.telefone && req.body.email && req.body.servico && req.body.data && req.body.hora && req.body.obs) {
+        
+        if( req.body.telefone && req.body.email && req.body.servico && req.body.data && req.body.hora && req.body.obs) {
             let consulta = new ConsultaModel();
 
-            consulta.nome = req.body.nome;
-            consulta.telefone = req.body.telefone;
-            consulta.email = req.body.email;
-            consulta.servico_id = req.body.servico;
-            consulta.data = req.body.data;
-            consulta.hora = req.body.hora;
-            consulta.obs = req.body.obs;
+            let verificarDataHora = await consulta.verificarConsultaMesmoDiaMesmoHorario(req.body.data,req.body.hora);
+            if(verificarDataHora == null) {
+                consulta.nome_id = req.body.nome;
+                consulta.telefone = req.body.telefone;
+                consulta.email = req.body.email;
+                consulta.servico_id = req.body.servico;
+                consulta.data = req.body.data;
+                consulta.hora = req.body.hora;
+                consulta.obs = req.body.obs;
 
-            let resultado = await consulta.cadastrarConsulta();
+                let resultado = await consulta.cadastrarConsulta();
 
-            if(resultado) {
-                res.send({ok: true, msg: 'Consulta cadastrada com sucesso!'});
-            }
+                if(resultado) {
+                    res.send({ok: true, msg: 'Consulta cadastrada com sucesso!'});
+                }
+                else {
+                    res.send({ok: false, msg: 'Erro ao cadastrar consulta'});
+                }
+                }
             else {
-                res.send({ok: false, msg: 'Erro ao cadastrar consulta'});
+                res.send({ok: false, msg: 'Já existem consulta nesse horario marcado!'});
             }
+            
         }
         else {
             res.send({ok: false, msg: 'Parametros incorretos'});

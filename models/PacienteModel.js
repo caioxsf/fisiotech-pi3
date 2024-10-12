@@ -146,13 +146,29 @@ class PacienteModel {
                                         pac_cep = ?
                                         where pac_id_paciente = ?`;
         let valores = [this.#nome, this.#telefone, this.#email, this.#nascimento, this.#cpf, this.#endereco, this.#bairro, this.#sexo_id, this.#cidade, this.#estado_id, this.#cep, this.#id];
-        console.log('SQL:', sql);
-        console.log('Valores:', valores);
 
         let resultado = await db.ExecutaComandoNonQuery(sql,valores);
-        console.log('Resultado:', resultado);
+
         return resultado;
     }
+
+    async puxarDados(id) {
+        let sql = `SELECT pac_telefone, pac_email FROM paciente WHERE pac_id_paciente = ?`;
+        let valores = [id];
+        let resultado = await db.ExecutaComando(sql, valores);
+        return resultado;
+    }
+
+    async verificarCpfCadastrado (cpf) {
+        let sql = `select pac_cpf from paciente where pac_cpf = ?`
+        let valores = [cpf];
+        let resultado = await db.ExecutaComando(sql,valores);
+        if(resultado.length > 0)
+            return resultado[0];
+        else
+            return null;
+    }
+    
 }
 
 module.exports = PacienteModel;

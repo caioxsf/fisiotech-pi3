@@ -1,22 +1,29 @@
 <script src="/js/consulta/cadastroConsulta.js"></script>
+<script src="/js/consulta/puxarDadosDoPaciente.js"></script>
 <body background="/img/background/bg.png">
     
     <div class="d-flex justify-content-center form-container-div">
         <% if(typeof consultaAlteracao == 'undefined') { %>
           <form class="row g-3 form-container">
             <h1 class="d-flex justify-content-center">Agendar Consulta</h1>
+
             <div class="col-md-6">
-              <label for="nome" class="form-label">Nome Completo</label>
-              <input type="text" class="form-control" id="nome" name="nome" onblur="validarNomes(this)">
-              
+              <label for="nomepacientes" class="form-label">Pacientes</label>
+              <select name="nomepacientes" id="nomepacientes" class="form-select" onchange="preencherDadosPaciente()">
+                  <option disabled selected >Selecione um paciente</option>
+                <% for(let i=0;i<lista_pacientes.length;i++) { %>
+                    <option value="<%= lista_pacientes[i].id %>"><%= lista_pacientes[i].nome %></option>
+                <% } %>
+              </select>
             </div>
+
             <div class="col-md-6">
               <label for="telefone" class="form-label">Telefone</label>
-              <input type="text" class="form-control" id="telefone" name="telefone" onblur="mascara('(##)#####-####',this,event)">
+              <input type="text" class="form-control" id="telefone" name="telefone" onblur="mascara('(##)#####-####',this,event)" >
             </div>
             <div class="col-6">
               <label for="email" class="form-label">E-mail</label>
-              <input type="text" class="form-control" id="email" name="email" onblur="validarEmail(this)">
+              <input type="text" class="form-control" id="email" name="email" onblur="validarEmail(this)" >
             </div>
       
             <div class="col-6">
@@ -103,4 +110,7 @@
         
     </div>
 
+    
+
     </body>
+    

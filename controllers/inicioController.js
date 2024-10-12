@@ -1,4 +1,3 @@
-const PacienteModel = require("../models/PacienteModel");
 
 class inicioController {
 
@@ -7,9 +6,12 @@ class inicioController {
     }
 
 
-
     vlibras(req,res) {
         res.render("vlibras.ejs");
+    }
+
+    naoAutorizado (req,res) {
+        res.render("nao-autorizado.ejs", {layout: false});
     }
 }
 

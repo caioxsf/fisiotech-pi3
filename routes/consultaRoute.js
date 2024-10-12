@@ -5,13 +5,14 @@ const router = express.Router();
 
 const ctrl = new ConsultaController();
 let auth = new AuthMiddleware();
-router.get("/", auth.validar,ctrl.consultaView);
-router.post('/', auth.validar,ctrl.consultaCadastro);
+router.get("/", auth.validarAdmin,ctrl.consultaView);
+router.post('/', auth.validarAdmin,ctrl.consultaCadastro);
 
-router.get('/lista', auth.validar,ctrl.listaConsultaView);
-router.get('/excluir/:id', auth.validar,ctrl.excluirConsulta);
 
-router.get('/editar/:id', auth.validar,ctrl.editarConsultaView);
-router.post('/editar', auth.validar,ctrl.editarConsulta);
+router.get('/lista', auth.validarAdmin,ctrl.listaConsultaView);
+router.get('/excluir/:id', auth.validarAdmin,ctrl.excluirConsulta);
+
+router.get('/editar/:id', auth.validarAdmin,ctrl.editarConsultaView);
+router.post('/editar', auth.validarAdmin,ctrl.editarConsulta);
 
 module.exports = router;
