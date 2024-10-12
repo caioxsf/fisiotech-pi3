@@ -1,0 +1,38 @@
+<link rel="stylesheet" href="css/adm/adm.css">
+
+<main>
+    <div class="container-form">
+        <form>
+            <label for="" class="form-label">Nome serviço</label>
+            <input type="text" class="form-control">
+            <button class="btn btn-primary" style="margin-top: 10px;">Cadastrar serviço</button>
+        </form>
+    </div>
+
+    <div class="container-perfis">
+        <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Usuário</th>
+                <th scope="col">Senha</th>
+                <th scope="col">Perfil</th>
+              </tr>
+            </thead>
+            <tbody>
+                <% for(let i=0;i<usuario.length;i++) { %>
+              <tr>
+              
+                    <th scope="row"><%= usuario[i].id %></th>
+                    <td><%= usuario[i].login %></td>
+                    <td><%= usuario[i].senha %></td>
+                    <td><%= usuario[i].perfil_id %></td>
+                
+                
+              </tr>
+              <% } %>
+            </tbody>
+          </table>
+    </div>
+</main>
+

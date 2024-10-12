@@ -72,16 +72,17 @@
         <h1>Fisio<span>tech</span></h1>
       </a>
       <nav id="navbar" class="navbar">
-        <ul>
-          <li><a href="/">Inicio</a></li>
-          <li><a href="/#sobre">Sobre nós</a></li>
-          <li><a href="/#servicos">Serviços</a></li>
-          <li><a href="/#vlibras">VLibras</a></li>
-          <li><a href="/#equipe">Equipe</a></li>
-          <li><a href="/#contato">Contato</a></li>
+        <ul style="margin-right: 50px;">
+          <li><a href="/"  style="font-weight: 500;">Inicio</a></li>
+          <li><a href="/#sobre" style="font-weight: 500;">Sobre nós</a></li>
+          <li><a href="/#servicos" style="font-weight: 500;">Serviços</a></li>
+          <li><a href="/#vlibras" style="font-weight: 500;">VLibras</a></li>
+          <li><a href="/#equipe" style="font-weight: 500;">Equipe</a></li>
+          <li><a href="/#contato" style="font-weight: 500;">Contato</a></li>
           <% if (usuario.perfil_id == 1) { %>
-            <li><a href="/paciente">Paciente</a></li>
-            <li><a href="/consulta">Consulta</a></li>
+            <li><a href="/paciente" style="font-weight: 500;">Paciente</a></li>
+            <li><a href="/consulta" style="font-weight: 500;">Consulta</a></li>
+            <li><a href="/administrador" style="font-weight: 500;">Adiministrador</a></li>
           <% } %>
 
           <li></li>

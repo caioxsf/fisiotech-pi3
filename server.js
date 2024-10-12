@@ -3,6 +3,7 @@ const routerInicio = require("./routes/inicioRoute");
 const routerPaciente = require("./routes/pacienteRoute");
 const routerConsulta = require("./routes/consultaRoute");
 const routerLogin = require("./routes/loginRoute");
+const routerAdm = require('./routes/admRoute');
 const expressEjsLayout = require('express-ejs-layouts');
 const cookieParser = require('cookie-parser');
 const app = express();
@@ -21,6 +22,7 @@ app.use("/", routerInicio);
 app.use("/paciente", routerPaciente);
 app.use("/consulta", routerConsulta);
 app.use("/login", routerLogin);
+app.use('/administrador', routerAdm);
 
 
 app.listen(5000, function() {

@@ -1,0 +1,21 @@
+.container-form {
+    width: 300px;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
+form  {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+}
+
+main {
+    height: 700px;
+}
+
+.container-perfis {
+    width: 500px;
+    margin: 0 auto;
+}

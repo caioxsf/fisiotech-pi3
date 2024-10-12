@@ -79,6 +79,30 @@ class UserModel {
         return null;
 
     }
+
+    async listarUsers () {
+        let sql = `select * from user_admin user
+        inner join perfil per on user.per_id = per.per_id
+        `;
+        let lista = [];
+        let colunas = await db.ExecutaComando(sql);
+        for(let i=0;i<colunas.length;i++) {
+            let coluna = colunas[i];
+            lista.push(new UserModel(coluna['user_id'],coluna['user_login'],coluna['user_senha'],coluna['per_desc']));
+        }
+        return lista;
+    }
+
+    async ListarSexo () {
+        let sql = `select * from sexo`;
+        let lista = [];
+        let colunas = await db.ExecutaComando(sql);
+        for(let i=0;i<colunas.length;i++) {
+            let coluna = colunas[i];
+            lista.push(new SexoModel(coluna['sexo_id'],coluna['sexo_nome']));
+        }
+        return lista;
+    }
 }
 
 module.exports = UserModel
