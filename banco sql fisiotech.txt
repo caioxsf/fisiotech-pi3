@@ -1,0 +1,168 @@
+CREATE TABLE cargo (
+  car_id_cargo INT(11) NOT NULL AUTO_INCREMENT,
+  car_nome VARCHAR(100) NOT NULL,
+  car_descricao VARCHAR(100) DEFAULT NULL,
+  PRIMARY KEY (car_id_cargo)
+);
+
+CREATE TABLE estado (
+  est_id INT(11) NOT NULL AUTO_INCREMENT,
+  est_nome VARCHAR(50) NOT NULL,
+  PRIMARY KEY (est_id)
+);
+
+CREATE TABLE sexo (
+  sexo_id INT(11) NOT NULL AUTO_INCREMENT,
+  sexo_nome VARCHAR(10) DEFAULT NULL,
+  PRIMARY KEY (sexo_id)
+);
+
+CREATE TABLE fornecedor (
+  forn_id_fornecedor INT(11) NOT NULL AUTO_INCREMENT,
+  forn_nome VARCHAR(100) NOT NULL,
+  forn_endereco VARCHAR(255) DEFAULT NULL,
+  forn_telefone VARCHAR(15) DEFAULT NULL,
+  forn_email VARCHAR(100) DEFAULT NULL,
+  PRIMARY KEY (forn_id_fornecedor)
+);
+
+CREATE TABLE laboratorio (
+  lab_id_laboratorio INT(11) NOT NULL AUTO_INCREMENT,
+  lab_nome VARCHAR(100) NOT NULL,
+  lab_endereco VARCHAR(255) DEFAULT NULL,
+  lab_telefone VARCHAR(15) DEFAULT NULL,
+  PRIMARY KEY (lab_id_laboratorio)
+);
+
+CREATE TABLE procedimento (
+  proc_id_procedimento INT(11) NOT NULL AUTO_INCREMENT,
+  proc_nome VARCHAR(100) NOT NULL,
+  proc_descricao VARCHAR(100) DEFAULT NULL,
+  PRIMARY KEY (proc_id_procedimento)
+);
+
+CREATE TABLE paciente (
+  pac_id_paciente INT(11) NOT NULL AUTO_INCREMENT,
+  pac_nome VARCHAR(100) NOT NULL,
+  pac_telefone VARCHAR(15) DEFAULT NULL,
+  pac_email VARCHAR(100) DEFAULT NULL,
+  pac_data_nascimento DATE DEFAULT NULL,
+  pac_cpf VARCHAR(45) DEFAULT NULL,
+  pac_endereco VARCHAR(255) DEFAULT NULL,
+  pac_bairro VARCHAR(255) DEFAULT NULL,
+  fk_sexo_id INT(11) DEFAULT NULL,
+  pac_cidade VARCHAR(45) DEFAULT NULL,
+  fk_est_id INT(11) DEFAULT NULL,
+  pac_cep VARCHAR(45) DEFAULT NULL,
+  PRIMARY KEY (pac_id_paciente),
+  FOREIGN KEY (fk_sexo_id) REFERENCES sexo(sexo_id),
+  FOREIGN KEY (fk_est_id) REFERENCES estado(est_id)
+);
+
+CREATE TABLE exame (
+  exa_id_exame INT(11) NOT NULL AUTO_INCREMENT,
+  exa_id_paciente INT(11) NOT NULL,
+  exa_id_procedimento INT(11) NOT NULL,
+  exa_data_exame DATE DEFAULT NULL,
+  exa_resultado VARCHAR(100) DEFAULT NULL,
+  PRIMARY KEY (exa_id_exame),
+  FOREIGN KEY (exa_id_paciente) REFERENCES paciente(pac_id_paciente),
+  FOREIGN KEY (exa_id_procedimento) REFERENCES procedimento(proc_id_procedimento)
+);
+
+CREATE TABLE procedimento_laboratorio (
+  proc_lab_id_procedimento_lab INT(11) NOT NULL AUTO_INCREMENT,
+  proc_lab_id_procedimento INT(11) NOT NULL,
+  proc_lab_id_laboratorio INT(11) NOT NULL,
+  PRIMARY KEY (proc_lab_id_procedimento_lab),
+  FOREIGN KEY (proc_lab_id_procedimento) REFERENCES procedimento(proc_id_procedimento),
+  FOREIGN KEY (proc_lab_id_laboratorio) REFERENCES laboratorio(lab_id_laboratorio)
+);
+
+CREATE TABLE material_produto (
+  mat_id_material INT(11) NOT NULL AUTO_INCREMENT,
+  mat_nome VARCHAR(100) NOT NULL,
+  mat_descricao VARCHAR(100) DEFAULT NULL,
+  mat_id_fornecedor INT(11) NOT NULL,
+  PRIMARY KEY (mat_id_material),
+  FOREIGN KEY (mat_id_fornecedor) REFERENCES fornecedor(forn_id_fornecedor)
+);
+
+CREATE TABLE servico_consulta (
+  serv_id INT(11) NOT NULL AUTO_INCREMENT,
+  serv_nome VARCHAR(50) NOT NULL,
+  PRIMARY KEY (serv_id)
+);
+
+CREATE TABLE consulta (
+  con_id INT(11) NOT NULL AUTO_INCREMENT,
+  con_nome VARCHAR(50) DEFAULT NULL,
+  con_telefone VARCHAR(20) DEFAULT NULL,
+  con_email VARCHAR(50) DEFAULT NULL,
+  fk_serv_id INT(11) DEFAULT NULL,
+  con_data DATE DEFAULT NULL,
+  con_hora TIME DEFAULT NULL,
+  con_obs VARCHAR(100) DEFAULT NULL,
+  PRIMARY KEY (con_id),
+  FOREIGN KEY (fk_serv_id) REFERENCES servico_consulta(serv_id)
+);
+
+CREATE TABLE profissional (
+  pro_id_profissional INT(11) NOT NULL AUTO_INCREMENT,
+  pro_nome VARCHAR(100) NOT NULL,
+  pro_cpf VARCHAR(11) NOT NULL,
+  pro_telefone VARCHAR(15) DEFAULT NULL,
+  pro_email VARCHAR(100) DEFAULT NULL,
+  pro_id_cargo INT(11) NOT NULL,
+  PRIMARY KEY (pro_id_profissional),
+  FOREIGN KEY (pro_id_cargo) REFERENCES cargo(car_id_cargo)
+);
+
+CREATE TABLE user_admin (
+  user_id INT(11) NOT NULL AUTO_INCREMENT,
+  user_login VARCHAR(50) NOT NULL,
+  user_senha VARCHAR(50) NOT NULL,
+  PRIMARY KEY (user_id)
+);
+
+INSERT INTO user_admin (user_login, user_senha) VALUES ('admin', '12345');
+
+INSERT INTO servico_consulta (serv_id, serv_nome) VALUES ('1','Avaliação Fisioterapêutica');
+INSERT INTO servico_consulta (serv_id, serv_nome) VALUES ('2','Fisioterapia Ortopédica');
+INSERT INTO servico_consulta (serv_id, serv_nome) VALUES ('3','Fisioterapia Neurológica');
+INSERT INTO servico_consulta (serv_id, serv_nome) VALUES ('4','Fisioterapia Respiratória');
+INSERT INTO servico_consulta (serv_id, serv_nome) VALUES ('5','Fisioterapia Geriátrica');
+INSERT INTO servico_consulta (serv_id, serv_nome) VALUES ('6','Fisioterapia Pediátrica');
+INSERT INTO servico_consulta (serv_id, serv_nome) VALUES ('7','Fisioterapia Aquática');
+
+INSERT INTO sexo (sexo_id, sexo_nome) VALUES ('1','Masculino');
+INSERT INTO sexo (sexo_id, sexo_nome) VALUES ('2','Feminino');
+
+INSERT INTO estado (est_id, est_nome) VALUES (1, 'Acre');
+INSERT INTO estado (est_id, est_nome) VALUES (2, 'Alagoas');
+INSERT INTO estado (est_id, est_nome) VALUES (3, 'Amapá');
+INSERT INTO estado (est_id, est_nome) VALUES (4, 'Amazonas');
+INSERT INTO estado (est_id, est_nome) VALUES (5, 'Bahia');
+INSERT INTO estado (est_id, est_nome) VALUES (6, 'Ceará');
+INSERT INTO estado (est_id, est_nome) VALUES (7, 'Distrito Federal');
+INSERT INTO estado (est_id, est_nome) VALUES (8, 'Espírito Santo');
+INSERT INTO estado (est_id, est_nome) VALUES (9, 'Goiás');
+INSERT INTO estado (est_id, est_nome) VALUES (10, 'Maranhão');
+INSERT INTO estado (est_id, est_nome) VALUES (11, 'Mato Grosso');
+INSERT INTO estado (est_id, est_nome) VALUES (12, 'Mato Grosso do Sul');
+INSERT INTO estado (est_id, est_nome) VALUES (13, 'Minas Gerais');
+INSERT INTO estado (est_id, est_nome) VALUES (14, 'Pará');
+INSERT INTO estado (est_id, est_nome) VALUES (15, 'Paraíba');
+INSERT INTO estado (est_id, est_nome) VALUES (16, 'Paraná');
+INSERT INTO estado (est_id, est_nome) VALUES (17, 'Pernambuco');
+INSERT INTO estado (est_id, est_nome) VALUES (18, 'Piauí');
+INSERT INTO estado (est_id, est_nome) VALUES (19, 'Rio de Janeiro');
+INSERT INTO estado (est_id, est_nome) VALUES (20, 'Rio Grande do Norte');
+INSERT INTO estado (est_id, est_nome) VALUES (21, 'Rio Grande do Sul');
+INSERT INTO estado (est_id, est_nome) VALUES (22, 'Rondônia');
+INSERT INTO estado (est_id, est_nome) VALUES (23, 'Roraima');
+INSERT INTO estado (est_id, est_nome) VALUES (24, 'Santa Catarina');
+INSERT INTO estado (est_id, est_nome) VALUES (25, 'São Paulo');
+INSERT INTO estado (est_id, est_nome) VALUES (26, 'Sergipe');
+INSERT INTO estado (est_id, est_nome) VALUES (27, 'Tocantins');
+
