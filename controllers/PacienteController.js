@@ -18,9 +18,12 @@ class PacienteController {
         let ok;
         if(req.body.nome && req.body.telefone && req.body.email && req.body.nascimento && req.body.cpf &&
             req.body.endereco && req.body.bairro && req.body.sexo && req.body.cidade && req.body.estado && req.body.cep) {
+
             let paciente = new PacienteModel();
             let verificarCpfCadastrado = await paciente.verificarCpfCadastrado(req.body.cpf);
+
             if(verificarCpfCadastrado == null) {
+
                 paciente.nome = req.body.nome;
                 paciente.telefone = req.body.telefone;
                 paciente.email = req.body.email;
@@ -34,6 +37,7 @@ class PacienteController {
                 paciente.cep = req.body.cep;
 
                 let resultado = await paciente.cadastrarPaciente();
+                
                 if(resultado) {
                     res.send({ok: true, msg: 'Paciente cadastrado com sucesso!'});
                 }
@@ -67,7 +71,6 @@ class PacienteController {
             res.json({ telefone: dados[0].pac_telefone, email: dados[0].pac_email });
         } 
     }
-    
     
     async excluirPaciente (req,res) {
         let id = req.params.id;

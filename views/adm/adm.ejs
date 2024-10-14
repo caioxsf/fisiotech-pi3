@@ -1,6 +1,10 @@
-<link rel="stylesheet" href="css/adm/adm.css">
+<link rel="stylesheet" href="/css/adm/adm.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-<main>
+<% if(typeof admAlteracao == 'undefined') { %>
+
+  
+  <main>
     <div class="container-form">
         <form>
             <label for="" class="form-label">Nome serviço</label>
@@ -10,29 +14,115 @@
     </div>
 
     <div class="container-perfis">
-        <table class="table table-hover">
+      <h3 style="text-align: center;">Contas registradas</h3>
+        <div class="table-responsive">
+          
+          <table class="table table-hover">
+            
             <thead>
               <tr>
-                <th scope="col">#</th>
+                <th scope="col">ID</th>
                 <th scope="col">Usuário</th>
                 <th scope="col">Senha</th>
                 <th scope="col">Perfil</th>
+                <th scope="col">Ações</th>
               </tr>
             </thead>
             <tbody>
-                <% for(let i=0;i<usuario.length;i++) { %>
+                <% for(let i=0;i<usuarios.length;i++) { %>
               <tr>
-              
-                    <th scope="row"><%= usuario[i].id %></th>
-                    <td><%= usuario[i].login %></td>
-                    <td><%= usuario[i].senha %></td>
-                    <td><%= usuario[i].perfil_id %></td>
-                
-                
+                    <% if(usuarios[i].perfil_id != 'Administrador') { %>
+                      <th scope="row"><%= usuarios[i].id %></th>
+                    <% } else {%>
+                      <th scope="row"></th>
+                    <%}%>
+                    
+                    <td data-label="Usuário"><%= usuarios[i].login %></td>
+
+                    <% if(usuarios[i].perfil_id != 'Administrador') { %>
+                    <td data-label="Senha"><%= usuarios[i].senha %></td>
+                    <% } else {%>
+                      <th scope="row"></th>
+                    <%}%>
+
+                    <td data-label="Perfil"><%= usuarios[i].perfil_id %></td>
+
+                    <% let perfil = usuarios[i].perfil_id; %>
+                    <% if(perfil != 'Administrador') { %>
+                    <td data-label="Ações"><a href="/administrador/editar/<%= usuarios[i].id %>" class="btn-editar" style="border: none; background-color: transparent;"><i class="fas fa-edit" style="color: #74C0FC;"></i></a><button type="button" style="border: none; background-color: transparent;"><i class="fas fa-trash" style="color: #d72323;"></i></button></td>
+                    <% } %>
               </tr>
               <% } %>
             </tbody>
           </table>
+        </div>
     </div>
 </main>
 
+
+<%} else { %>
+  <main>
+    <div class="container-form">
+      <form>
+        <label for="" class="form-label">Nome serviço</label>
+        <input type="text" class="form-control">
+        <button class="btn btn-primary" style="margin-top: 10px;">Cadastrar serviço</button>
+      </form>
+    </div>
+  
+    <div class="container-perfis">
+      <h3 style="text-align: center;">Contas registradas</h3>
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Usuário</th>
+              <th scope="col">Senha</th>
+              <th scope="col">Perfil</th>
+              <th scope="col">Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for(let i=0;i<usuarios.length;i++) { %>
+              <tr>
+                <% if(usuarios[i].perfil_id != 'Administrador') { %>
+                  <th scope="row"><%= usuarios[i].id %></th>
+                <% } else {%>
+                  <th scope="row"></th>
+                <% } %>
+ 
+                <% if(admAlteracao && admAlteracao.id == usuarios[i].id) { %>
+                  <td data-label="Usuário"><input type="text" class="form-control" value="<%= usuarios[i].login %>"></td>
+                  <td data-label="Senha"><input type="text" class="form-control" value="<%= usuarios[i].senha %>"></td>
+                  <td data-label="Perfil"><input type="text" class="form-control" value="<%= usuarios[i].perfil_id %>"></td>
+                <% } else { %>
+                  <td data-label="Usuário"><%= usuarios[i].login %></td>
+  
+                  <% if(usuarios[i].perfil_id != 'Administrador') { %>
+                    <td data-label="Senha"><%= usuarios[i].senha %></td>
+                  <% } else {%>
+                    <th scope="row"></th>
+                  <%}%>
+  
+                  <td data-label="Perfil"><%= usuarios[i].perfil_id %></td>
+                <% } %>
+  
+                <% if(usuarios[i].perfil_id != 'Administrador') { %>
+                  <td data-label="Ações">
+                    <a href="/administrador/editar/<%= usuarios[i].id %>" class="btn-editar" style="border: none; background-color: transparent;">
+                      <i class="fas fa-edit" style="color: #74C0FC;"></i>
+                    </a>
+                    <button type="button" style="border: none; background-color: transparent;">
+                      <i class="fas fa-trash" style="color: #d72323;"></i>
+                    </button>
+                  </td>
+                <% } %>
+              </tr>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+<%}%>

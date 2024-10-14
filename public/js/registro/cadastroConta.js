@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .then(function(resposta) {
                 return resposta.json();
+                
             })
             .then(function(resposta) {
                 if(resposta.ok) {

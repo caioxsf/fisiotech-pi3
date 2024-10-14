@@ -2,20 +2,64 @@
     width: 300px;
     margin: 0 auto;
     margin-top: 50px;
+    
 }
 
 form  {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    
+    margin-bottom: 30px;
 }
 
 main {
     height: 700px;
+    
 }
 
 .container-perfis {
     width: 500px;
     margin: 0 auto;
+}
+
+.table-responsive {
+    height: 500px;
+    overflow-x: auto; 
+    
+
+}
+
+
+@media (max-width: 1250px) {
+    .table thead {
+        display: none; 
+    }
+    
+    .table tbody tr {
+        display: block;
+        margin-bottom: 30px;
+
+    }
+
+    .table tbody tr td {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        border-bottom: 1px solid #ddd;
+    }
+
+   
+    .table tbody tr td:before {
+        content: attr(data-label); 
+        font-weight: bold;
+        background-color: transparent;
+        color: black;
+    }
+    
+    .btn-editar {
+        margin-left: 250px;
+    }
 }

@@ -21,6 +21,7 @@ class ConsultaController {
             let consulta = new ConsultaModel();
 
             let verificarDataHora = await consulta.verificarConsultaMesmoDiaMesmoHorario(req.body.data,req.body.hora);
+            
             if(verificarDataHora == null) {
                 consulta.nome_id = req.body.nome;
                 consulta.telefone = req.body.telefone;
