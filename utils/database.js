@@ -10,7 +10,7 @@ class Database {
 
         this.#conexao = mysql.createPool({
             host: '127.0.0.1', //endereço do nosso banco de dados na nuvem
-            database: 'projeto_integrado', //a database de cada um de vocês possui a nomenclatura DB_(RA)
+            database: 'teste', //a database de cada um de vocês possui a nomenclatura DB_(RA)
             user: 'root', // usuario e senha de cada um de vocês é o RA
             password: '',
         });

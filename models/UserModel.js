@@ -104,14 +104,14 @@ class UserModel {
         return lista;
     }
 
-    async excluirUsuario () {
-        let sql = `delete * from user_admin where user_id = ?`;
+    async excluirUsuario (id) {
+        let sql = `delete from user_admin where user_id = ?`;
         let valores = [id];
         let resultado = await db.ExecutaComandoNonQuery(sql,valores);
         return resultado;
     }
 
-    async editarAdm () {
+    async editar() {
         let sql = `update user_admin set    user_login = ?,
                                             user_senha = ?,
                                             per_id = ?
@@ -120,6 +120,7 @@ class UserModel {
         let resultado = await db.ExecutaComandoNonQuery(sql,valores);
         return resultado;
     }
+
 }
 
 module.exports = UserModel

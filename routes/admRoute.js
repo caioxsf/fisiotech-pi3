@@ -8,5 +8,7 @@ let auth = new AuthMiddleware();
 
 router.get('/', auth.validarAdmin, ctrl.admView);
 router.get('/editar/:id', auth.validarAdmin, ctrl.editarAdmView);
+router.post('/editar', auth.validarAdmin, ctrl.editarAdm);
+router.get('/excluir/:id', auth.validarAdmin, ctrl.excluirUsuarioCadastrado);
 
 module.exports = router;

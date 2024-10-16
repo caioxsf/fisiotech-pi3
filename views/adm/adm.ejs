@@ -1,5 +1,8 @@
 <link rel="stylesheet" href="/css/adm/adm.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="/js/registro/excluirConta.js"></script>
+<script src="/js/registro/editarConta.js"></script>
+
 
 <% if(typeof admAlteracao == 'undefined') { %>
 
@@ -49,7 +52,8 @@
 
                     <% let perfil = usuarios[i].perfil_id; %>
                     <% if(perfil != 'Administrador') { %>
-                    <td data-label="Ações"><a href="/administrador/editar/<%= usuarios[i].id %>" class="btn-editar" style="border: none; background-color: transparent;"><i class="fas fa-edit" style="color: #74C0FC;"></i></a><button type="button" style="border: none; background-color: transparent;"><i class="fas fa-trash" style="color: #d72323;"></i></button></td>
+                    <td data-label="Ações"><a href="/administrador/editar/<%= usuarios[i].id %>" class="btn-editar" style="border: none; background-color: transparent;"><i class="fas fa-edit" style="color: #74C0FC;"></i></a>
+                    <button type="button" class="btn-excluir" data-id="<%= usuarios[i].id %>" data-nome="<%= usuarios[i].login %>" style="border: none; background-color: transparent;"><i class="fas fa-trash" style="color: #d72323;"></i></button></td>
                     <% } %>
               </tr>
               <% } %>
@@ -64,6 +68,9 @@
   <main>
     <div class="container-form">
       <form>
+        <div class="mb-3" hidden>
+          <input type="text" class="form-control" id="id" name="id" value="<%= admAlteracao.id %>">
+        </div>
         <label for="" class="form-label">Nome serviço</label>
         <input type="text" class="form-control">
         <button class="btn btn-primary" style="margin-top: 10px;">Cadastrar serviço</button>
@@ -93,9 +100,25 @@
                 <% } %>
  
                 <% if(admAlteracao && admAlteracao.id == usuarios[i].id) { %>
-                  <td data-label="Usuário"><input type="text" class="form-control" value="<%= usuarios[i].login %>"></td>
-                  <td data-label="Senha"><input type="text" class="form-control" value="<%= usuarios[i].senha %>"></td>
-                  <td data-label="Perfil"><input type="text" class="form-control" value="<%= usuarios[i].perfil_id %>"></td>
+                  <td data-label="Usuário"><input type="text" class="form-control" id="usuario" name="usuario" value="<%= usuarios[i].login %>"></td>
+                  <td data-label="Senha"><input type="text" class="form-control" id="senha" name="senha" value="<%= usuarios[i].senha %>"></td>
+
+                 
+                    <td data-label="Perfil">
+                      <select id="perfil" class="form-select">
+                        <% for(let j=0;j<perfis.length;j++) { %>
+                        <% if(perfis[j].id == admAlteracao.perfil_id) {%>
+                          <option selected value="<%= perfis[j].id %>" ><%= perfis[j].descricao %></option>
+                        <%} else {%>
+                          <option value="<%= perfis[j].id %>"><%= perfis[j].descricao %></option>
+                        <%}%>
+                        
+                        <% } %>
+                      </select>
+                    </td>
+                  
+                  
+
                 <% } else { %>
                   <td data-label="Usuário"><%= usuarios[i].login %></td>
   
@@ -113,8 +136,11 @@
                     <a href="/administrador/editar/<%= usuarios[i].id %>" class="btn-editar" style="border: none; background-color: transparent;">
                       <i class="fas fa-edit" style="color: #74C0FC;"></i>
                     </a>
-                    <button type="button" style="border: none; background-color: transparent;">
+                    <button type="button"  style="border: none; background-color: transparent;">
                       <i class="fas fa-trash" style="color: #d72323;"></i>
+                    </button>
+                    <button type="button" class="btn-add" style="border: none; background-color: transparent;">
+                      <i class="fas fa-thumbs-up" style="color: #63E6BE;"></i>
                     </button>
                   </td>
                 <% } %>

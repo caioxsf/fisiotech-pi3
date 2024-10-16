@@ -28,13 +28,11 @@ class PerfilModel {
     async listar() {
         let sql = "select * from perfil";
 
-        let rows = await db.ExecutaComando(sql);
+        let resultado = await db.ExecutaComando(sql);
         let lista = [];
-        for(let i = 0; i < rows.length; i++) {
-            let row = rows[i];
-            lista.push(new PerfilModel(row["per_id"], row["per_desc"]))
+        for(let registro of resultado) {
+                lista.push(new PerfilModel(registro["per_id"], registro["per_desc"]));
         }
-
         return lista;
     }
 
