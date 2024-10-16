@@ -1,22 +1,23 @@
 document.addEventListener('DOMContentLoaded', function() {
 
     let btn = document.querySelector('.btn-add');
-    btn.addEventListener('click', cadastrarConta)
+    btn.addEventListener('click', cadastrarServico)
     
-    function cadastrarConta () {
+
+
+    function cadastrarServico () {
+        // debugger
+      
+       let servico = document.getElementById('servico');
         
-       let usuario = document.getElementById('usuario');
-       let senha = document.getElementById('senha');
-        
-        if (usuario && senha) {
+        if (servico) {
             let obj = {
-              usuario: usuario.value,
-              senha: senha.value
+              servico: servico.value
             };
         
             let stringObj = JSON.stringify(obj);
 
-            fetch('/login/registro', {
+            fetch('/administrador', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -25,10 +26,12 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .then(function(resposta) {
                 return resposta.json();
+                
             })
             .then(function(resposta) {
                 if(resposta.ok) {
                     alert(resposta.msg);
+                    window.location.href = '/administrador'
                 }
                 else {
                     alert(resposta.msg);

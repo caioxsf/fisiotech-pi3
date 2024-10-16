@@ -28,6 +28,20 @@ class ServicosModel {
         return lista;
     }
 
+    async cadastrarServico () {
+        let sql = `insert into servico_consulta (serv_nome) values (?)`;
+        let valores = [this.#nome];
+        let resultado = await db.ExecutaComandoNonQuery(sql,valores);
+        return resultado;
+    }
+
+    async excluirServicos (id) {
+        let sql = `delete from servico_consulta where serv_id = ?`;
+        let valores = [id];
+        let resultado = await db.ExecutaComandoNonQuery(sql,valores);
+        return resultado;
+    }
+
 }
 
 module.exports = ServicosModel;

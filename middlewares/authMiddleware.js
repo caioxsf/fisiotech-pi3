@@ -27,9 +27,9 @@ class AuthMiddleware {
     // funcao para criar um usuario logado padrao, para poder acessar as rotas raizes
     async criarUsuarioLogado(req, res) {
         const usuarioPadrao = {
-            id: '3',
+            id: '100',
             nome: 'Usuário Padrão',
-            perfil_id: 3
+            perfil_id: 100
         };
 
         res.cookie('usuarioLogadoPadrao', usuarioPadrao.id, {
@@ -47,7 +47,7 @@ class AuthMiddleware {
             let idUsuario = req.cookies.usuarioLogado;
             let usuario = new UserModel();
             usuario  = await usuario.obter(idUsuario);
-            if(usuario && usuario.perfil_id == 1) {
+            if(usuario && usuario.perfil_id == 1 || usuario.perfil_id == 3) {
                 //informação é disponibilizada para a controladora
                 req.usuario = usuario;
                 //informação disponível na renderização das páginas

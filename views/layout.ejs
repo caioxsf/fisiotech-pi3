@@ -79,7 +79,7 @@
           <li><a href="/#vlibras" style="font-weight: 500;">VLibras</a></li>
           <li><a href="/#equipe" style="font-weight: 500;">Equipe</a></li>
           <li><a href="/#contato" style="font-weight: 500;">Contato</a></li>
-          <% if (usuario.perfil_id == 1) { %>
+          <% if (usuario.perfil_id == 1 || usuario.perfil_id == 3) { %>
             <li><a href="/paciente" style="font-weight: 500;">Paciente</a></li>
             <li><a href="/consulta" style="font-weight: 500;">Consulta</a></li>
             <li><a href="/administrador" style="font-weight: 500;">Administrador</a></li>
@@ -89,10 +89,10 @@
         
       </nav><!-- .navbar -->
 
-        <% if(usuario.perfil_id == 1 || usuario.perfil_id == 2 ) { %>
+        <% if(usuario.perfil_id == 1 || usuario.perfil_id == 2 || usuario.perfil_id == 3) { %>
           <a style="color: rgb(202, 202, 202);" class="nome-logout"><%= usuario.login %></a>
           <a style="color: rgb(202, 202, 202); padding: 5px; border-radius: 5px;" href="/login/logout" class="logout"><i class="fas fa-sign-out-alt fa-lg"></i>ﾠSair</a>
-        <% } else if (usuario.perfil_id != 1 || usuario.perfil_id != 2 ) { %>
+        <% } else if (usuario.perfil_id != 1 || usuario.perfil_id != 2 || usuario.perfil_id != 3) { %>
           <a style="color: rgb(202, 202, 202); padding: 5px; border-radius: 5px;" href="/login" class="logout"><i class="fas fa-sign-in-alt "></i>ﾠEntrar</a>
         <% } %>
       

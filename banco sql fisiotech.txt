@@ -152,8 +152,9 @@ CREATE TABLE user_admin (
 
 INSERT INTO perfil (per_desc) VALUES ('Administrador');
 INSERT INTO perfil (per_desc) VALUES ('Visitante');
+INSERT INTO perfil (per_desc) VALUES ('Sistema');
 
-INSERT INTO user_admin (user_login, user_senha, per_id) VALUES ('admin', '12345', '1');
+INSERT INTO user_admin (user_login, user_senha, per_id) VALUES ('Admin', '12345', '3');
 
 INSERT INTO servico_consulta (serv_id, serv_nome) VALUES ('1','Avaliação Fisioterapêutica');
 INSERT INTO servico_consulta (serv_id, serv_nome) VALUES ('2','Fisioterapia Ortopédica');
