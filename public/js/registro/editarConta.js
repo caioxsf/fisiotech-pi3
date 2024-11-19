@@ -1,8 +1,10 @@
 
 document.addEventListener('DOMContentLoaded', function() {
 
-    let btn = document.querySelector('.btn-add');
-    btn.addEventListener('click', atualizarAdm)
+    let btn = document.querySelectorAll('.btn-addConta');
+    for(let btns of btn) {
+        btns.addEventListener('click', atualizarAdm)
+    }
     
     function atualizarAdm () {
         
@@ -21,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
             let stringObj = JSON.stringify(obj);
 
-            fetch('/administrador/editar', {
+            fetch(`/administrador/editar/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

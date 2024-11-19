@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     
     function cadastrarPaciente () {
-        // debugger
+         
         let nome = document.getElementById('nome');
         let telefone = document.getElementById('telefone');
         let email = document.getElementById('email');
@@ -22,46 +22,44 @@ document.addEventListener('DOMContentLoaded', function() {
         let cidade = document.getElementById('cidade');
         let estado = document.getElementById('estado');
         let cep = document.getElementById('cep');
+        let pacienteImagem = document.getElementById('pacienteImagem').files[0];
         
-        if (nome && telefone && email && nascimento && cpf && endereco && bairro && sexo && cidade && estado && cep) {
-            let obj = {
-                nome: nome.value,
-                telefone: telefone.value,
-                email: email.value,
-                nascimento: nascimento.value,
-                cpf: cpf.value,
-                endereco: endereco.value,
-                bairro: bairro.value,
-                sexo: sexo.value,
-                cidade: cidade.value,
-                estado: estado.value,
-                cep: cep.value
-            };
+        if (nome.value != "" && telefone.value != "" && email.value != "" && nascimento.value != "" && cpf.value != "" && endereco.value != "" &&
+            bairro.value != "" && sexo.value != "" && cidade.value != "" && estado.value != "" && cep.value != "" && pacienteImagem != null) {
         
-            let stringObj = JSON.stringify(obj);
+            var data = new FormData();
+            data.append("nome", nome.value);
+            data.append("telefone", telefone.value);
+            data.append("email", email.value);
+            data.append("nascimento", nascimento.value);
+            data.append("cpf", cpf.value);
+            data.append("endereco", endereco.value);
+            data.append("bairro", bairro.value);
+            data.append("sexo", sexo.value);
+            data.append("cidade", cidade.value);
+            data.append("estado", estado.value);
+            data.append("cep", cep.value);
+            data.append("pacienteImagem", pacienteImagem)
 
             fetch('/paciente', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: stringObj
+                body: data
             })
-            .then(function(resposta) {
-                return resposta.json();
+            .then(r => {
+                return r.json();
             })
-            .then(function(resposta) {
-                if(resposta.ok) {
-                    alert(resposta.msg);
+            .then(r=> {
+                if(r.ok) {
+                    alert("Paciente cadastrado com sucesso!");
                 }
-                else {
-                    alert(resposta.msg);
+                else{
+                    alert("Erro ao cadastrar paciente!");
                 }
             })
-            .catch (function(e) {
-                console.error('erro no fatch' + e);
+            .catch(e => {
+                console.log(e);
             })
-            // location.reload();
+            
         }
     }
 

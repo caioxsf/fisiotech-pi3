@@ -15,8 +15,9 @@ class PacienteModel {
     #cidade
     #estado_id
     #cep
+    #pacienteImagem
 
-    constructor (id, nome, telefone, email, nascimento, cpf, endereco, bairro, sexo_id, cidade, estado_id, cep) {
+    constructor (id, nome, telefone, email, nascimento, cpf, endereco, bairro, sexo_id, cidade, estado_id, cep, pacienteImagem) {
         this.#id = id;
         this.#nome = nome;
         this.#telefone = telefone;
@@ -29,6 +30,7 @@ class PacienteModel {
         this.#cidade = cidade;
         this.#estado_id = estado_id;
         this.#cep = cep;
+        this.#pacienteImagem = pacienteImagem;
     }
 
     get id () {return this.#id;}
@@ -67,9 +69,12 @@ class PacienteModel {
     get cep() { return this.#cep; }
     set cep(value) { this.#cep = value; }
 
+    get pacienteImagem() { return this.#pacienteImagem; }
+    set pacienteImagem(value) { this.#pacienteImagem = value; }
+
     async cadastrarPaciente () {
-        let sql = `insert into paciente (pac_nome,pac_telefone,pac_email,pac_data_nascimento,pac_cpf,pac_endereco,pac_bairro,fk_sexo_id,pac_cidade,fk_est_id,pac_cep) values (?,?,?,?,?,?,?,?,?,?,?)`;
-        let valores = [this.#nome, this.#telefone, this.#email, this.#nascimento, this.#cpf, this.#endereco, this.#bairro, this.#sexo_id, this.#cidade, this.#estado_id, this.#cep];
+        let sql = `insert into paciente (pac_nome,pac_telefone,pac_email,pac_data_nascimento,pac_cpf,pac_endereco,pac_bairro,fk_sexo_id,pac_cidade,fk_est_id,pac_cep, pac_imagem) values (?,?,?,?,?,?,?,?,?,?,?,?)`;
+        let valores = [this.#nome, this.#telefone, this.#email, this.#nascimento, this.#cpf, this.#endereco, this.#bairro, this.#sexo_id, this.#cidade, this.#estado_id, this.#cep, this.#pacienteImagem];
         let resultado = await db.ExecutaComandoNonQuery(sql,valores);
         return resultado;
     }

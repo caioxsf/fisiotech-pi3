@@ -15,43 +15,31 @@ class PacienteController {
     }
 
     async pacienteCadastro (req,res) {
-        let ok;
-        if(req.body.nome && req.body.telefone && req.body.email && req.body.nascimento && req.body.cpf &&
-            req.body.endereco && req.body.bairro && req.body.sexo && req.body.cidade && req.body.estado && req.body.cep) {
+        let ok = true;
+        if( req.body.nome != "") {
 
             let paciente = new PacienteModel();
             let verificarCpfCadastrado = await paciente.verificarCpfCadastrado(req.body.cpf);
 
             if(verificarCpfCadastrado == null) {
 
-                paciente.nome = req.body.nome;
-                paciente.telefone = req.body.telefone;
-                paciente.email = req.body.email;
-                paciente.nascimento = req.body.nascimento;
-                paciente.cpf = req.body.cpf;
-                paciente.endereco = req.body.endereco;
-                paciente.bairro = req.body.bairro;
-                paciente.sexo_id = req.body.sexo;
-                paciente.cidade = req.body.cidade;
-                paciente.estado_id = req.body.estado;
-                paciente.cep = req.body.cep;
+                paciente = new PacienteModel( 0, 
+                    req.body.nome, req.body.telefone, req.body.email, req.body.nascimento,
+                    req.body.cpf, req.body.endereco, req.body.bairro, req.body.sexo, req.body.cidade,
+                    req.body.estado, req.body.cep, req.file.filename)
 
-                let resultado = await paciente.cadastrarPaciente();
+                ok = await paciente.cadastrarPaciente();
                 
-                if(resultado) {
-                    res.send({ok: true, msg: 'Paciente cadastrado com sucesso!'});
-                }
-                else {
-                    res.send({ok: false, msg: 'Erro ao cadastro de paciente'});
-                }
             }
             else {
                 res.send({ok: false, msg: 'Já existe um paciente cadastrado com esse CPF!'});
             }
         }
         else {
-            res.send({ok: false, msg: 'Parametros incorretos'});
+            ok = false;
         }
+
+        res.send({ok: ok})
     }
 
     async listaPacienteView (req,res) {

@@ -37,7 +37,10 @@ class AdmController {
 
         let listaUsuarios = await userModel.listarUsers();
 
-        res.render('adm/adm.ejs', {admAlteracao: userModel, usuarios: listaUsuarios, perfis: perfilModel});
+        let servicoModel = new ServicosModel();
+        let listaServicos = await servicoModel.listarServicos();
+
+        res.render('adm/adm.ejs', {admAlteracao: userModel, usuarios: listaUsuarios, perfis: perfilModel, servicos: listaServicos});
     }
 
     async editarAdm (req,res) {
@@ -88,9 +91,9 @@ class AdmController {
         let resultado = await servicoModel.excluirServicos(id);
         let msg = '';
         if(resultado)
-            msg = 'Conta excluída com sucesso!';
+            msg = 'Serviço excluido com sucesso!';
         else 
-            msg = 'Erro ao excluir conta';
+            msg = 'Erro ao excluir serviço';
 
         res.send({ok: resultado, msg: msg});
     }
