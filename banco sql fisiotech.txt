@@ -150,6 +150,17 @@ CREATE TABLE user_admin (
   CONSTRAINT fk_per_id FOREIGN KEY (per_id) REFERENCES perfil (per_id)
 );
 
+CREATE TABLE atestado (
+	ate_id int primary key auto_increment not null,
+    ate_nome_medico varchar(40) not null,
+    ate_esp_medica int not null,
+    ate_data_inicio date,
+    ate_data_termino date,
+    ate_foto_atestado decimal  VARCHAR(255);
+    
+    FOREIGN KEY (ate_esp_medica) REFERENCES servico_consulta(serv_id)
+)
+
 INSERT INTO perfil (per_desc) VALUES ('Administrador');
 INSERT INTO perfil (per_desc) VALUES ('Visitante');
 INSERT INTO perfil (per_desc) VALUES ('Sistema');

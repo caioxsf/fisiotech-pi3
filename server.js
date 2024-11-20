@@ -25,6 +25,6 @@ app.use("/login", routerLogin);
 app.use('/administrador', routerAdm);
 
 
-app.listen(5000, function() {
+app.listen(5001, function() {
     console.log("servidor iniciado!");
 })

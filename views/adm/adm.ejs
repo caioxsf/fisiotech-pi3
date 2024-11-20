@@ -4,6 +4,7 @@
 <script src="/js/registro/editarConta.js"></script>
 <script src="/js/serviço/cadastrarServico.js"></script>
 <script src="/js/serviço/excluirServico.js"></script>
+<script src="/js/atestado/cadastroAtestado.js"></script>
 
 
 <% if(typeof admAlteracao == 'undefined') { %>
@@ -91,7 +92,8 @@
         <input type="text" class="form-control" id="nomeMedico" name="nomeMedico">
 
         <label for="" style="text-align: start; margin-top: 20px;">Especialidade médica:</label>
-        <select name="" id="" class="form-select"> 
+
+        <select name="selEspecialidade" id="selEspecialidade" class="form-select"> 
           <option value="0" disabled selected>Selecione uma opção</option>
           <% for(let i=0;i<servicos.length;i++) {%>
             <option value="<%= servicos[i].id %>"><%= servicos[i].nome %></option>
@@ -114,6 +116,8 @@
 
         <label for="" style="text-align: start;margin-top: 20px;">Foto do atestado:</label>
         <input type="file" id="fotoAtestado" name="fotoAtestado" class="form-control">
+
+        <button type="button" class="btn btn-primary" id="btn-atestado" style="margin-top: 20px;">Enviar atestado médico</button>
 
       </div>
     </section>

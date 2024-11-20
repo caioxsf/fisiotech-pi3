@@ -1,3 +1,4 @@
+const AtestadoModel = require("../models/AtestadoModel");
 const PerfilModel = require("../models/PerfilModel");
 const ServicosModel = require("../models/ServicosModel");
 const UserModel = require("../models/UserModel");
@@ -99,6 +100,34 @@ class AdmController {
         res.send({ok: resultado, msg: msg});
     }
 
+
+    async cadastrarAtestado (req,res) {
+
+        if (req.body.nome && req.body.especialidade && req.file != null) {
+            let atestadoModel = new AtestadoModel();
+
+            atestadoModel.nome_medico = req.body.nome;
+            atestadoModel.especialidade_medica = req.body.especialidade;
+            atestadoModel.data_inicio = req.body.dataI;
+            atestadoModel.data_termino = req.body.dataT;
+            atestadoModel.foto_atestado = req.file.filename;
+
+            // let atestado = new AtestadoModel(0, req.body.nome, req.body.especialidade, req.body.dataI, req.body.dataT, req.file.filename)
+
+            let resultado = atestadoModel.cadastrar();
+
+            if(resultado) {
+                res.send({ok: true, msg: 'Atestado médico cadastrado com sucesso!'});
+
+            }
+            else {
+                res.send({ok: false, msg: 'Erro ao cadastrar atestado médico!'});
+            }
+        }
+        else {
+            res.send({ok: false, msg: 'teste'});
+        }
+    }
 }
 
 module.exports = AdmController;
