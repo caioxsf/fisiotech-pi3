@@ -8,158 +8,218 @@
 
 <% if(typeof admAlteracao == 'undefined') { %>
 
-  
-  <main>
-    <div class="container-form">
-        <form>
-            <label for="servico" class="form-label">Nome serviço</label>
+  <main class="background-main">
+
+    <section class="section-adm">
+      
+      <div class="container-servicos ">
+        <h3>Serviços cadastrados</h3>
             <input type="text" class="form-control" id="servico" name="servico">
-            <button type="button" class="btn btn-primary btn-add" style="margin-top: 10px;">Cadastrar serviço</button>
-        </form>
+            <button class="btn btn-primary btn-add" style="margin-top: 12px;">Cadastrar serviço</button>
 
-        <div class="table-responsive tabela-servicos">
-          <table class="table table-hover table-servico">
-            <thead>
-              <tr>
-                <th scope="col">Serviço</th>
-                <th>Ações</th>
-              </tr>
-            </thead>
-            <tbody> 
-              <% for(let i=0;i<servicos.length;i++) { %>
-                <tr>
+           <div class="container-tabela">
+              <table class="table table-hover table-responsive" >
+                <thead>
+                  <tr>
+                    <th scope="col" style="text-align: start;">Serviço</th>
+                    <th scope="col"  style="text-align: end;">Ações</th>
+                  </tr>
+                </thead>
+                <tbody> 
+                  <% for(let i=0;i<servicos.length;i++) { %>
+                    <tr>
+        
+                      <td scope="row" style="text-align: start;" data-label="Nome" ><%= servicos[i].nome %></td>
     
-                  <td scope="row" data-label="Nome" class="tbodyservicos"><%= servicos[i].nome %></td>
+                      <td scope="row" data-label="Ações" style="text-align: end;">
+                        <button type="button" class="btn-excluir" data-id="<%= servicos[i].id %>" data-nome="<%= servicos[i].nome %>" style="border: none; background-color: transparent; ">
+                          <i class="fas fa-trash" style="color: #d72323;"></i>
+                        </button>
+                      </td>
+                    </tr>
+                  <% } %>
+                </tbody>
+              </table>
+           </div>
+      </div>
 
-                  <td scope="row" data-label="Ações" class="tbodyservicos">
-                    <button type="button" class="btn-excluir" data-id="<%= servicos[i].id %>" data-nome="<%= servicos[i].nome %>" style="border: none; background-color: transparent;">
-                      <i class="fas fa-trash" style="color: #d72323;"></i>
-                    </button>
-                  </td>
+      <div class="container-contas" style="margin-top: 20px;">
+        <h3>Usuários registrados</h3>
 
-                </tr>
-              <% } %>
-            </tbody>
-          </table>
-        </div>
-
-    </div>
-
-    <div class="container-perfis">
-      <h3 style="text-align: center;">Contas registradas</h3>
-        <div class="table-responsive">
-          
-          <table class="table table-hover">
-            
+        <div class="container-table" style="overflow-y: auto; max-height: 500px;">
+          <table class="table table-hover table-responsive" style="text-align: start;">
             <thead>
               <tr>
                 <th scope="col">Usuário</th>
                 <th scope="col">Perfil</th>
-                <th scope="col">Ações</th>
+                <th scope="col" style="text-align: end;">Ações</th>
               </tr>
             </thead>
             <tbody>
-                <% for(let i=0;i<usuarios.length;i++) { %>
-              <tr>
-                 
-                    
-                    <td data-label="Usuário" class="tbodyusuarios"><%= usuarios[i].login %></td>
+              <% for(let i=0;i<usuarios.length;i++) { %>
+            <tr>
+               
+                  
+                  <td data-label="Usuário" class="tbodyusuarios"><%= usuarios[i].login %></td>
 
-                    <td data-label="Perfil" class="tbodyusuarios"><%= usuarios[i].perfil_id %></td>
+                  <td data-label="Perfil" class="tbodyusuarios"><%= usuarios[i].perfil_id %></td>
 
-                    <% let perfil = usuarios[i].perfil_id; %>
-                    <% if(perfil != 'Sistema' ) { %>
-                    <td data-label="Ações" class="tbodyusuarios"> <a href="/administrador/editar/<%= usuarios[i].id %>" class="btn-editar" style="border: none; background-color: transparent;"><i class="fas fa-edit" style="color: #74C0FC;"></i></a>
-                    <button type="button" class="btn-excluirConta" data-id="<%= usuarios[i].id %>" data-nome="<%= usuarios[i].login %>" style="border: none; background-color: transparent;"><i class="fas fa-trash" style="color: #d72323;"></i></button></td>
-                    <% } %>
-              </tr>
-              <% } %>
-            </tbody>
+                  <% let perfil = usuarios[i].perfil_id; %>
+                  <% if(perfil != 'Sistema' ) { %>
+                  <td data-label="Ações" class="tbodyusuarios" style=" text-align: end;">
+
+                    <a href="/administrador/editar/<%= usuarios[i].id %>" class="btn-editar" style="border: none; background-color: transparent; ">
+                      <i class="fas fa-edit" style="color: #74C0FC;"></i>
+                    </a>
+                    <button type="button"  class="btn-excluirConta" data-id="<%= usuarios[i].id %>" data-nome="<%= usuarios[i].login %>" style="border: none; background-color: transparent;">
+                      <i class="fas fa-trash" style="color: #d72323;"></i>
+                    </button>
+
+                  </td>
+                  <% } %>
+            </tr>
+            <% } %>
+          </tbody>
           </table>
         </div>
-    </div>
-</main>
+      </div>
+
+      <div class="container-atestado" style="margin-top: 20px;">
+        <h3>Atestado médico</h3>
+
+        <label for="" style="text-align: start;">Nome do médico:</label>
+        <input type="text" class="form-control" id="nomeMedico" name="nomeMedico">
+
+        <label for="" style="text-align: start; margin-top: 20px;">Especialidade médica:</label>
+        <select name="" id="" class="form-select"> 
+          <option value="0" disabled selected>Selecione uma opção</option>
+          <% for(let i=0;i<servicos.length;i++) {%>
+            <option value="<%= servicos[i].id %>"><%= servicos[i].nome %></option>
+          <%}%>
+          
+        </select>
+        
+        <div class="row" style="margin-top: 20px;">
+
+          <div class="col" style="text-align: start;">
+            <label for="">Data de início do afastamento:</label>
+            <input type="date" class="form-control" id="dataInicio" name="dataInicio">
+          </div>
+          
+          <div class="col" style="text-align: start;">
+            <label for="">Data de término do afastamento:</label>
+            <input type="date" class="form-control" id="dataTermino" name="dataTermino">
+          </div>
+        </div>
+
+        <label for="" style="text-align: start;margin-top: 20px;">Foto do atestado:</label>
+        <input type="file" id="fotoAtestado" name="fotoAtestado" class="form-control">
+
+      </div>
+    </section>
+
+
+  </main>
 
 
 <%} else { %>
-  <main>
+  <main class="background-main">
 
-    <div class="container-form">
-
-      <form>
-        <div class="mb-3" hidden>
-          <input type="text" class="form-control" id="id" name="id" value="<%= admAlteracao.id %>">
-        </div>
-        <!-- <label for="" class="form-label">Nome serviço</label>
-        <input type="text" class="form-control">
-        <button class="btn btn-primary" style="margin-top: 10px;">Cadastrar serviço</button> -->
-        <label for="servico" class="form-label">Nome serviço</label>
+    <section class="section-adm">
+      
+      <div class="container-servicos ">
+        <h3>Serviços cadastrados</h3>
+          <div class="mb-3" hidden>
+            <input type="text" class="form-control" id="id" name="id" value="<%= admAlteracao.id %>">
+          </div>
             <input type="text" class="form-control" id="servico" name="servico">
-            <button type="button" class="btn btn-primary btn-add" style="margin-top: 10px;">Cadastrar serviço</button>
-      </form>
+            <button class="btn btn-primary btn-add" style="margin-top: 12px;">Cadastrar serviço</button>
 
-      <div class="table-responsive tabela-servicos">
-        <table class="table table-hover table-servico">
-          <thead>
-            <tr>
-              <th scope="col">Serviço</th>
-              <th>Ações</th>
-            </tr>
-          </thead>
-          <tbody> 
-            <% for(let i=0;i<servicos.length;i++) { %>
-              <tr>
-                <td scope="row" data-label="Nome" class="tbodyservicos"><%= servicos[i].nome %></td>
-
-                <td scope="row" data-label="Ações" class="tbodyservicos">
-                  <button type="button" class="btn-excluir" data-id="<%= servicos[i].id %>" data-nome="<%= servicos[i].nome %>" style="border: none; background-color: transparent;">
-                    <i class="fas fa-trash" style="color: #d72323;"></i>
-                  </button>
-                </td>
-
-              </tr>
-            <% } %>
-          </tbody>
-        </table>
+           <div class="container-tabela">
+              <table class="table table-hover table-responsive">
+                <thead>
+                  <tr>
+                    <th scope="col" style="text-align: start;">Serviço</th>
+                    <th scope="col"  style="text-align: end;">Ações</th>
+                  </tr>
+                </thead>
+                <tbody> 
+                  <% for(let i=0;i<servicos.length;i++) { %>
+                    <tr>
+        
+                      <td scope="row" style="text-align: start;" data-label="Nome" ><%= servicos[i].nome %></td>
+    
+                      <td scope="row" data-label="Ações" style="text-align: end;">
+                        <button type="button" class="btn-excluir" data-id="<%= servicos[i].id %>" data-nome="<%= servicos[i].nome %>" style="border: none; background-color: transparent; ">
+                          <i class="fas fa-trash" style="color: #d72323;"></i>
+                        </button>
+                      </td>
+                    </tr>
+                  <% } %>
+                </tbody>
+              </table>
+           </div>
       </div>
-    </div>
-  
-    <div class="container-perfis">
-      <h3 style="text-align: center;">Contas registradas</h3>
-      <div class="table-responsive">
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th scope="col">Usuário</th>
-              <th scope="col">Senha</th>
-              <th scope="col">Perfil</th>
-              <th scope="col">Ações</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% for(let i=0;i<usuarios.length;i++) { %>
+
+      <div class="container-contas" style="margin-top: 20px;">
+        <h3>Usuários registrados</h3>
+
+        <div class="container-table" style="overflow-y: auto; max-height: 500px;">
+          <table class="table table-hover table-responsive" style="text-align: start;">
+            <thead>
               <tr>
-               
- 
-                <% if(admAlteracao && admAlteracao.id == usuarios[i].id) { %>
-                  
-
-                  <% if(admAlteracao && admAlteracao.id == usuario.id || usuario.id == '1') { %>
+                <th scope="col">Usuário</th>
+                <th scope="col" style="text-align: end; position: relative; left: 58px;">Perfil</th>
+                <th scope="col" style="text-align: end; position: relative; left: 58px;">Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% for(let i=0;i<usuarios.length;i++) { %>
+                <tr>
+                 
+   
+                  <% if(admAlteracao && admAlteracao.id == usuarios[i].id) { %>
                     
-
-                    <% if (usuario.id == '1') { %>
-                      <td data-label="Usuário"><input type="text" class="form-control" id="usuario" name="usuario"  disabled value="<%= usuarios[i].login %>"></td>
-                      <td data-label="Senha"><input type="password" class="form-control" id="senha" name="senha"  disabled value="<%= usuarios[i].senha %>"></td>
-                    <% } else { %>
-                      <td data-label="Usuário"><input type="text" class="form-control" id="usuario" name="usuario" value="<%= usuarios[i].login %>"></td>
-                      <td data-label="Senha"><input type="text" class="form-control" id="senha" name="senha"   value="<%= usuarios[i].senha %>"></td>
-                    <%}%>
-                    
-
-
-                   
+  
+                    <% if(admAlteracao && admAlteracao.id == usuario.id || usuario.id == '1') { %>
+                      
+  
+                      <% if (usuario.id == '1') { %>
+                        <td data-label="Usuário"><input type="text" class="form-control" id="usuario" name="usuario"   disabled value="<%= usuarios[i].login %>" ></td>
+                        <td data-label="Senha"><input type="password" class="form-control" id="senha" name="senha"  disabled value="<%= usuarios[i].senha %>"></td>
+                      <% } else { %>
+                        <td data-label="Usuário"><input type="text" class="form-control" id="usuario" name="usuario" value="<%= usuarios[i].login %>"></td>
+                        <td data-label="Senha"><input type="text" class="form-control" id="senha" name="senha"   value="<%= usuarios[i].senha %>"></td>
+                      <%}%>
+                      
+  
+  
+                     
+                        <td data-label="Perfil">
+                          <select id="perfil" name="perfil" class="form-select">
+                            <% for(let j=0;j<perfis.length;j++) { %>
+                              <% if(perfis[j].descricao != 'Sistema') { %>
+                                <% if(perfis[j].id == admAlteracao.perfil_id) { %>
+                                  <option selected value="<%= perfis[j].id %>"><%= perfis[j].descricao %></option>
+                                <% } else { %>
+                                  <option value="<%= perfis[j].id %>"><%= perfis[j].descricao %></option>
+                                <% } %>
+                              <% } %>
+                            <% } %>
+                          </select>
+                        </td>
+                      
+                      
+  
+  
+                    <% } else {%>
+  
+  
+                      <td data-label="Usuário" ><input type="text" class="form-control" id="usuario" name="usuario" disabled value="<%= usuarios[i].login %>"></td>
+                      <td data-label="Senha"><input type="password" class="form-control" id="senha" name="senha" disabled value="<%= usuarios[i].senha %>"></td>
+  
                       <td data-label="Perfil">
-                        <select id="perfil" name="perfil" class="form-select">
+                        <select id="perfil" name="perfil" class="form-select" disabled>
                           <% for(let j=0;j<perfis.length;j++) { %>
                             <% if(perfis[j].descricao != 'Sistema') { %>
                               <% if(perfis[j].id == admAlteracao.perfil_id) { %>
@@ -171,68 +231,48 @@
                           <% } %>
                         </select>
                       </td>
-                    
-                    
-
-
-                  <% } else {%>
-
-
-                    <td data-label="Usuário"><input type="text" class="form-control" id="usuario" name="usuario" disabled value="<%= usuarios[i].login %>"></td>
-                    <td data-label="Senha"><input type="password" class="form-control" id="senha" name="senha" disabled value="<%= usuarios[i].senha %>"></td>
-
-                    <td data-label="Perfil">
-                      <select id="perfil" name="perfil" class="form-select" disabled>
-                        <% for(let j=0;j<perfis.length;j++) { %>
-                          <% if(perfis[j].descricao != 'Sistema') { %>
-                            <% if(perfis[j].id == admAlteracao.perfil_id) { %>
-                              <option selected value="<%= perfis[j].id %>"><%= perfis[j].descricao %></option>
-                            <% } else { %>
-                              <option value="<%= perfis[j].id %>"><%= perfis[j].descricao %></option>
-                            <% } %>
-                          <% } %>
-                        <% } %>
-                      </select>
-                    </td>
-
-                  <%}%>
-                 
-                  
-                  
-                  
-                  
-
-                <% } else { %>
-                  <td data-label="Usuário"><%= usuarios[i].login %></td>
   
-                  <td></td>
-  
-                  <td data-label="Perfil"><%= usuarios[i].perfil_id %></td>
-                <% } %>
-  
-                <% if(usuarios[i].perfil_id != 'Sistema') { %>
-                  <td data-label="Ações">
-                    <a href="/administrador/editar/<%= usuarios[i].id %>" class="btn-editar" style="border: none; background-color: transparent;">
-                      <i class="fas fa-edit" style="color: #74C0FC;"></i>
-                    </a>
-
-                    <% if(admAlteracao && admAlteracao.id == usuario.id || usuario.id == '1') { %>
-                      <button type="button" class="btn-addConta" style="border: none; background-color: transparent;">
-                        <i class="fas fa-thumbs-up" style="color: #63E6BE;"></i>
-                      </button>
-                    <% } else { %>
-                      <button hidden type="button" class="btn-addConta" style="border: none; background-color: transparent;">
-                        <i class="fas fa-thumbs-up" style="color: #63E6BE;" ></i>
-                      </button>
                     <%}%>
                    
-                  </td>
-                <% } %>
-              </tr>
-            <% } %>
-          </tbody>
-        </table>
+                    
+                    
+                    
+                    
+  
+                  <% } else { %>
+                    <td data-label="Usuário"><%= usuarios[i].login %></td>
+    
+                    <td></td>
+    
+                    <td data-label="Perfil"><%= usuarios[i].perfil_id %></td>
+                  <% } %>
+    
+                  <% if(usuarios[i].perfil_id != 'Sistema') { %>
+                    <td data-label="Ações" style="text-align: end;">
+                      <a href="/administrador/editar/<%= usuarios[i].id %>" class="btn-editar" style="border: none; background-color: transparent;">
+                        <i class="fas fa-edit" style="color: #74C0FC;"></i>
+                      </a>
+  
+                      <% if(admAlteracao && admAlteracao.id == usuario.id || usuario.id == '1') { %>
+                        <button type="button" class="btn-addConta" style="border: none; background-color: transparent;">
+                          <i class="fas fa-thumbs-up" style="color: #63E6BE;"></i>
+                        </button>
+                      <% } else { %>
+                        <button hidden type="button" class="btn-addConta" style="border: none; background-color: transparent;">
+                          <i class="fas fa-thumbs-up" style="color: #63E6BE;" ></i>
+                        </button>
+                      <%}%>
+                     
+                    </td>
+                  <% } %>
+                </tr>
+              <% } %>
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
+    </section>
+
+
   </main>
 <%}%>

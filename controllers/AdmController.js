@@ -10,6 +10,7 @@ class AdmController {
 
         let servicoModel = new ServicosModel();
         let listaServicos = await servicoModel.listarServicos();
+        
 
         res.render('adm/adm.ejs', {usuarios: listaUsuarios, servicos: listaServicos});
     }
