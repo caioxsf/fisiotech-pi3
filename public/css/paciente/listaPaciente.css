@@ -1,5 +1,4 @@
 .container-lista {
-    width: 1800px;
     height: 500px;
     overflow-y: auto;
     margin: 20px;
@@ -12,8 +11,44 @@
 
     gap: 30px;
 }
+.modal-container {
+    display: flex;
+    flex-wrap: wrap; /* Permite que os itens quebrem para a próxima linha */
+    justify-content: center; /* Centraliza os itens na linha */
+    gap: 20px; /* Espaço entre os itens */
+    padding: 20px; /* Espaçamento interno */
+}
+
 
 .rolagem-y-card {
     max-height: 150px; /* Define uma altura máxima para o corpo do cartão */
     overflow-y: auto; /* Permite a rolagem vertical */
 }
+
+.container-search {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.inputTexto {
+    display: flex;
+    justify-content: center;
+    text-align: start;
+    margin: 0 auto;
+}
+
+.container-input-e-search {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    width: 350px;
+    margin: 0 auto;
+    gap: 10px;
+}
+
+/* .container-input-e-search .btn-primary {
+    position: relative;
+    right:  20px;
+} */

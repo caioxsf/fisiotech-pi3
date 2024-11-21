@@ -105,6 +105,45 @@ class PacienteModel {
         return listaPaciente;
         
     }
+
+    async listarPacienteSearch (texto,tipoBusca) {
+        let whereFiltro = "";
+        if(texto) {
+            if(tipoBusca == 'nome') {
+                whereFiltro = `where pac.pac_nome like '%${texto}%' order by  pac.pac_nome asc`
+            } else if (tipoBusca == 'cpf') {
+                whereFiltro = `where pac.pac_cpf ='${texto}'`
+            }
+                
+        }
+
+        let sql = `select * from paciente pac
+        inner join sexo sex on pac.fk_sexo_id = sex.sexo_id
+        inner join estado est on pac.fk_est_id = est.est_id
+        ${whereFiltro}
+        `;
+
+        let resultado = await db.ExecutaComando(sql);
+        let listaPaciente = [];
+        for(let registro of resultado) {
+            listaPaciente.push(new PacienteModel (
+                registro['pac_id_paciente'],
+                registro['pac_nome'],
+                registro['pac_telefone'],
+                registro['pac_email'],
+                registro['pac_data_nascimento'],
+                registro['pac_cpf'],
+                registro['pac_endereco'],
+                registro['pac_bairro'],
+                registro['sexo_nome'],
+                registro['pac_cidade'],
+                registro['est_nome'],
+                registro['pac_cep']
+            ));
+        }
+        return listaPaciente;
+        
+    }
     
     async excluirPaciente (id) {
         let sql = `delete from paciente where pac_id_paciente = ?`;
@@ -173,6 +212,25 @@ class PacienteModel {
         else
             return null;
     }
+
+    toJSON() {
+        return {
+            id: this.#id,
+            nome: this.#nome,
+            telefone: this.#telefone,
+            email: this.#email,
+            nascimento: this.#nascimento,
+            cpf: this.#cpf,
+            endereco: this.#endereco,
+            bairro: this.#bairro,
+            sexo_id: this.#sexo_id,
+            cidade: this.#cidade,
+            estado_id: this.#estado_id,
+            cep: this.#cep,
+            pacienteImagem: this.#pacienteImagem
+        };
+    }
+    
     
 }
 

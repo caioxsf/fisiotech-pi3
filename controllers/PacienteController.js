@@ -122,7 +122,12 @@ class PacienteController {
         }
     }
 
-    
+    async listarPacienteSearch (req,res) {
+        let pacienteModel = new PacienteModel();
+        let pacientes = await pacienteModel.listarPacienteSearch(req.body.texto, req.body.tipoBusca)
+        res.send({pacientes: pacientes});
+    }
+
 }
 
 module.exports = PacienteController;

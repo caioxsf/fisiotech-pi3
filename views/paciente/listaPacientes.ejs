@@ -2,14 +2,47 @@
 <link rel="stylesheet" href="/css/paciente/modal.css">
 <script src="/js/paciente/excluirPaciente.js"></script>
 <script src="/js/paciente/dialogPaciente.js"></script>
+<script src="/js/paciente/search.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 
 <% if(pacientes.length > 0) { %>
     <h2 style="text-align: center; margin-top: 25px;">Pacientes cadastrados!</h2> 
+
+    <form>
+        <div class="container-search text-center">
+
+            <div class="form-group ">
+                 <label for="" class="form-label">Buscar por:</label>
+     
+                 <label for="nomePaciente" class="form-label" style="margin-right: 14px; margin-left: 5px;">
+                     <input type="radio" value="nome" class="form-check-input" id="nomePaciente" name="tipoBusca"> 
+                     Nome do paciente
+                 </label>
+     
+                 <label for="CPFPaciente" class="form-label">
+                     <input type="radio" value="cpf" class="form-check-input" id="CPFPaciente" name="tipoBusca">
+                      CPF do paciente
+                 </label>
+            </div>
+     
+             <div class="form-group container-input-e-search">
+                 <input type="text" class="form-control inputTexto" id="texto" name="texto"  onblur="mascara('###.###.###-##',this,event)">
+                 <button type="button" class="btn btn-primary" id="btnBuscar"><i class="fas fa-search"></i></button>
+             </div>
+            
+         </div>
+    </form>
+
+   
+
+        
+        
+    </div>
+
     <div class="modal-container">
             <% for(let i=0;i<pacientes.length;i++) { %>
-                    <div class="card-modal">
+                    <div class="card-modal" id="search-aqui">
                         <div class="card" style="width: 18rem;">
                             
                             <div class="card-body">
@@ -18,6 +51,7 @@
                             </div>
                             <button class="abrir" data-dialog="dialog-<%= pacientes[i].id %>">Ver mais..</button>
                           </div>
+
                             <dialog class="texto" id="dialog-<%= pacientes[i].id %>">
                                 <div class="card" style="width: 18rem;">
                                     <img src="/img/paciente/fotosemperfil.png" class="card-img-top card-img-perfil">
