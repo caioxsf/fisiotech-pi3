@@ -13,16 +13,16 @@
 }
 .modal-container {
     display: flex;
-    flex-wrap: wrap; /* Permite que os itens quebrem para a próxima linha */
-    justify-content: center; /* Centraliza os itens na linha */
-    gap: 20px; /* Espaço entre os itens */
-    padding: 20px; /* Espaçamento interno */
+    flex-wrap: wrap; 
+    justify-content: center; 
+    gap: 20px; 
+    padding: 20px; 
 }
 
 
 .rolagem-y-card {
-    max-height: 150px; /* Define uma altura máxima para o corpo do cartão */
-    overflow-y: auto; /* Permite a rolagem vertical */
+    max-height: 150px; 
+    overflow-y: auto; 
 }
 
 .container-search {

@@ -24,6 +24,8 @@ app.use("/consulta", routerConsulta);
 app.use("/login", routerLogin);
 app.use('/administrador', routerAdm);
 
+global.CAMINHO_IMG_NAV = "/img/atestado/";
+global.CAMINHO_IMG_REAL = __dirname + "/public";
 
 app.listen(5000, function() {
     console.log("servidor iniciado!");

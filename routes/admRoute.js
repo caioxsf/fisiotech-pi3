@@ -1,6 +1,7 @@
 const express = require("express");
 const multer = require('multer');
 const AdmController = require("../controllers/AdmController");
+const RelatoriosController = require("../controllers/RelatoriosController");
 const AuthMiddleware = require("../middlewares/authMiddleware");
 const router = express.Router();
 
@@ -20,6 +21,7 @@ const storage = multer.diskStorage({
 let upload = multer({storage});
 
 let ctrl = new AdmController();
+let rela = new RelatoriosController();
 let auth = new AuthMiddleware();
 
 router.get('/', auth.validarAdmin, ctrl.admView);
@@ -30,5 +32,11 @@ router.get('/editar/:id', auth.validarAdmin, ctrl.editarAdmView);
 router.post('/editar', auth.validarAdmin, ctrl.editarAdm);
 router.get('/servico/excluir/:id', auth.validarAdmin, ctrl.excluirServico)
 router.get('/excluir/:id', auth.validarAdmin, ctrl.excluirUsuarioCadastrado);
+
+router.get('/relatorio/atestado', auth.validarAdmin, rela.atestadoView);
+router.get('/relatorio/atestado/excluir/:id', auth.validarAdmin, rela.excluirAtestado);
+router.post('/relatorio/atestado/lista', rela.listaAtestadoSearch)
+
+router.get('/relatorio/usuarios', auth.validarAdmin, rela.usuarioView);
 
 module.exports = router;

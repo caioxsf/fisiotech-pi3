@@ -1,19 +1,13 @@
-.container-lista {
-    height: 600px;
+.table-container {
+    
+    margin-top: 10px;
+    margin-inline: 150px;
+    max-height: 600px;     
     overflow-y: auto;
-    margin: 20px;
-    padding: 20px;
-
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-
-    gap: 30px;
 }
 
-.card {
-    height: 330px;
+main {
+    height: 600px;
 }
 
 .container-search {

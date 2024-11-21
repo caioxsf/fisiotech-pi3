@@ -109,6 +109,40 @@ class ConsultaModel {
         return listaConsulta;
     }
 
+    async listarConsultaSearch (texto, tipoBusca) {
+        let whereFiltro = "";
+        if(texto) {
+            if(tipoBusca == 'nome') {
+                whereFiltro = `where pac.pac_nome like '%${texto}%' order by pac.pac_nome asc`
+            } else if (tipoBusca == 'cpf') {
+                whereFiltro = `where con.con_data = '${texto}' order by con.con_data asc`
+            }
+                
+        }
+        
+        let sql = `select *  from consulta con
+        inner join servico_consulta sv on con.fk_serv_id = sv.serv_id
+        inner join paciente pac on con.fk_pac_id_paciente = pac.pac_id_paciente
+        ${whereFiltro}
+        `;
+
+        let resultado = await db.ExecutaComando(sql);
+        let listaConsulta = [];
+        for(let registro of resultado) {
+            listaConsulta.push(new ConsultaModel (
+                registro['con_id'],
+                registro['pac_nome'],
+                registro['con_telefone'],
+                registro['con_email'],
+                registro['serv_nome'],
+                registro['con_data'],
+                registro['con_hora'],
+                registro['con_obs']
+            ));
+        }
+        return listaConsulta;
+    }
+
     async verificarConsultaMesmoDiaMesmoHorario (data,hora) {
         let sql = ` select con_data, con_hora from consulta
                     where con_data = ? and con_hora = ?`;
@@ -162,7 +196,19 @@ class ConsultaModel {
         let resultado = await db.ExecutaComandoNonQuery(sql,valores);
         return resultado;
     }
-
+    
+    toJSON() {
+        return {
+            id: this.#id,
+            nome_id: this.#nome_id,
+            telefone: this.#telefone,
+            email: this.#email,
+            servico_id: this.#servico_id,
+            data: this.#data,
+            hora: this.#hora,
+            obs: this.#obs,
+        };
+    }
 }
 
 module.exports = ConsultaModel;

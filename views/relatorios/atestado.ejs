@@ -1,0 +1,67 @@
+<link rel="stylesheet" href="/css/relatorio/atestado.css">
+<script src="/js/atestado/excluirAtestado.js"></script>
+<script src="/js/atestado/search.js"></script>
+
+<main>
+    <section>
+
+        <form>
+            <div class="container-search text-center">
+    
+                <div class="form-group ">
+                     <label for="" class="form-label">Buscar por:</label>
+         
+                     <label for="nomeMedico" class="form-label" style="margin-right: 14px; margin-left: 5px;">
+                         <input type="radio" value="nome" class="form-check-input" id="nomeMedico" name="tipoBusca"> 
+                         Nome do médico
+                     </label>
+         
+                     <label for="dataInicio" class="form-label">
+                         <input type="radio" value="data" class="form-check-input" id="dataInicio" name="tipoBusca">
+                          Data início do afastamento
+                     </label>
+
+                </div>
+         
+                 <div class="form-group container-input-e-search">
+                     <input type="text" class="form-control inputTexto" id="texto" name="texto"  >
+                     <button type="button" class="btn btn-primary" id="btnBuscar"><i class="fas fa-search"></i></button>
+                 </div>
+                
+             </div>
+        </form>
+
+        <div class="table-container">
+            <table class="table table-hover table-responsive">
+                <thead>
+                    <tr>
+                        <th>Nome médico</th>
+                        <th>Especialidade médica</th>
+                        <th>Data início do afastamento</th>
+                        <th>Data término do afastamento</th>
+                        <th style="text-align: center;">Foto atestado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% atestado.map(function(value) { %>
+                        <tr>
+                            <td><%= value.nome_medico %></td>
+                            <td><%= value.especialidade_medica %></td>
+                            <td><%= new Date(value.data_inicio).toLocaleDateString('pt-BR') %></td>
+                            <td><%= new Date(value.data_termino).toLocaleDateString('pt-BR') %></td>
+                            <td style="text-align: center;">
+                                <a href="<%= value.foto_atestado %>" download='Atestado' style="margin-right: 15px;"><i class="fas fa-file-download fa-lg "style="font-size: 25px;" ></i></a>
+                                <img src="<%= value.foto_atestado %>" alt="Foto Atestado" width="100">
+
+                                <button type="button" class="btn-excluir" data-id="<%= value.id %>" data-nome="<%= value.nome_medico %>" style="border: none; background-color: transparent; margin-left: 10px; ">
+                                    <i class="fas fa-trash" style="color: #d72323;"></i>
+                                  </button>
+                            </td>
+                        </tr>
+                    <% }) %>
+                   
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>

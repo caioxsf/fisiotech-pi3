@@ -10,6 +10,8 @@ router.post('/', auth.validarAdmin,ctrl.consultaCadastro);
 
 
 router.get('/lista', auth.validarAdmin,ctrl.listaConsultaView);
+router.post('/lista', ctrl.listarConsultaSearch)
+
 router.get('/excluir/:id', auth.validarAdmin,ctrl.excluirConsulta);
 
 router.get('/editar/:id', auth.validarAdmin,ctrl.editarConsultaView);

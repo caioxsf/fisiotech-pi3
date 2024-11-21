@@ -1,0 +1,58 @@
+<link rel="stylesheet" href="/css/relatorio/usuarios.css">
+<script src="/js/usuarios/excel.js"></script>
+
+<main>
+    <section>
+
+        <form>
+            <div class="container-search text-center">
+    
+                <div class="form-group ">
+                     <label for="" class="form-label">Buscar por:</label>
+         
+                     <label for="nomeMedico" class="form-label" style="margin-right: 14px; margin-left: 5px;">
+                         <input type="radio" value="nome" class="form-check-input" id="nomeMedico" name="tipoBusca"> 
+                         Usuário
+                     </label>
+         
+                     <label for="dataInicio" class="form-label">
+                         <input type="radio" value="data" class="form-check-input" id="dataInicio" name="tipoBusca">
+                          Perfil
+                     </label>
+
+                </div>
+         
+                 <div class="form-group container-input-e-search">
+                     <input type="text" class="form-control inputTexto" id="texto" name="texto"  >
+                     <button type="button" class="btn btn-primary" id="btnBuscar"><i class="fas fa-search"></i></button>
+                     <button class="btn btn-primary" id="btnExportarExcel">
+                        <i class="fas fa-file"></i>
+                        Excel
+                    </button>
+                 </div>
+                
+             </div>
+        </form>
+
+        <div class="table-container">
+            <table class="table table-hover table-responsive" id="tabelausers">
+                <thead>
+                    <tr>
+                        <th>Usuário</th>
+                        <th>Perfil</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for(let i=0;i<usuarios.length;i++) { %>
+                        <tr>
+                            <td><%= usuarios[i].login %></td>
+                            <td><%= usuarios[i].perfil_id %></td>
+                        </td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>

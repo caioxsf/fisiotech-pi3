@@ -1,9 +1,36 @@
 <link rel="stylesheet" href="/css/consulta/listaConsulta.css">
 <script src="/js/consulta/excluirConsulta.js"></script>
+<script src="/js/consulta/search.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <% if(consultas.length > 0)  {%>
     <h2 style="text-align: center; margin-top: 25px;">Consultas marcadas!</h2>
+
+    <form>
+      <div class="container-search text-center">
+
+          <div class="form-group ">
+               <label for="" class="form-label">Buscar por:</label>
+   
+               <label for="nomePaciente" class="form-label" style="margin-right: 14px; margin-left: 5px;">
+                   <input type="radio" value="nome" class="form-check-input" id="nomePaciente" name="tipoBusca"> 
+                   Nome do paciente
+               </label>
+   
+               <label for="dataConsulta" class="form-label">
+                   <input type="radio" value="data" class="form-check-input" id="dataConsulta" name="tipoBusca">
+                    Data consulta
+               </label>
+          </div>
+   
+           <div class="form-group container-input-e-search">
+               <input type="text" class="form-control inputTexto" id="texto" name="texto"  >
+               <button type="button" class="btn btn-primary" id="btnBuscar"><i class="fas fa-search"></i></button>
+           </div>
+          
+       </div>
+  </form>
+
     <div class="container-lista">
     
         <% for(let i=0;i<consultas.length;i++) { %>

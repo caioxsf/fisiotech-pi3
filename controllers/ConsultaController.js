@@ -79,7 +79,10 @@ class ConsultaController {
         let consultaModel = new ConsultaModel();
         consultaModel = await consultaModel.obter(id);
 
-        res.render('consulta/consulta.ejs', {serv: listaServicos, consultaAlteracao: consultaModel});
+        let pacienteModel = new PacienteModel();
+        let listaPaciente = await pacienteModel.listarPaciente();
+
+        res.render('consulta/consulta.ejs', {serv: listaServicos, consultaAlteracao: consultaModel, lista_pacientes: listaPaciente});
     }
 
     async editarConsulta (req,res) {
@@ -107,6 +110,11 @@ class ConsultaController {
         }
     }
     
+    async listarConsultaSearch (req,res) {
+        let consultaModel = new ConsultaModel();
+        let consultas = await consultaModel.listarConsultaSearch(req.body.texto, req.body.tipoBusca)
+        res.send({consultas: consultas});
+    }
 }
 
 module.exports = ConsultaController;

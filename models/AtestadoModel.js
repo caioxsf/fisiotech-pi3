@@ -1,6 +1,6 @@
 const Database = require('../utils/database');
 const db = new Database();
-
+const fs = require('fs');
 class AtestadoModel {
 
     #id
@@ -33,6 +33,100 @@ class AtestadoModel {
         let resultado = await db.ExecutaComandoNonQuery(sql,valores);
 
         return resultado;
+    }
+
+    async listarAtestados () {
+        let sql = `select * from atestado ate
+        inner join servico_consulta sc on ate.ate_esp_medica = sc.serv_id
+        `
+
+        let resultado = await db.ExecutaComando(sql);
+        let listaAtestado = [];
+
+        if(resultado.length > 0) {
+            for (let i=0;i<resultado.length;i++) {
+
+                var registro = resultado[i];
+
+                let imagem = "/img/paciente/fotosemperfil.png";
+                if(registro["ate_foto_atestado"] != null && fs.existsSync(global.CAMINHO_IMG_REAL + global.CAMINHO_IMG_NAV + registro["ate_foto_atestado"])){
+                    imagem = global.CAMINHO_IMG_NAV + registro["ate_foto_atestado"]
+                }
+
+                listaAtestado.push(new AtestadoModel (
+                    registro['ate_id'],
+                    registro['ate_nome_medico'],
+                    registro['serv_nome'],
+                    registro['ate_data_inicio'],
+                    registro['ate_data_termino'],
+                    imagem
+                ));
+            }
+        }
+
+        return listaAtestado;
+    }
+
+    async listaAtestadoSearch (texto, tipoBusca) {
+        let whereFiltro = "";
+        if(texto) {
+            if(tipoBusca == 'nome') {
+                whereFiltro = `where ate.ate_nome_medico like '%${texto}%' order by ate.ate_nome_medico asc`
+            } else if (tipoBusca == 'data') {
+                whereFiltro = `where ate.ate_data_inicio = '${texto}' order by ate.ate_data_inicio asc `
+            }
+                
+        }
+
+
+        let sql = `select * from atestado ate
+        inner join servico_consulta sc on ate.ate_esp_medica = sc.serv_id
+        ${whereFiltro}
+        `
+
+        let resultado = await db.ExecutaComando(sql);
+        let listaAtestado = [];
+
+        if(resultado.length > 0) {
+            for (let i=0;i<resultado.length;i++) {
+
+                var registro = resultado[i];
+
+                let imagem = "/img/paciente/fotosemperfil.png";
+                if(registro["ate_foto_atestado"] != null && fs.existsSync(global.CAMINHO_IMG_REAL + global.CAMINHO_IMG_NAV + registro["ate_foto_atestado"])){
+                    imagem = global.CAMINHO_IMG_NAV + registro["ate_foto_atestado"]
+                }
+
+                listaAtestado.push(new AtestadoModel (
+                    registro['ate_id'],
+                    registro['ate_nome_medico'],
+                    registro['serv_nome'],
+                    registro['ate_data_inicio'],
+                    registro['ate_data_termino'],
+                    imagem
+                ));
+            }
+        }
+
+        return listaAtestado;
+    }
+
+    async excluirAtestado (id) {
+        let sql = `delete from atestado where ate_id = ?`;
+        let valores = [id];
+        let resultado = await db.ExecutaComandoNonQuery(sql,valores);
+        return resultado;
+    }
+
+    toJSON() {
+        return {
+            id: this.id,
+            nome_medico: this.nome_medico,
+            especialidade_medica: this.especialidade_medica,
+            data_inicio: this.data_inicio,
+            data_termino: this.data_termino,
+            foto_atestado: this.foto_atestado
+        };
     }
 
 }
