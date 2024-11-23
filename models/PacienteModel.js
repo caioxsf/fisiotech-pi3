@@ -1,6 +1,6 @@
 const Database = require('../utils/database');
 const db = new Database();
-
+const fs = require('fs');
 class PacienteModel {
 
     #id
@@ -86,7 +86,18 @@ class PacienteModel {
         `;
         let resultado = await db.ExecutaComando(sql);
         let listaPaciente = [];
-        for(let registro of resultado) {
+
+        if(resultado.length > 0)
+
+        for(let i=0;i<resultado.length;i++) {
+
+            var registro = resultado[i];
+
+            let imagem = "/img/paciente/fotosemperfil.png";
+            if(registro["pac_imagem"] != null && fs.existsSync(global.CAMINHO_IMG_REAL + global.CAMINHO_IMG_NAV_PACIENTE + registro["pac_imagem"])){
+                imagem = global.CAMINHO_IMG_NAV_PACIENTE + registro["pac_imagem"]
+            }
+
             listaPaciente.push(new PacienteModel (
                 registro['pac_id_paciente'],
                 registro['pac_nome'],
@@ -99,7 +110,8 @@ class PacienteModel {
                 registro['sexo_nome'],
                 registro['pac_cidade'],
                 registro['est_nome'],
-                registro['pac_cep']
+                registro['pac_cep'],
+                imagem
             ));
         }
         return listaPaciente;
@@ -125,7 +137,17 @@ class PacienteModel {
 
         let resultado = await db.ExecutaComando(sql);
         let listaPaciente = [];
-        for(let registro of resultado) {
+        if(resultado.length > 0)
+
+        for(let i=0;i<resultado.length;i++) {
+
+            var registro = resultado[i];
+
+            let imagem = "/img/paciente/fotosemperfil.png";
+            if(registro["pac_imagem"] != null && fs.existsSync(global.CAMINHO_IMG_REAL + global.CAMINHO_IMG_NAV_PACIENTE + registro["pac_imagem"])){
+                imagem = global.CAMINHO_IMG_NAV_PACIENTE + registro["pac_imagem"]
+            }
+
             listaPaciente.push(new PacienteModel (
                 registro['pac_id_paciente'],
                 registro['pac_nome'],
@@ -138,7 +160,8 @@ class PacienteModel {
                 registro['sexo_nome'],
                 registro['pac_cidade'],
                 registro['est_nome'],
-                registro['pac_cep']
+                registro['pac_cep'],
+                imagem
             ));
         }
         return listaPaciente;
@@ -187,9 +210,11 @@ class PacienteModel {
                                         fk_sexo_id = ?,
                                         pac_cidade = ?,
                                         fk_est_id = ?,
-                                        pac_cep = ?
+                                        pac_cep = ?,
+                                        pac_imagem = ?
+
                                         where pac_id_paciente = ?`;
-        let valores = [this.#nome, this.#telefone, this.#email, this.#nascimento, this.#cpf, this.#endereco, this.#bairro, this.#sexo_id, this.#cidade, this.#estado_id, this.#cep, this.#id];
+        let valores = [this.#nome, this.#telefone, this.#email, this.#nascimento, this.#cpf, this.#endereco, this.#bairro, this.#sexo_id, this.#cidade, this.#estado_id, this.#cep, this.#pacienteImagem, this.#id];
 
         let resultado = await db.ExecutaComandoNonQuery(sql,valores);
 
@@ -215,19 +240,19 @@ class PacienteModel {
 
     toJSON() {
         return {
-            id: this.#id,
-            nome: this.#nome,
-            telefone: this.#telefone,
-            email: this.#email,
-            nascimento: this.#nascimento,
-            cpf: this.#cpf,
-            endereco: this.#endereco,
-            bairro: this.#bairro,
-            sexo_id: this.#sexo_id,
-            cidade: this.#cidade,
-            estado_id: this.#estado_id,
-            cep: this.#cep,
-            pacienteImagem: this.#pacienteImagem
+        "id": this.#id,
+        "nome": this.#nome,
+        "telefone": this.#telefone,
+        "email": this.#email,
+        "nascimento": this.#nascimento,
+        "cpf": this.#cpf,
+        "endereco": this.#endereco,
+        "bairro": this.#bairro,
+        "sexo_id": this.#sexo_id,
+        "cidade": this.#cidade,
+        "estado_id": this.#estado_id,
+        "cep": this.#cep,
+        "pacienteImagem": this.#pacienteImagem
         };
     }
     

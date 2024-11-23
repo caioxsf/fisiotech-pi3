@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('btnBuscar').addEventListener('click', buscar);
 
     function buscar() {
-        debugger;
+        
         let texto = document.getElementById('texto').value;
         let tipoBusca = "";
 
@@ -11,8 +11,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
         let objetoBusca = {};
         if (texto != "" && (tipoBusca === 'nome' || tipoBusca === 'cpf')) {
-            objetoBusca.texto = texto;
-            objetoBusca.tipoBusca = tipoBusca;
+            if(tipoBusca == 'cpf'){
+                let novoTexto = texto.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+                objetoBusca.texto = novoTexto;
+                objetoBusca.tipoBusca = tipoBusca;
+            }
+            else {
+                objetoBusca.texto = texto;
+                objetoBusca.tipoBusca = tipoBusca;
+            }
+
         } else if (texto === "") {
             objetoBusca.texto = texto;
         } else {
@@ -45,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                             <dialog class="texto" id="dialog-${p.id}">
                                 <div class="card" style="width: 18rem;">
-                                    <img src="/img/paciente/fotosemperfil.png" class="card-img-top card-img-perfil">
+                                    <img src="${p.pacienteImagem }" class="card-img-top card-img-perfil">
                                     <div class="card-body">
                                         <h5 class="card-title"> ${p.nome} </h5>
                                         <p class="card-text"> ${p.endereco}, ${p.bairro}, ${p.cidade} (${p.estado_id}), ${p.cep} </p>

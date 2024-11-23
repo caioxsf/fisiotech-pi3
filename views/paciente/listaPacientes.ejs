@@ -22,7 +22,7 @@
      
                  <label for="CPFPaciente" class="form-label">
                      <input type="radio" value="cpf" class="form-check-input" id="CPFPaciente" name="tipoBusca">
-                      CPF do paciente (utilize 000.000.000-00)
+                      CPF do paciente
                  </label>
             </div>
      
@@ -49,7 +49,7 @@
 
                             <dialog class="texto" id="dialog-<%= pacientes[i].id %>">
                                 <div class="card" style="width: 18rem;">
-                                    <img src="/img/paciente/fotosemperfil.png" class="card-img-top card-img-perfil">
+                                    <img src="<%= pacientes[i].pacienteImagem %>" class="card-img-top card-img-perfil">
                             
                                     <% if (pacientes[i].nascimento) { %>
                                         <% 

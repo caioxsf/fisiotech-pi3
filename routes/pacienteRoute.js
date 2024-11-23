@@ -9,8 +9,8 @@ const storage = multer.diskStorage( {
         cb(null,'public/img/paciente')
     },
     filename(req,file,cb) {
-        let ext = file.orinalname.split(".").pop();
-        let novoNome = Data.now().toString() + "." + ext;
+        let ext = file.originalname.split(".").pop();
+        let novoNome = Date.now().toString() + "." + ext;
         cb(null,novoNome);
     }
 })
@@ -20,7 +20,7 @@ let upload = multer({storage});
 
 let auth = new AuthMiddleware();
 router.get("/", auth.validarAdmin,ctrl.pacienteView);
-router.post("/", upload.single("imagem"), auth.validarAdmin, ctrl.pacienteCadastro);
+router.post("/", upload.single("imagem"), ctrl.pacienteCadastro);
 
 router.get('/dados/:id', auth.validarAdmin, ctrl.pacientePuxarDados)
 

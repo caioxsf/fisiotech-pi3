@@ -125,7 +125,7 @@ class AdmController {
             }
         }
         else {
-            res.send({ok: false, msg: 'teste'});
+            res.send({ok: false, msg: 'Parametros incorretos'});
         }
     }
 }

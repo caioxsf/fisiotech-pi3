@@ -49,8 +49,8 @@ class AtestadoModel {
                 var registro = resultado[i];
 
                 let imagem = "/img/paciente/fotosemperfil.png";
-                if(registro["ate_foto_atestado"] != null && fs.existsSync(global.CAMINHO_IMG_REAL + global.CAMINHO_IMG_NAV + registro["ate_foto_atestado"])){
-                    imagem = global.CAMINHO_IMG_NAV + registro["ate_foto_atestado"]
+                if(registro["ate_foto_atestado"] != null && fs.existsSync(global.CAMINHO_IMG_REAL + global.CAMINHO_IMG_NAV_ATESTADO + registro["ate_foto_atestado"])){
+                    imagem = global.CAMINHO_IMG_NAV_ATESTADO + registro["ate_foto_atestado"]
                 }
 
                 listaAtestado.push(new AtestadoModel (
