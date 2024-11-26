@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     
     function cadastrarPaciente () {
-        debugger
+        
         let nome = document.getElementById('nome');
         let telefone = document.getElementById('telefone');
         let email = document.getElementById('email');
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let pacienteImagem = document.getElementById('pacienteImagem').files[0];
         
         if (nome.value != "" && telefone.value != "" && email.value != "" && nascimento.value != "" && cpf.value != "" && endereco.value != "" &&
-            bairro.value != "" && sexo.value != "" && cidade.value != "" && estado.value != "" && cep.value != "" && pacienteImagem != null) {
+            bairro.value != "" && sexo.value != "" && cidade.value != "" && estado.value != "" && cep.value != "") {
         
             var data = new FormData();
             data.append("nome", nome.value);
@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let pacienteImagem = document.getElementById('pacienteImagem').files[0];
         
         if (nome.value != "" && telefone.value != "" && email.value != "" && nascimento.value != "" && cpf.value != "" && endereco.value != "" &&
-            bairro.value != "" && sexo.value != "" && cidade.value != "" && estado.value != "" && cep.value != "" && pacienteImagem != null) {
+            bairro.value != "" && sexo.value != "" && cidade.value != "" && estado.value != "" && cep.value != "" ) {
         
             var data = new FormData();
             data.append("id", id.value);

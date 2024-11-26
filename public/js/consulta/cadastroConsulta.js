@@ -10,10 +10,11 @@ document.addEventListener('DOMContentLoaded', function(){
             btn[i].addEventListener('click', cadastrarConsulta);
     }
 
+    
+
     function cadastrarConsulta () {
         
         let nome = document.getElementById('nomepacientes');
-
         let telefone = document.getElementById('telefone');
         let email = document.getElementById('email');
         let servico = document.getElementById('servico');
@@ -63,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function(){
     function atualizarConsulta () {
         
         let id = document.getElementById('id');
-        let nome = document.getElementById('nome');
+        let nome = document.getElementById('nomepacientes');
         let telefone = document.getElementById('telefone');
         let email = document.getElementById('email');
         let servico = document.getElementById('servico');
@@ -71,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function(){
         let hora = document.getElementById('hora');
         let obs = document.getElementById('obs');
 
-        if(nome && telefone && email && servico && data && hora && obs) {
+        if(nome && telefone && email && servico && data && hora) {
             let obj = {
                 id: id.value,
                 nome: nome.value,

@@ -23,6 +23,7 @@
     text-align: center;
 }
 
+
 .inputTexto {
     display: flex;
     justify-content: center;
@@ -33,6 +34,16 @@
 .container-input-e-search {
     display: flex;
     justify-content: center;
+    flex-direction: row;
+    width: 350px;
+    margin: 0 auto;
+    gap: 10px;
+}
+
+.datas {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     flex-direction: row;
     width: 350px;
     margin: 0 auto;

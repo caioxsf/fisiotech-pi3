@@ -19,32 +19,41 @@ class PacienteController {
 
     async pacienteCadastro (req,res) {
         
-        if (req.body.nome && req.body.telefone && req.body.email && req.body.nascimento && req.body.cpf && req.body.endereco && req.body.bairro && req.body.sexo  && req.body.cidade  && req.body.estado &&  req.body.cep && req.file != null) {
+        if (req.body.nome && req.body.telefone && req.body.email && req.body.nascimento && req.body.cpf && req.body.endereco && req.body.bairro && req.body.sexo  && req.body.cidade  && req.body.estado &&  req.body.cep) {
             let pacienteModel = new PacienteModel();
 
-           pacienteModel.nome = req.body.nome;
-           pacienteModel.telefone = req.body.telefone;
-           pacienteModel.email = req.body.email;
-           pacienteModel.nascimento = req.body.nascimento;
-           pacienteModel.cpf = req.body.cpf;
-           pacienteModel.endereco = req.body.endereco;
-           pacienteModel.bairro = req.body.bairro;
-           pacienteModel.sexo_id = req.body.sexo;
-           pacienteModel.cidade = req.body.cidade;
-           pacienteModel.estado_id = req.body.estado;
-           pacienteModel.cep = req.body.cep;
-           pacienteModel.pacienteImagem = req.file.filename;
+            let cpfIgual = await pacienteModel.verificarCpfCadastrado(req.body.cpf);
+
+            if(cpfIgual == null)
+            {
+                pacienteModel.nome = req.body.nome;
+                pacienteModel.telefone = req.body.telefone;
+                pacienteModel.email = req.body.email;
+                pacienteModel.nascimento = req.body.nascimento;
+                pacienteModel.cpf = req.body.cpf;
+                pacienteModel.endereco = req.body.endereco;
+                pacienteModel.bairro = req.body.bairro;
+                pacienteModel.sexo_id = req.body.sexo;
+                pacienteModel.cidade = req.body.cidade;
+                pacienteModel.estado_id = req.body.estado;
+                pacienteModel.cep = req.body.cep;
+                pacienteModel.pacienteImagem = req.file.filename;
 
 
-            let resultado = pacienteModel.cadastrarPaciente();
+                let resultado = pacienteModel.cadastrarPaciente();
 
-            if(resultado) {
-                res.send({ok: true, msg: 'Paciente cadastrado com sucesso!'});
+                if(resultado) {
+                    res.send({ok: true, msg: 'Paciente cadastrado com sucesso!'});
 
+                }
+                else {
+                    res.send({ok: false, msg: 'Erro ao cadastrar paciente!'});
+                }
             }
             else {
-                res.send({ok: false, msg: 'Erro ao cadastrar paciente!'});
+                res.send({ok: false, msg: 'Já existem pacientes com esse CPF!'})
             }
+            
         }
         else {
             res.send({ok: false, msg: 'Parametros incorretos'});
@@ -99,7 +108,7 @@ class PacienteController {
 
     async editarPaciente (req,res) {
         
-        if (req.body.nome && req.body.telefone && req.body.email && req.body.nascimento && req.body.cpf && req.body.endereco && req.body.bairro && req.body.sexo  && req.body.cidade  && req.body.estado &&  req.body.cep && req.file != null) {
+        if (req.body.nome && req.body.telefone && req.body.email && req.body.nascimento && req.body.cpf && req.body.endereco && req.body.bairro && req.body.sexo  && req.body.cidade  && req.body.estado &&  req.body.cep) {
             let pacienteModel = new PacienteModel();
 
             pacienteModel.id = req.body.id;
@@ -114,18 +123,30 @@ class PacienteController {
             pacienteModel.cidade = req.body.cidade;
             pacienteModel.estado_id = req.body.estado;
             pacienteModel.cep = req.body.cep;
-            pacienteModel.pacienteImagem = req.file.filename;
-
-
-            let resultado = pacienteModel.editar();
-
-            if(resultado) {
-                res.send({ok: true, msg: 'Paciente atualizado com sucesso!'});
-
+            if(req.file != null)
+            {
+                pacienteModel.pacienteImagem = req.file.filename;
+                let resultado = pacienteModel.editar();
+                if(resultado) {
+                    res.send({ok: true, msg: 'Paciente atualizado com sucesso!'});
+    
+                }
+                else {
+                    res.send({ok: false, msg: 'Erro ao atualizar paciente!'});
+                }
             }
             else {
-                res.send({ok: false, msg: 'Erro ao atualizar paciente!'});
+                let resultado = pacienteModel.editarSemImagem();
+                if(resultado) {
+                    res.send({ok: true, msg: 'Paciente atualizado com sucesso!'});
+    
+                }
+                else {
+                    res.send({ok: false, msg: 'Erro ao atualizar paciente!'});
+                }
             }
+
+            
         }
         else {
             res.send({ok: false, msg: 'Parametros incorretos'});

@@ -17,7 +17,7 @@ class ConsultaController {
     async consultaCadastro(req,res) {
         let ok;
         
-        if( req.body.telefone && req.body.email && req.body.servico && req.body.data && req.body.hora && req.body.obs) {
+        if( req.body.telefone && req.body.email && req.body.servico && req.body.data && req.body.hora) {
             let consulta = new ConsultaModel();
 
             let verificarDataHora = await consulta.verificarConsultaMesmoDiaMesmoHorario(req.body.data,req.body.hora);
@@ -87,10 +87,10 @@ class ConsultaController {
 
     async editarConsulta (req,res) {
         let ok;
-        if(req.body.nome && req.body.telefone && req.body.email && req.body.servico && req.body.data && req.body.hora && req.body.obs) {
+        if(req.body.nome && req.body.telefone && req.body.email && req.body.servico && req.body.data && req.body.hora) {
             let consulta = new ConsultaModel();
             consulta.id = req.body.id;
-            consulta.nome = req.body.nome;
+            consulta.nome_id = req.body.nome;
             consulta.telefone = req.body.telefone;
             consulta.email = req.body.email;
             consulta.servico_id = req.body.servico;
@@ -112,7 +112,8 @@ class ConsultaController {
     
     async listarConsultaSearch (req,res) {
         let consultaModel = new ConsultaModel();
-        let consultas = await consultaModel.listarConsultaSearch(req.body.texto, req.body.tipoBusca)
+        let consultas = await consultaModel.listarConsultaSearch(req.body.texto, req.body.tipoBusca, req.body.inicio, req.body.fim)
+
         res.send({consultas: consultas});
     }
 }

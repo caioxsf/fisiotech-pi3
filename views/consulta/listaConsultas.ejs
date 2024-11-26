@@ -1,39 +1,51 @@
 <link rel="stylesheet" href="/css/consulta/listaConsulta.css">
 <script src="/js/consulta/excluirConsulta.js"></script>
 <script src="/js/consulta/search.js"></script>
+<script src="/js/consulta/datas.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <% if(consultas.length > 0)  {%>
     <h2 style="text-align: center; margin-top: 25px;">Consultas marcadas!</h2>
 
     <form>
-      <div class="container-search text-center">
+        <div class="container-search text-center">
+            <div class="form-group">
+                <label for="" class="form-label">Buscar por:</label>
 
-          <div class="form-group ">
-               <label for="" class="form-label">Buscar por:</label>
-   
-               <label for="nomePaciente" class="form-label" style="margin-right: 14px; margin-left: 5px;">
-                   <input type="radio" value="nome" class="form-check-input" id="nomePaciente" name="tipoBusca"> 
-                   Nome do paciente
-               </label>
-   
-               <label for="dataConsulta" class="form-label">
-                   <input type="radio" value="data" class="form-check-input" id="dataConsulta" name="tipoBusca">
+                <label for="nomePaciente" class="form-label" style="margin-right: 14px; margin-left: 5px;">
+                    <input type="radio" value="nome" class="form-check-input" id="nomePaciente" name="tipoBusca" >
+                    Nome do paciente
+                </label>
+
+                <label for="dataConsulta" class="form-label">
+                    <input type="radio" value="data" class="form-check-input" id="dataConsulta" name="tipoBusca">
                     Data consulta
-               </label>
-          </div>
-   
-           <div class="form-group container-input-e-search">
-               <input type="text" class="form-control inputTexto" id="texto" name="texto"  >
-               <button type="button" class="btn btn-primary" id="btnBuscar"><i class="fas fa-search"></i></button>
-           </div>
-          
-       </div>
-  </form>
+                </label>
+
+                <div id="intervaloData" class="datas" style="margin-bottom: 12px; display: none;">
+
+                    <label for="inicio" class="form-label"></label>
+                    <input type="date" id="inicio" name="inicio" class="form-control">
+
+                    <span class="form-label">até</span>
+
+                    <label for="fim" class="form-label"></label>
+                    <input type="date" id="fim" name="fim" class="form-control">
+                    <button type="button" class="btn btn-primary" id="btnBuscarDatas" style="margin-top: 5px;"><i class="fas fa-search"></i></button>
+                    
+                </div>
+            </div>
+
+            <div class="form-group container-input-e-search"  id="inputBusca">
+                <input type="text" class="form-control inputTexto" id="texto" name="texto">
+                <button type="button" class="btn btn-primary" id="btnBuscar" style="margin-top: 5px;"><i class="fas fa-search"></i></button>
+            </div>
+            
+        </div>
+    </form>
 
     <div class="container-lista">
-    
-        <% for(let i=0;i<consultas.length;i++) { %>
+        <% for(let i=0; i<consultas.length; i++) { %>
             <% if (consultas[i].data) { %>
                 <% 
                     const datadata = new Date(consultas[i].data); 
@@ -45,27 +57,24 @@
             <% } %>
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
-                  <h5 class="card-title"><%= consultas[i].nome_id %></h5>
-                  <p class="card-text"><%= consultas[i].data %>, <%= consultas[i].hora %></p>
+                    <h5 class="card-title"><%= consultas[i].nome_id %></h5>
+                    <p class="card-text"><%= consultas[i].data %>, <%= consultas[i].hora %></p>
                 </div>
                 <ul class="list-group list-group-flush">
-                  <li class="list-group-item"><i class="fa fa-phone" aria-hidden="true"></i> <%= consultas[i].telefone %></li>
-                  <li class="list-group-item"><i class="fa fa-envelope" aria-hidden="true"></i> <%= consultas[i].email %></li>
-                  <li class="list-group-item"><i class="fa fa-briefcase" aria-hidden="true"></i> <%= consultas[i].servico_id %></li>
-                  <li class="list-group-item"><i class="fa fa-search-minus" aria-hidden="true"></i> <%= consultas[i].obs %></li>
+                    <li class="list-group-item"><i class="fa fa-phone" aria-hidden="true"></i> <%= consultas[i].telefone %></li>
+                    <li class="list-group-item"><i class="fa fa-envelope" aria-hidden="true"></i> <%= consultas[i].email %></li>
+                    <li class="list-group-item"><i class="fa fa-briefcase" aria-hidden="true"></i> <%= consultas[i].servico_id %></li>
+                    <li class="list-group-item"><i class="fa fa-search-minus" aria-hidden="true"></i> <%= consultas[i].obs %></li>
                 </ul>
                 <div class="card-body">
-                    
-                  <a href="/consulta/editar/<%= consultas[i].id %>" class="card-link" style="background-color: transparent; border: none;"><i class="fas fa-edit" style="color: #74C0FC;"></i></a>
-                  <button type="button" class="btn-excluir" style="background-color: transparent; border: none; position: absolute; right: 10px;" data-id="<%= consultas[i].id %>" data-nome="<%= consultas[i].nome %>"><i class="fa-solid fa-trash" style="color: #f50a0a;"></i></button>
+                    <a href="/consulta/editar/<%= consultas[i].id %>" class="card-link" style="background-color: transparent; border: none;"><i class="fas fa-edit" style="color: #74C0FC;"></i></a>
+                    <button type="button" class="btn-excluir" style="background-color: transparent; border: none; position: absolute; right: 10px;" data-id="<%= consultas[i].id %>" data-nome="<%= consultas[i].nome %>"><i class="fa-solid fa-trash" style="color: #f50a0a;"></i></button>
                 </div>
-              </div>
+            </div>
         <% } %>
-        
     </div>
 <% } else { %>
-    <div class="container-lista"><h2 style="margin-top: 220px;">Nenhuma consulta cadastrada!</h2></div>
+    <div class="container-lista">
+        <h2 style="margin-top: 220px;">Nenhuma consulta cadastrada!</h2>
+    </div>
 <% } %>
-
-
-

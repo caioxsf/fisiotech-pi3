@@ -221,6 +221,27 @@ class PacienteModel {
         return resultado;
     }
 
+    async editarSemImagem () {
+        let sql = `update paciente set  pac_nome = ?,
+                                        pac_telefone = ?,
+                                        pac_email = ?,
+                                        pac_data_nascimento = ?,
+                                        pac_cpf = ?,
+                                        pac_endereco = ?,
+                                        pac_bairro = ?,
+                                        fk_sexo_id = ?,
+                                        pac_cidade = ?,
+                                        fk_est_id = ?,
+                                        pac_cep = ?
+
+                                        where pac_id_paciente = ?`;
+        let valores = [this.#nome, this.#telefone, this.#email, this.#nascimento, this.#cpf, this.#endereco, this.#bairro, this.#sexo_id, this.#cidade, this.#estado_id, this.#cep, this.#id];
+
+        let resultado = await db.ExecutaComandoNonQuery(sql,valores);
+
+        return resultado;
+    }
+
     async puxarDados(id) {
         let sql = `SELECT pac_telefone, pac_email FROM paciente WHERE pac_id_paciente = ?`;
         let valores = [id];

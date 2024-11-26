@@ -1,17 +1,30 @@
 document.addEventListener('DOMContentLoaded', function () {
+
     document.getElementById('btnBuscar').addEventListener('click', buscar);
+    document.getElementById('btnBuscarDatas').addEventListener('click', buscar);
 
     function buscar() {
+        
         let texto = document.getElementById('texto').value;
+        let inicio = document.getElementById('inicio').value;
+        let fim = document.getElementById('fim').value
         let tipoBusca = "";
 
         if (document.querySelector("input[name='tipoBusca']:checked"))
             tipoBusca = document.querySelector("input[name='tipoBusca']:checked").value;
 
         let objetoBusca = {};
-        if (texto != "" && (tipoBusca === 'nome' || tipoBusca === 'data')) {
-            objetoBusca.texto = texto;
-            objetoBusca.tipoBusca = tipoBusca;
+        if (texto != "" || inicio != "") {
+
+            if(tipoBusca == 'nome') {
+                objetoBusca.texto = texto;
+                objetoBusca.tipoBusca = tipoBusca;
+            } else if (tipoBusca == 'data') {
+                objetoBusca.tipoBusca = tipoBusca;
+                objetoBusca.inicio = inicio;
+                objetoBusca.fim = fim;
+            } 
+
         } else if (texto === "") {
             objetoBusca.texto = texto;
         } else {
@@ -32,11 +45,18 @@ document.addEventListener('DOMContentLoaded', function () {
                     let html = "";
 
                     for (let c of r.consultas) {
+
+                        const datadata = new Date(c.data); 
+                        const dia = String(datadata.getDate()).padStart(2, '0'); 
+                        const mes = String(datadata.getMonth() + 1).padStart(2, '0');
+                        const ano = datadata.getFullYear();
+                        c.data = `${dia}/${mes}/${ano}`;
+
                         html += `
                             <div class="card" style="width: 18rem;">
                                 <div class="card-body">
                                   <h5 class="card-title"> ${c.nome_id} </h5>
-                                  <p class="card-text"> ${c.data} ,  ${c.hora} </p>
+                                  <p class="card-text"> ${c.data},  ${c.hora} </p>
                                 </div>
                                 <ul class="list-group list-group-flush">
                                   <li class="list-group-item"><i class="fa fa-phone" aria-hidden="true"></i>  ${c.telefone} </li>

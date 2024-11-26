@@ -109,15 +109,15 @@ class ConsultaModel {
         return listaConsulta;
     }
 
-    async listarConsultaSearch (texto, tipoBusca) {
+    async listarConsultaSearch (texto, tipoBusca, inicio, fim) {
         let whereFiltro = "";
-        if(texto) {
+
+        if(texto || inicio) {
             if(tipoBusca == 'nome') {
                 whereFiltro = `where pac.pac_nome like '%${texto}%' order by pac.pac_nome asc`
-            } else if (tipoBusca == 'cpf') {
-                whereFiltro = `where con.con_data = '${texto}' order by con.con_data asc`
+            } else if (tipoBusca == 'data') {
+                whereFiltro = `where con.con_data between '${inicio}' and '${fim}'`
             }
-                
         }
         
         let sql = `select *  from consulta con
@@ -171,7 +171,7 @@ class ConsultaModel {
         if(row.length > 0) {
             return new ConsultaModel(
                 row[0]['con_id'],
-                row[0]['nome_id'],
+                row[0]['fk_pac_id_paciente'],
                 row[0]['con_telefone'],
                 row[0]['con_email'],
                 row[0]['fk_serv_id'],
@@ -199,14 +199,14 @@ class ConsultaModel {
     
     toJSON() {
         return {
-            id: this.#id,
-            nome_id: this.#nome_id,
-            telefone: this.#telefone,
-            email: this.#email,
-            servico_id: this.#servico_id,
-            data: this.#data,
-            hora: this.#hora,
-            obs: this.#obs,
+            "id": this.#id,
+            "nome_id": this.#nome_id,
+            "telefone": this.#telefone,
+            "email": this.#email,
+            "servico_id": this.#servico_id,
+            "data": this.#data,
+            "hora": this.#hora,
+            "obs": this.#obs,
         };
     }
 }
