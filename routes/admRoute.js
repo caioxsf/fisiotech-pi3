@@ -26,6 +26,10 @@ let auth = new AuthMiddleware();
 
 router.get('/', auth.validarAdmin, ctrl.admView);
 router.post('/', auth.validarAdmin, ctrl.cadastrarServico);
+
+router.get('/servicos/editar/:id', auth.validarAdmin, ctrl.editarServicoView);
+router.post('/servicos/editar', auth.validarAdmin, ctrl.editarServico);
+
 router.post('/atestado', upload.single("imagem"), ctrl.cadastrarAtestado)
 
 router.get('/servico/excluir/:id', auth.validarAdmin, ctrl.excluirServico)

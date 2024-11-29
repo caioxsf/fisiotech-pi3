@@ -16,7 +16,6 @@ class AdmController {
         res.render('adm/adm.ejs', {usuarios: listaUsuarios, servicos: listaServicos});
     }
 
-
     async cadastrarServico (req,res) {
         let ok;
         if(req.body.servico) {
@@ -48,7 +47,6 @@ class AdmController {
         res.send({ok: resultado, msg: msg});
     }
 
-
     async cadastrarAtestado (req,res) {
 
         if (req.body.nome && req.body.especialidade && req.file != null) {
@@ -75,6 +73,38 @@ class AdmController {
         }
     }
 
+    async editarServicoView (req,res) {
+        let id = req.params.id;
+        let servicosModel = new ServicosModel();
+        servicosModel = await servicosModel.obter(id);
+
+        let listaServicos = await servicosModel.listarServicos();
+
+        res.render('adm/adm.ejs', {admAlteracao: servicosModel, servicos: listaServicos})
+    }
+
+    async editarServico (req,res) {
+        let ok;
+        if(req.body.servico) {
+            
+            let servicoModel = new ServicosModel();
+
+            servicoModel.id = req.body.id;
+            servicoModel.nome = req.body.servico;
+
+            let resultado = await servicoModel.atualizarServico();
+
+            if(resultado) {
+                res.send({ok: true, msg: 'Serviço atualizado com sucesso!'});
+            }
+            else {
+                res.send({ok: false, msg: 'Erro ao atualizar serviço'});
+            }
+        }
+        else {
+            res.send({ok: false, msg: 'Erro ao atualizar serviço'});
+        }
+    }
     
 }
 

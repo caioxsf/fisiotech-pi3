@@ -71,7 +71,45 @@ document.addEventListener('DOMContentLoaded', function () {
                                 <button type="button" class="btn-excluir" data-id="${p.id}" data-nome="${p.nome}" style="margin-top: 20px; background-color: transparent; border: none;"><i class="fa-solid fa-trash" style="color: #f50a0a;"></i></button>
                                 <button class="fechar" data-dialog="dialog-${p.id}"><i class="fa-solid fa-xmark fa-xl" style="color: #ff0000;"></i></button>
                             </dialog>
+                            <table id="tabela" hidden>
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>CPF</th>
+                                <th>Endereço</th>
+                                <th>Bairro</th>
+                                <th>Cidade</th>
+                                <th>Estado</th>
+                                <th>CEP</th>
+                                <th>Telefone</th>
+                                <th>Email</th>
+                                <th>Nascimento</th>
+                                <th>Sexo</th>
+                            </tr>
+                        </thead>
+        
+                        <tbody>
+                            
+                                <tr>
+                                    <td> ${p.nome}</td>
+                                    <td> ${p.cpf}</td>
+                                    <td> ${p.endereco}</td>
+                                    <td> ${p.bairro}</td>
+                                    <td> ${p.cidade}</td>
+                                    <td> ${p.estado_id}</td>
+                                    <td> ${p.cep}</td>
+                                    <td> ${p.telefone}</td>
+                                    <td> ${p.email}</td>
+                                    <td> ${p.nascimento}</td>
+                                    <td> ${p.sexo}</td>
+                                </tr>
+                           
+                            
+                        </tbody>
+                    </table>
                         </div>
+
+                        
                         `;
                     }
 

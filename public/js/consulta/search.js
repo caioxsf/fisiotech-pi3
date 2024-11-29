@@ -69,6 +69,34 @@ document.addEventListener('DOMContentLoaded', function () {
                                   <button type="button" class="btn-excluir" style="background-color: transparent; border: none; position: absolute; right: 10px;" data-id="${c.id}" data-nome="${c.nome_id}"><i class="fa-solid fa-trash" style="color: #f50a0a;"></i></button>
                                 </div>
                             </div>
+
+                            <table id="tabela" hidden>
+                                <thead>
+                                    <tr>
+                                        <th>Nome</th>
+                                        <th>Data</th>
+                                        <th>Horario</th>
+                                        <th>Telefone</th>
+                                        <th>Email</th>
+                                        <th>Serviço</th>
+                                        <th>Observação</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    
+                                        <tr>
+                                            <td> ${c.nome_id} </td>
+                                            <td> ${c.data} </td>
+                                            <td> ${c.hora} </td>
+                                            <td> ${c.telefone} </td>
+                                            <td> ${c.email} </td>
+                                            <td> ${c.servico_id} </td>
+                                            <td> ${c.obs} </td>
+                                        </tr>
+                                    
+                                    
+                                </tbody>
+                            </table>
                         `;
                     }
 

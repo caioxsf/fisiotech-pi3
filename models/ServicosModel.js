@@ -35,11 +35,33 @@ class ServicosModel {
         return resultado;
     }
 
+    async atualizarServico () {
+        let sql = `update servico_consulta set serv_nome = ? where serv_id = ?`;
+        let valores = [ this.#nome, this.#id];
+        let resultado = await db.ExecutaComandoNonQuery(sql,valores);
+        return resultado;
+    }
+
     async excluirServicos (id) {
         let sql = `delete from servico_consulta where serv_id = ?`;
         let valores = [id];
         let resultado = await db.ExecutaComandoNonQuery(sql,valores);
         return resultado;
+    }
+
+    async obter(id) {
+        let sql = `select * from servico_consulta where serv_id = ?`;
+        let valores = [id];
+        let colunas = await db.ExecutaComando(sql, valores);
+
+        if(colunas.length > 0) {
+
+            return new ServicosModel(   colunas[0]['serv_id'], 
+                                        colunas[0]['serv_nome']
+            )
+            
+        }
+        return null;
     }
 
 }

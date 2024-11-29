@@ -48,10 +48,10 @@ document.addEventListener('DOMContentLoaded', function () {
                     for (let c of r.atestados) {
                         html += `
                                 <tr>
-                                    <td> ${c.nome_medico} </td>
-                                    <td> ${c.especialidade_medica} </td>
-                                    <td> ${new Date(c.data_inicio).toLocaleDateString('pt-BR')} </td>
-                                    <td> ${new Date(c.data_termino).toLocaleDateString('pt-BR') }</td>
+                                    <td data-label="Nome médico"> ${c.nome_medico} </td>
+                                    <td data-label="Esp. médica"> ${c.especialidade_medica} </td>
+                                    <td data-label="Dt. Inicio"> ${new Date(c.data_inicio).toLocaleDateString('pt-BR')} </td>
+                                    <td data-label="Dt. Term."> ${new Date(c.data_termino).toLocaleDateString('pt-BR') }</td>
                                     <td style="text-align: center;">
                                         <a href=" ${c.foto_atestado} " download='Atestado' style="margin-right: 15px;"><i class="fas fa-file-download fa-lg "style="font-size: 25px;" ></i></a>
                                         <img src="${c.foto_atestado}" alt="Foto Atestado" width="100">

@@ -1,16 +1,19 @@
 <link rel="stylesheet" href="/css/paciente/listaPaciente.css">
 <link rel="stylesheet" href="/css/paciente/modal.css">
+<link rel="stylesheet" href="/css/print.css" media="print">
 <script src="/js/paciente/excluirPaciente.js"></script>
 <script src="/js/paciente/dialogPaciente.js"></script>
 <script src="/js/paciente/search.js"></script>
+<script src="/js/paciente/excel.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
 
 
 <% if(pacientes.length > 0) { %>
-    <h2 style="text-align: center; margin-top: 25px;">Pacientes cadastrados!</h2> 
+    <h2 style="text-align: center; margin-top: 25px;" class="print">Pacientes cadastrados!</h2> 
 
-    <form>
-        <div class="container-search text-center">
+    <form class="print">
+        <div class="container-search text-center print">
 
             <div class="form-group ">
                  <label for="" class="form-label">Buscar por:</label>
@@ -29,7 +32,16 @@
              <div class="form-group container-input-e-search">
                  <input type="text" class="form-control inputTexto" id="texto" name="texto"  >
                  <button type="button" class="btn btn-primary" id="btnBuscar"><i class="fas fa-search"></i></button>
+
+                 <button id="btnExportarExcel" style="background-color: transparent; border: none;" class="btnExcel">
+                    <i class="fas fa-file-csv fa-lg" style="font-size: 25px;"></i>
+                </button>
+                <button style="margin-right: 15px; background-color: transparent; border: none;" class="btnPdf" onclick="window.print()" >
+                    <i class="fas fa-file-pdf fa-lg" style="font-size: 25px;"></i>
+                </button>
              </div>
+
+             
             
          </div>
     </form>
@@ -83,7 +95,50 @@
                                 <button class="fechar" data-dialog="dialog-<%= pacientes[i].id %>"><i class="fa-solid fa-xmark fa-xl" style="color: #ff0000;"></i></button>
                             </dialog>
                     </div>
+                    
             <% } %>
+
+
+            <table id="tabela" hidden>
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>CPF</th>
+                        <th>Endereço</th>
+                        <th>Bairro</th>
+                        <th>Cidade</th>
+                        <th>Estado</th>
+                        <th>CEP</th>
+                        <th>Telefone</th>
+                        <th>Email</th>
+                        <th>Nascimento</th>
+                        <th>Sexo</th>
+                    </tr>
+                </thead>
+
+                <% for (let i=0;i<pacientes.length;i++) {%>
+                    <tbody>
+                    
+                        <tr>
+                            <td><%= pacientes[i].nome %></td>
+                            <td><%= pacientes[i].cpf %></td>
+                            <td><%= pacientes[i].endereco %></td>
+                            <td><%= pacientes[i].bairro %></td>
+                            <td><%= pacientes[i].cidade %></td>
+                            <td><%= pacientes[i].estado_id %></td>
+                            <td><%= pacientes[i].cep %></td>
+                            <td><%= pacientes[i].telefone %></td>
+                            <td><%= pacientes[i].email %></td>
+                            <td><%= pacientes[i].nascimento %></td>
+                            <td><%= pacientes[i].sexo %></td>
+                        </tr>
+                   
+                    
+                </tbody>
+                <%}%>
+                
+            </table>
+            
         </div>
         
     

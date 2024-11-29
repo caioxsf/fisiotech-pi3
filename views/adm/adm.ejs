@@ -3,6 +3,7 @@
 <script src="/js/registro/excluirConta.js"></script>
 <script src="/js/registro/editarConta.js"></script>
 <script src="/js/serviço/cadastrarServico.js"></script>
+<script src="/js/serviço/editarServico.js"></script>
 <script src="/js/serviço/excluirServico.js"></script>
 <script src="/js/atestado/verificarDatasAtestado.js"></script>
 <script src="/js/atestado/cadastroAtestado.js"></script>
@@ -14,7 +15,7 @@
 
     <section class="section-adm">
       
-      <div class="container-servicos ">
+      <div class="container-servicos">
         <h3>Serviços cadastrados</h3>
             <input type="text" class="form-control" id="servico" name="servico">
             <button class="btn btn-primary btn-add" style="margin-top: 12px;">Cadastrar serviço</button>
@@ -23,8 +24,8 @@
               <table class="table table-hover table-responsive" >
                 <thead>
                   <tr>
-                    <th scope="col" style="text-align: start;">Serviço</th>
-                    <th scope="col"  style="text-align: end;">Ações</th>
+                    <th scope="col" data-label="Serviço" style="text-align: start;">Serviço</th>
+                    <th scope="col"  data-label="Ações" style="text-align: end;">Ações</th>
                   </tr>
                 </thead>
                 <tbody> 
@@ -34,6 +35,7 @@
                       <td scope="row" style="text-align: start;" data-label="Nome" ><%= servicos[i].nome %></td>
     
                       <td scope="row" data-label="Ações" style="text-align: end;">
+                        <a href="/administrador/servicos/editar/<%= servicos[i].id %>" class="card-link" style="background-color: transparent; border: none;"><i class="fas fa-edit" style="color: #74C0FC;"></i></a>
                         <button type="button" class="btn-excluir" data-id="<%= servicos[i].id %>" data-nome="<%= servicos[i].nome %>" style="border: none; background-color: transparent; ">
                           <i class="fas fa-trash" style="color: #d72323;"></i>
                         </button>
@@ -102,17 +104,17 @@
 
     <section class="section-adm">
       
-      <div class="container-servicos ">
+      <div class="container-servicosEditar">
         <h3>Serviços cadastrados</h3>
 
           <div class="mb-3" hidden>
             <input type="text" class="form-control" id="id" name="id" value="<%= admAlteracao.id %>">
           </div>
           
-            <input type="text" class="form-control" id="servico" name="servico">
-            <button class="btn btn-primary btn-add" style="margin-top: 12px;">Cadastrar serviço</button>
+            <input type="text" class="form-control" id="servico" name="servico" value="<%= admAlteracao.nome %>">
+            <button class="btn btn-primary btn-addEditar" style="margin-top: 12px;">Atualizar serviço</button>
 
-           <div class="container-tabela">
+           <!-- <div class="container-tabela">
               <table class="table table-hover table-responsive">
                 <thead>
                   <tr>
@@ -127,6 +129,7 @@
                       <td scope="row" style="text-align: start;" data-label="Nome" ><%= servicos[i].nome %></td>
     
                       <td scope="row" data-label="Ações" style="text-align: end;">
+                        <a href="/administrador/servicos/editar/<%= servicos[i].id %>" class="card-link" style="background-color: transparent; border: none;"><i class="fas fa-edit" style="color: #74C0FC;"></i></a>
                         <button type="button" class="btn-excluir" data-id="<%= servicos[i].id %>" data-nome="<%= servicos[i].nome %>" style="border: none; background-color: transparent; ">
                           <i class="fas fa-trash" style="color: #d72323;"></i>
                         </button>
@@ -135,10 +138,10 @@
                   <% } %>
                 </tbody>
               </table>
-           </div>
+           </div> -->
       </div>
 
-      <div class="container-atestado" style="margin-top: 20px;">
+      <!-- <div class="container-atestado" style="margin-top: 20px;">
         <h3>Atestado médico</h3>
 
         <label for="" style="text-align: start;">Nome do médico:</label>
@@ -172,7 +175,7 @@
 
         <button type="button" class="btn btn-primary" id="btn-atestado" style="margin-top: 20px;">Enviar atestado médico</button>
 
-      </div>
+      </div> -->
       
       <div class="container-relatorio" style="margin-top: 20px;">
         <h3>Relatórios</h3>
@@ -183,6 +186,8 @@
 
         </div>
       </div>
+
+      
     </section>
 
 

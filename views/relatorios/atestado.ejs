@@ -21,7 +21,7 @@
                 <div class="container-search text-center">
         
                     <div class="form-group">
-                         <label for="" class="form-label">Buscar por:</label>
+                         <label for="" class="form-label" class="buscar">Buscar por:</label>
              
                          <label for="nomeMedico" class="form-label" style="margin-right: 14px; margin-left: 5px;">
                              <input type="radio" value="nome" class="form-check-input" id="nomeMedico" name="tipoBusca"> 
@@ -46,6 +46,7 @@
                             <input type="date" id="fim" name="fim" class="form-control" >
                             <button type="button" class="btn btn-primary" id="btnBuscarDatas" style="margin-top: 5px;"><i class="fas fa-search"></i></button>
 
+                            
                             <button id="btnExportarExcel" style="background-color: transparent; border: none;" class="btnExcel">
                                 <i class="fas fa-file-csv fa-lg" style="font-size: 25px;"></i>
                             </button>
@@ -94,10 +95,10 @@
                     <tbody>
                         <% atestado.map(function(value) { %>
                             <tr>
-                                <td><%= value.nome_medico %></td>
-                                <td><%= value.especialidade_medica %></td>
-                                <td><%= new Date(value.data_inicio).toLocaleDateString('pt-BR') %></td>
-                                <td><%= new Date(value.data_termino).toLocaleDateString('pt-BR') %></td>
+                                <td data-label="Nome médico"><%= value.nome_medico %></td>
+                                <td data-label="Esp. médica"><%= value.especialidade_medica %></td>
+                                <td data-label="Dt. Inicio"><%= new Date(value.data_inicio).toLocaleDateString('pt-BR') %></td>
+                                <td data-label="Dt. Term."><%= new Date(value.data_termino).toLocaleDateString('pt-BR') %></td>
                                 
                                 <td style="text-align: center;">
 
@@ -143,6 +144,7 @@
     </main>
 <%} else {%>
     <div class="container-atestado" style="margin-top: 20px;">
+
         <div class="mb-3" hidden>
             <input type="text" class="form-control" id="id" name="id" value="<%= atestadoAlteracao.id %>">
           </div>
@@ -191,6 +193,18 @@
 
         <button type="button" class="btn btn-primary" id="btn-atestado" style="margin-top: 20px;">Atualizar atestado médico</button>
 
+
+        
       </div>
+
+      <div class="container-relatorio" style="margin-top: 20px;">
+        <h3>Relatórios</h3>
+        <div class="botoes-relatorios">
+
+          <a href="/administrador/relatorio/atestado" class="btn btn-primary"><i class="fas fa-hospital-user"></i> Relatório de atestado</a>
+          <a href="/administrador/relatorio/usuarios" class="btn btn-primary"><i class="fas fa-users"></i> Relatório de usuários cadastrados</a>
+
+        </div>
+      </div> 
 <%}%>
 

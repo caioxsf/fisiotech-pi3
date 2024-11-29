@@ -1,13 +1,17 @@
 <link rel="stylesheet" href="/css/consulta/listaConsulta.css">
+<link rel="stylesheet" href="/css/print.css" media="print">
 <script src="/js/consulta/excluirConsulta.js"></script>
 <script src="/js/consulta/search.js"></script>
 <script src="/js/consulta/datas.js"></script>
+<script src="/js/consulta/excel.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+
 
 <% if(consultas.length > 0)  {%>
-    <h2 style="text-align: center; margin-top: 25px;">Consultas marcadas!</h2>
+    <h2 style="text-align: center; margin-top: 25px;" class="print">Consultas marcadas!</h2>
 
-    <form>
+    <form class="print">
         <div class="container-search text-center">
             <div class="form-group">
                 <label for="" class="form-label">Buscar por:</label>
@@ -39,7 +43,15 @@
             <div class="form-group container-input-e-search"  id="inputBusca">
                 <input type="text" class="form-control inputTexto" id="texto" name="texto">
                 <button type="button" class="btn btn-primary" id="btnBuscar" style="margin-top: 5px;"><i class="fas fa-search"></i></button>
+
+                <button id="btnExportarExcel" style="background-color: transparent; border: none;" class="btnExcel">
+                    <i class="fas fa-file-csv fa-lg" style="font-size: 25px;"></i>
+                </button>
+                <button style="margin-right: 15px; background-color: transparent; border: none;" class="btnPdf" onclick="window.print()" >
+                    <i class="fas fa-file-pdf fa-lg" style="font-size: 25px;"></i>
+                </button>
             </div>
+            
             
         </div>
     </form>
@@ -66,12 +78,41 @@
                     <li class="list-group-item"><i class="fa fa-briefcase" aria-hidden="true"></i> <%= consultas[i].servico_id %></li>
                     <li class="list-group-item"><i class="fa fa-search-minus" aria-hidden="true"></i> <%= consultas[i].obs %></li>
                 </ul>
-                <div class="card-body">
-                    <a href="/consulta/editar/<%= consultas[i].id %>" class="card-link" style="background-color: transparent; border: none;"><i class="fas fa-edit" style="color: #74C0FC;"></i></a>
-                    <button type="button" class="btn-excluir" style="background-color: transparent; border: none; position: absolute; right: 10px;" data-id="<%= consultas[i].id %>" data-nome="<%= consultas[i].nome %>"><i class="fa-solid fa-trash" style="color: #f50a0a;"></i></button>
+                <div class="card-body" class="print">
+                    <a href="/consulta/editar/<%= consultas[i].id %>" class="card-link print" style="background-color: transparent; border: none;"><i class="fas fa-edit" style="color: #74C0FC;"></i></a>
+                    <button type="button" class="btn-excluir print" style="background-color: transparent; border: none; position: absolute; right: 10px;" data-id="<%= consultas[i].id %>" data-nome="<%= consultas[i].nome %>"><i class="fa-solid fa-trash" style="color: #f50a0a;"></i></button>
                 </div>
             </div>
         <% } %>
+
+            <table id="tabela" hidden>
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Data</th>
+                        <th>Horario</th>
+                        <th>Telefone</th>
+                        <th>Email</th>
+                        <th>Serviço</th>
+                        <th>Observação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for(let i=0;i<consultas.length;i++) {%>
+                        <tr>
+                            <td><%= consultas[i].nome_id %></td>
+                            <td><%= consultas[i].data %></td>
+                            <td><%= consultas[i].hora %></td>
+                            <td><%= consultas[i].telefone %></td>
+                            <td><%= consultas[i].email %></td>
+                            <td><%= consultas[i].servico_id %></td>
+                            <td><%= consultas[i].obs %></td>
+                        </tr>
+                    <%}%>
+                    
+                </tbody>
+            </table>
+
     </div>
 <% } else { %>
     <div class="container-lista">

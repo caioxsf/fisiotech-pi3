@@ -53,3 +53,62 @@ main {
     border-radius: 6px;
     padding: 20px;
 }
+
+.container-relatorio {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-inline: 350px;
+    text-align: center;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    border-radius: 6px;
+    padding: 20px;
+    margin-bottom: 50px;
+}
+
+@media (max-width: 1250px) {
+    .table-container {
+        width: 300px;
+        margin: 0 auto;
+        height: 450px;
+    }
+
+
+    .table tbody tr td:before {
+        content: attr(data-label); 
+        font-weight: bold;
+        background-color: transparent;
+        color: rgb(0, 0, 0);
+    }
+
+    td {
+        text-align: start;
+    }
+
+    .table thead {
+        display: none; 
+    }
+    
+    .table tbody tr {
+        display: block;
+        margin-bottom: 30px;
+    }
+
+    .table tbody tr td {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        border-bottom: 1px solid #ddd;
+        align-items: center;
+    }
+
+    .datas {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+    }
+}
