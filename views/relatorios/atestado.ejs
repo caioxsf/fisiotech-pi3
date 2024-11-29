@@ -36,19 +36,30 @@
                          <div id="intervaloData" class="datas" style="margin-bottom: 12px; display: none;">
     
                             <label for="inicio" class="form-label"></label>
-                            <input type="date" id="inicio" name="inicio" class="form-control">
+                            <input type="date" id="inicio" name="inicio" class="form-control" >
         
                             <span class="form-label">até</span>
+
+                            
         
                             <label for="fim" class="form-label"></label>
-                            <input type="date" id="fim" name="fim" class="form-control">
+                            <input type="date" id="fim" name="fim" class="form-control" >
                             <button type="button" class="btn btn-primary" id="btnBuscarDatas" style="margin-top: 5px;"><i class="fas fa-search"></i></button>
+
+                            <button id="btnExportarExcel" style="background-color: transparent; border: none;" class="btnExcel">
+                                <i class="fas fa-file-csv fa-lg" style="font-size: 25px;"></i>
+                            </button>
+                            <button style="margin-right: 15px; background-color: transparent; border: none;" class="btnPdf" onclick="window.print()" >
+                                <i class="fas fa-file-pdf fa-lg" style="font-size: 25px;"></i>
+                            </button>
                             
                         </div>
     
                     </div>
              
                     <div class="form-group container-input-e-search" id="inputBusca">
+
+                       
                         <input type="text" class="form-control inputTexto" id="texto" name="texto"  >
 
                         <button type="button" class="btn btn-primary" id="btnBuscar">
@@ -68,7 +79,6 @@
             
     
             <div class="table-container">
-                
                 <table class="table table-hover table-responsive" id="tabela">
                     <thead>
                         <tr>

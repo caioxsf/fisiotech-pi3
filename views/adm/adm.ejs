@@ -4,6 +4,7 @@
 <script src="/js/registro/editarConta.js"></script>
 <script src="/js/serviço/cadastrarServico.js"></script>
 <script src="/js/serviço/excluirServico.js"></script>
+<script src="/js/atestado/verificarDatasAtestado.js"></script>
 <script src="/js/atestado/cadastroAtestado.js"></script>
 
 
@@ -65,12 +66,12 @@
 
           <div class="col" style="text-align: start;">
             <label for="">Data de início do afastamento:</label>
-            <input type="date" class="form-control" id="dataInicio" name="dataInicio">
+            <input type="date" class="form-control" id="dataInicio" name="dataInicio" onblur="validarDataInicio30DiasAntes(event)">
           </div>
           
           <div class="col" style="text-align: start;">
             <label for="">Data de término do afastamento:</label>
-            <input type="date" class="form-control" id="dataTermino" name="dataTermino">
+            <input type="date" class="form-control" id="dataTermino" name="dataTermino" onblur="validarDataFim(event)">
           </div>
         </div>
 
@@ -157,12 +158,12 @@
 
           <div class="col" style="text-align: start;">
             <label for="">Data de início do afastamento:</label>
-            <input type="date" class="form-control" id="dataInicio" name="dataInicio">
+            <input type="date" class="form-control" id="dataInicio" name="dataInicio" >
           </div>
           
           <div class="col" style="text-align: start;">
             <label for="">Data de término do afastamento:</label>
-            <input type="date" class="form-control" id="dataTermino" name="dataTermino">
+            <input type="date" class="form-control" id="dataTermino" name="dataTermino" >
           </div>
         </div>
 
