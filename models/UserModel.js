@@ -93,6 +93,49 @@ class UserModel {
         return lista;
     }
 
+    async listaUsersSearch (texto, tipoBusca) {
+        let whereFiltro = "";
+
+        if(texto == 'Visitante' || texto == 'visitante')
+            texto = 2;
+        if(texto == 'Administrador' || texto == 'administrador')
+            texto == 1;
+        if(texto == 'Sistema' || texto == 'sistema')
+            texto == 1;
+
+        if(texto != "" || texto == 1 || texto == 2 || texto == 3) {
+            if(tipoBusca == 'user') {
+                whereFiltro = `where user_login like '%${texto}%'`
+            }
+            if (tipoBusca == 'perfilUser') {
+                whereFiltro = `where per_desc = '${texto}'`
+            }
+        }
+
+        if(texto == 1 || texto == 2 || texto == 3) {
+            let sql = `select * from user_admin us
+            inner join perfil p on p.per_id = us.per_id ${whereFiltro}`
+            let lista = [];
+            let colunas = await db.ExecutaComando(sql);
+            for(let i=0;i<colunas.length;i++) {
+                let coluna = colunas[i];
+                lista.push(new UserModel(coluna['user_id'],coluna['user_login'],coluna['user_senha'],coluna['per_desc']));
+            }
+            return lista;
+        }
+        else {
+            let sql = `select * from user_admin user
+            inner join perfil per on user.per_id = per.per_id ${whereFiltro}`
+            let lista = [];
+            let colunas = await db.ExecutaComando(sql);
+            for(let i=0;i<colunas.length;i++) {
+                let coluna = colunas[i];
+                lista.push(new UserModel(coluna['user_id'],coluna['user_login'],coluna['user_senha'],coluna['per_desc']));
+            }
+            return lista;
+        }    
+    }
+
     async ListarSexo () {
         let sql = `select * from sexo`;
         let lista = [];
@@ -119,6 +162,16 @@ class UserModel {
         let valores = [this.#login, this.#senha, this.#perfil_id, this.#id];
         let resultado = await db.ExecutaComandoNonQuery(sql,valores);
         return resultado;
+    }
+
+    toJSON () {
+        return {
+            "id": this.id,
+            "login": this.login,
+            "senha": this.senha,
+            "perfil_id": this.perfil_id,
+            "perfil_desc": this.perfil_desc
+        }
     }
 
 }

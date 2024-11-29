@@ -39,3 +39,14 @@ main {
     gap: 15px;
     
 }
+.container-contas {
+
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-inline: 350px;
+    text-align: center;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    border-radius: 6px;
+    padding: 20px;
+}

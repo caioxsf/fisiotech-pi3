@@ -1,45 +1,119 @@
 <link rel="stylesheet" href="/css/relatorio/atestado.css">
+<link rel="stylesheet" href="/css/print.css" media="print">
 <script src="/js/atestado/excluirAtestado.js"></script>
 <script src="/js/atestado/search.js"></script>
+<script src="/js/atestado/datas.js"></script>
+<script src="/js/atestado/editarAtestado.js"></script>
+<script src="/js/atestado/excel.js"></script>
+<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
 
-<main>
-    <section>
+<style>
+    .btnExcel:hover, .btnPdf:hover {
+        color: #63E6BE;
+    }
+</style>
 
-        <form>
-            <div class="container-search text-center">
+<%  if(typeof atestadoAlteracao == 'undefined') {%>
+    <main>
+        <section>
     
-                <div class="form-group ">
-                     <label for="" class="form-label">Buscar por:</label>
-         
-                     <label for="nomeMedico" class="form-label" style="margin-right: 14px; margin-left: 5px;">
-                         <input type="radio" value="nome" class="form-check-input" id="nomeMedico" name="tipoBusca"> 
-                         Nome do médico
-                     </label>
-         
-                     <label for="dataInicio" class="form-label">
-                         <input type="radio" value="data" class="form-check-input" id="dataInicio" name="tipoBusca">
-                          Data início do afastamento
-                     </label>
+            <form class="print">
+                <div class="container-search text-center">
+        
+                    <div class="form-group">
+                         <label for="" class="form-label">Buscar por:</label>
+             
+                         <label for="nomeMedico" class="form-label" style="margin-right: 14px; margin-left: 5px;">
+                             <input type="radio" value="nome" class="form-check-input" id="nomeMedico" name="tipoBusca"> 
+                             Nome do médico
+                         </label>
+             
+                         <label for="dataInicio" class="form-label">
+                             <input type="radio" value="data" class="form-check-input" id="dataInicio" name="tipoBusca">
+                              Data início/afastamento
+                         </label>
+    
+                         <div id="intervaloData" class="datas" style="margin-bottom: 12px; display: none;">
+    
+                            <label for="inicio" class="form-label"></label>
+                            <input type="date" id="inicio" name="inicio" class="form-control">
+        
+                            <span class="form-label">até</span>
+        
+                            <label for="fim" class="form-label"></label>
+                            <input type="date" id="fim" name="fim" class="form-control">
+                            <button type="button" class="btn btn-primary" id="btnBuscarDatas" style="margin-top: 5px;"><i class="fas fa-search"></i></button>
+                            
+                        </div>
+    
+                    </div>
+             
+                    <div class="form-group container-input-e-search" id="inputBusca">
+                        <input type="text" class="form-control inputTexto" id="texto" name="texto"  >
 
-                </div>
-         
-                 <div class="form-group container-input-e-search">
-                     <input type="text" class="form-control inputTexto" id="texto" name="texto"  >
-                     <button type="button" class="btn btn-primary" id="btnBuscar"><i class="fas fa-search"></i></button>
+                        <button type="button" class="btn btn-primary" id="btnBuscar">
+                            <i class="fas fa-search"></i>
+                        </button>
+
+
+                        <button id="btnExportarExcel" style="background-color: transparent; border: none;" class="btnExcel">
+                            <i class="fas fa-file-csv fa-lg" style="font-size: 25px;"></i>
+                        </button>
+                        <button style="margin-right: 15px; background-color: transparent; border: none;" class="btnPdf" onclick="window.print()" >
+                            <i class="fas fa-file-pdf fa-lg" style="font-size: 25px;"></i>
+                        </button>
+                    </div>
                  </div>
+            </form>
+            
+    
+            <div class="table-container">
                 
-             </div>
-        </form>
+                <table class="table table-hover table-responsive" id="tabela">
+                    <thead>
+                        <tr>
+                            <th>Nome médico</th>
+                            <th>Especialidade médica</th>
+                            <th>Data início do afastamento</th>
+                            <th>Data término do afastamento</th>
+                            
+                            <th style="text-align: center;">Foto atestado</th>
+                           
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% atestado.map(function(value) { %>
+                            <tr>
+                                <td><%= value.nome_medico %></td>
+                                <td><%= value.especialidade_medica %></td>
+                                <td><%= new Date(value.data_inicio).toLocaleDateString('pt-BR') %></td>
+                                <td><%= new Date(value.data_termino).toLocaleDateString('pt-BR') %></td>
+                                
+                                <td style="text-align: center;">
 
-        <div class="table-container">
-            <table class="table table-hover table-responsive">
+                                    <a href="<%= value.foto_atestado %>" download='Atestado' class="print" style="margin-right: 15px;"><i class="fas fa-file-download fa-lg" style="font-size: 25px;" ></i></a>
+                                    <img src="<%= value.foto_atestado %>" alt="Foto Atestado"  width="100">
+    
+                                    <button type="button" class="btn-excluir print" data-id="<%= value.id %>" data-nome="<%= value.nome_medico %>" style="border: none; background-color: transparent; margin-left: 10px; ">
+                                        <i class="fas fa-trash" style="color: #d72323;"></i>
+                                    </button>
+                                    <a href="/administrador/relatorio/atestado/editar/<%= value.id %>"><i class="fas fa-edit print" style="color: #74C0FC;"></i></a>
+                                </td>
+                                <td></td>
+                            </tr>
+                        <% }) %>
+                       
+                    </tbody>
+                </table>
+            </div>
+
+            <table class="table table-hover table-responsive" id="tabelaExcel" hidden >
                 <thead>
                     <tr>
                         <th>Nome médico</th>
                         <th>Especialidade médica</th>
                         <th>Data início do afastamento</th>
                         <th>Data término do afastamento</th>
-                        <th style="text-align: center;">Foto atestado</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -49,19 +123,64 @@
                             <td><%= value.especialidade_medica %></td>
                             <td><%= new Date(value.data_inicio).toLocaleDateString('pt-BR') %></td>
                             <td><%= new Date(value.data_termino).toLocaleDateString('pt-BR') %></td>
-                            <td style="text-align: center;">
-                                <a href="<%= value.foto_atestado %>" download='Atestado' style="margin-right: 15px;"><i class="fas fa-file-download fa-lg "style="font-size: 25px;" ></i></a>
-                                <img src="<%= value.foto_atestado %>" alt="Foto Atestado" width="100">
-
-                                <button type="button" class="btn-excluir" data-id="<%= value.id %>" data-nome="<%= value.nome_medico %>" style="border: none; background-color: transparent; margin-left: 10px; ">
-                                    <i class="fas fa-trash" style="color: #d72323;"></i>
-                                  </button>
-                            </td>
                         </tr>
                     <% }) %>
                    
                 </tbody>
             </table>
+
+        </section>
+    </main>
+<%} else {%>
+    <div class="container-atestado" style="margin-top: 20px;">
+        <div class="mb-3" hidden>
+            <input type="text" class="form-control" id="id" name="id" value="<%= atestadoAlteracao.id %>">
+          </div>
+
+        <h3>Atestado médico</h3>
+
+        <label for="" style="text-align: start;">Nome do médico:</label>
+        <input type="text" class="form-control" id="nomeMedico" name="nomeMedico" value="<%= atestadoAlteracao.nome_medico %>">
+
+        <label for="" style="text-align: start; margin-top: 20px;">Especialidade médica:</label>
+
+        <select name="selEspecialidade" id="selEspecialidade" class="form-select"> 
+          <option value="0" disabled>Selecione uma opção</option>
+          
+          <% for(let i=0;i<servicos.length;i++) {%>
+            <% if (atestadoAlteracao.especialidade_medica == servicos[i].nome) {%>
+                <option selected value="<%= servicos[i].id %>"><%= servicos[i].nome %></option>
+            <%} else {%>
+                <option value="<%= servicos[i].id %>"><%= servicos[i].nome %></option>
+           <% }%>
+            
+          <%}%>
+          
+        </select>
+        
+        <div class="row" style="margin-top: 20px;">
+
+          <div class="col" style="text-align: start;">
+            <label for="">Data de início do afastamento:</label>
+            <input type="date" class="form-control" id="dataInicio" name="dataInicio" value="<%= new Date(atestadoAlteracao.data_inicio).toISOString().substring(0, 10) %>">
+          </div>
+          
+          <div class="col" style="text-align: start;">
+            <label for="">Data de término do afastamento:</label>
+            <input type="date" class="form-control" id="dataTermino" name="dataTermino" value="<%= new Date(atestadoAlteracao.data_termino).toISOString().substring(0, 10) %>">
+          </div>
         </div>
-    </section>
-</main>
+
+        <label for="" style="text-align: start;margin-top: 20px;">Foto do atestado:</label>
+        <input type="file" id="fotoAtestado" name="fotoAtestado" class="form-control">
+
+        <div class="form-group" id="previaImagem" style="text-align: start;">
+            <label>Prévia da imagem:</label><br>
+            <img src="<%= atestadoAlteracao.foto_atestado %>" id="imgPrevia" width="150" />
+          </div>
+
+        <button type="button" class="btn btn-primary" id="btn-atestado" style="margin-top: 20px;">Atualizar atestado médico</button>
+
+      </div>
+<%}%>
+

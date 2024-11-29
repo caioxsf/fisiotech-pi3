@@ -35,6 +35,24 @@ class AtestadoModel {
         return resultado;
     }
 
+    async atualizar () {
+        let sql = `update atestado set ate_nome_medico = ?, ate_esp_medica = ?, ate_data_inicio = ?, ate_data_termino = ?, ate_foto_atestado = ? where ate_id = ?`;
+        let valores = [this.#nome_medico, this.#especialidade_medica, this.#data_inicio, this.#data_termino, this.#foto_atestado, this.#id];
+
+        let resultado = await db.ExecutaComandoNonQuery(sql,valores);
+
+        return resultado;
+    }
+
+    async atualizarSemImagem () {
+        let sql = `update atestado set ate_nome_medico = ?, ate_esp_medica = ?, ate_data_inicio = ?, ate_data_termino = ? where ate_id = ?`;
+        let valores = [this.#nome_medico, this.#especialidade_medica, this.#data_inicio, this.#data_termino, this.#id];
+
+        let resultado = await db.ExecutaComandoNonQuery(sql,valores);
+
+        return resultado;
+    }
+
     async listarAtestados () {
         let sql = `select * from atestado ate
         inner join servico_consulta sc on ate.ate_esp_medica = sc.serv_id
@@ -67,13 +85,13 @@ class AtestadoModel {
         return listaAtestado;
     }
 
-    async listaAtestadoSearch (texto, tipoBusca) {
+    async listaAtestadoSearch (texto, tipoBusca, inicio, fim) {
         let whereFiltro = "";
-        if(texto) {
+        if(texto || inicio) {
             if(tipoBusca == 'nome') {
                 whereFiltro = `where ate.ate_nome_medico like '%${texto}%' order by ate.ate_nome_medico asc`
             } else if (tipoBusca == 'data') {
-                whereFiltro = `where ate.ate_data_inicio = '${texto}' order by ate.ate_data_inicio asc `
+                whereFiltro = `where ate.ate_data_inicio between '${inicio}' and '${fim}' order by ate.ate_data_inicio asc`
             }
                 
         }
@@ -93,8 +111,8 @@ class AtestadoModel {
                 var registro = resultado[i];
 
                 let imagem = "/img/paciente/fotosemperfil.png";
-                if(registro["ate_foto_atestado"] != null && fs.existsSync(global.CAMINHO_IMG_REAL + global.CAMINHO_IMG_NAV + registro["ate_foto_atestado"])){
-                    imagem = global.CAMINHO_IMG_NAV + registro["ate_foto_atestado"]
+                if(registro["ate_foto_atestado"] != null && fs.existsSync(global.CAMINHO_IMG_REAL + global.CAMINHO_IMG_NAV_ATESTADO + registro["ate_foto_atestado"])){
+                    imagem = global.CAMINHO_IMG_NAV_ATESTADO + registro["ate_foto_atestado"]
                 }
 
                 listaAtestado.push(new AtestadoModel (
@@ -118,14 +136,45 @@ class AtestadoModel {
         return resultado;
     }
 
+    async obterAtestado (id) {
+        let sql = `select * from atestado ate
+        inner join servico_consulta sc on ate.ate_esp_medica = sc.serv_id where ate_id = ?
+        `
+        let valores = [id]
+
+        let resultado = await db.ExecutaComando(sql,valores);
+        if(resultado.length > 0) {
+            for (let i=0;i<resultado.length;i++) {
+
+                var registro = resultado[i];
+
+                let imagem = "/img/paciente/fotosemperfil.png";
+                if(registro["ate_foto_atestado"] != null && fs.existsSync(global.CAMINHO_IMG_REAL + global.CAMINHO_IMG_NAV_ATESTADO + registro["ate_foto_atestado"])){
+                    imagem = global.CAMINHO_IMG_NAV_ATESTADO + registro["ate_foto_atestado"]
+                }
+
+                return new AtestadoModel (
+                    registro['ate_id'],
+                    registro['ate_nome_medico'],
+                    registro['serv_nome'],
+                    registro['ate_data_inicio'],
+                    registro['ate_data_termino'],
+                    imagem
+                );
+            }
+        }
+
+        return null;
+    }
+
     toJSON() {
         return {
-            id: this.id,
-            nome_medico: this.nome_medico,
-            especialidade_medica: this.especialidade_medica,
-            data_inicio: this.data_inicio,
-            data_termino: this.data_termino,
-            foto_atestado: this.foto_atestado
+            "id": this.id,
+            "nome_medico": this.nome_medico,
+            "especialidade_medica": this.especialidade_medica,
+            "data_inicio": this.data_inicio,
+            "data_termino": this.data_termino,
+            "foto_atestado": this.foto_atestado
         };
     }
 

@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if(confirm(`Tem certeza que deseja apagar a conta de ${nome}?`)) {
             let that = this;
             if(id) {
-                fetch(`administrador/excluir/${id}`)
+                fetch(`/administrador/relatorio/usuarios/excluir/${id}`)
                 .then(response => {
                     return response.json();
                 })

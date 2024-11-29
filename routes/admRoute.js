@@ -28,15 +28,19 @@ router.get('/', auth.validarAdmin, ctrl.admView);
 router.post('/', auth.validarAdmin, ctrl.cadastrarServico);
 router.post('/atestado', upload.single("imagem"), ctrl.cadastrarAtestado)
 
-router.get('/editar/:id', auth.validarAdmin, ctrl.editarAdmView);
-router.post('/editar', auth.validarAdmin, ctrl.editarAdm);
 router.get('/servico/excluir/:id', auth.validarAdmin, ctrl.excluirServico)
-router.get('/excluir/:id', auth.validarAdmin, ctrl.excluirUsuarioCadastrado);
 
 router.get('/relatorio/atestado', auth.validarAdmin, rela.atestadoView);
 router.get('/relatorio/atestado/excluir/:id', auth.validarAdmin, rela.excluirAtestado);
+
+router.get('/relatorio/atestado/editar/:id', auth.validarAdmin, rela.editarAtestadoView);
+router.post('/relatorio/atestado/editar', upload.single("imagem"), rela.editarAtestado);
 router.post('/relatorio/atestado/lista', rela.listaAtestadoSearch)
 
 router.get('/relatorio/usuarios', auth.validarAdmin, rela.usuarioView);
+router.get('/relatorio/usuarios/editar/:id', auth.validarAdmin, rela.editarUsuarioView)
+router.post('/relatorio/usuarios/editar', auth.validarAdmin, rela.editarUsuario)
+router.get('/relatorio/usuarios/excluir/:id', auth.validarAdmin, rela.excluirUsuarioCadastrado);
+router.post('/relatorio/usuarios', rela.listaSearch);
 
 module.exports = router;

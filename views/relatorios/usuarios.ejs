@@ -1,46 +1,271 @@
 <link rel="stylesheet" href="/css/relatorio/usuarios.css">
+<link rel="stylesheet" href="/css/print.css" media="print">
 <script src="/js/usuarios/excel.js"></script>
+<script src="/js/usuarios/search.js"></script>
+<script src="/js/registro/excluirConta.js"></script>
+<script src="/js/registro/editarConta.js"></script>
+<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
 
-<main>
-    <section>
 
-        <form>
-            <div class="container-search text-center">
+
+<% if(typeof admAlteracao == 'undefined') {%>
+    <main>
+        <section>
+            <form class="print">
+                <div class="container-search text-center">
+        
+                    <div class="form-group ">
+                         <label for="" class="form-label">Buscar por:</label>
+             
+                         <label for="user" class="form-label" style="margin-right: 14px; margin-left: 5px;">
+                             <input type="radio" value="user" class="form-check-input" id="user" name="tipoBusca"> 
+                             Usuário
+                         </label>
+             
+                         <label for="perfilUser" class="form-label">
+                             <input type="radio" value="perfilUser" class="form-check-input" id="perfilUser" name="tipoBusca">
+                              Perfil
+                         </label>
     
-                <div class="form-group ">
-                     <label for="" class="form-label">Buscar por:</label>
-         
-                     <label for="nomeMedico" class="form-label" style="margin-right: 14px; margin-left: 5px;">
-                         <input type="radio" value="nome" class="form-check-input" id="nomeMedico" name="tipoBusca"> 
-                         Usuário
-                     </label>
-         
-                     <label for="dataInicio" class="form-label">
-                         <input type="radio" value="data" class="form-check-input" id="dataInicio" name="tipoBusca">
-                          Perfil
-                     </label>
-
-                </div>
-         
-                 <div class="form-group container-input-e-search">
-                     <input type="text" class="form-control inputTexto" id="texto" name="texto"  >
-                     <button type="button" class="btn btn-primary" id="btnBuscar"><i class="fas fa-search"></i></button>
-                     <button class="btn btn-primary" id="btnExportarExcel">
-                        <i class="fas fa-file"></i>
-                        Excel
-                    </button>
+                    </div>
+             
+                     <div class="form-group container-input-e-search" style="align-items: center;">
+    
+                        <input type="text" class="form-control inputTexto" id="texto" name="texto"  >
+                        <button type="button" class="btn btn-primary" id="btnBuscar"><i class="fas fa-search"></i></button>
+                         
+    
+    
+                        <button id="btnExportarExcel" style="background-color: transparent; border: none;" class="btnExcel">
+                            <i class="fas fa-file-csv fa-lg" style="font-size: 25px;"></i>
+                        </button>
+                        <button style="margin-right: 15px; background-color: transparent; border: none;" class="btnPdf" onclick="window.print()" >
+                            <i class="fas fa-file-pdf fa-lg" style="font-size: 25px;"></i>
+                        </button>
+                      
+                     </div>
+                    
                  </div>
-                
-             </div>
-        </form>
+            </form>
+    
+        </section>
+        <div class="container-contas" style="margin-top: 20px;">
+            <h3>Usuários registrados</h3>
+    
+            <div class="container-table" style="overflow-y: auto; max-height: 500px;">
+              <table class="table table-hover table-responsive" style="text-align: start;" id="tabelausers">
+                <thead>
+                  <tr>
+                    <th scope="col">Usuário</th>
+                    <th scope="col">Perfil</th>
+                    <th scope="col" style="text-align: end;"  class="print">Ações</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% for(let i=0;i<usuarios.length;i++) { %>
+                <tr>
+                   
+                      
+                      <td data-label="Usuário" class="tbodyusuarios"><%= usuarios[i].login %></td>
+    
+                      <td data-label="Perfil" class="tbodyusuarios"><%= usuarios[i].perfil_id %></td>
+    
+                      <% let perfil = usuarios[i].perfil_id; %>
+                      <% if(perfil != 'Sistema' ) { %>
+                      <td data-label="Ações" class="tbodyusuarios print" style=" text-align: end;">
+    
+                        <a href="/administrador/relatorio/usuarios/editar/<%= usuarios[i].id %>" class="btn-editar" style="border: none; background-color: transparent; ">
+                          <i class="fas fa-edit" style="color: #74C0FC;"></i>
+                        </a>
+                        <button type="button"  class="btn-excluirConta" data-id="<%= usuarios[i].id %>" data-nome="<%= usuarios[i].login %>" style="border: none; background-color: transparent;">
+                          <i class="fas fa-trash" style="color: #d72323;"></i>
+                        </button>
+    
+                      </td>
+                      <% } %>
+                </tr>
+                <% } %>
+              </tbody>
+              </table>
+            </div>
+        </div>
 
-        <div class="table-container">
-            <table class="table table-hover table-responsive" id="tabelausers">
+        <table hidden id="tabelausers">
+            <thead>
+                <tr>
+                    <th>Usuário</th>
+                    <th>Perfil</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(let i=0;i<usuarios.length;i++) { %>
+                    <tr>
+                        <td><%= usuarios[i].login %></td>
+                        <td><%= usuarios[i].perfil_id %></td>
+                    </tr>
+                <% }%>
+            </tbody>
+        </table>
+    </main>
+    
+<%} else {%>
+
+    <main>
+        <section hidden>
+            <form class="print">
+                <div class="container-search text-center">
+        
+                    <div class="form-group ">
+                         <label for="" class="form-label">Buscar por:</label>
+             
+                         <label for="user" class="form-label" style="margin-right: 14px; margin-left: 5px;">
+                             <input type="radio" value="user" class="form-check-input" id="user" name="tipoBusca"> 
+                             Usuário
+                         </label>
+             
+                         <label for="perfilUser" class="form-label">
+                             <input type="radio" value="perfilUser" class="form-check-input" id="perfilUser" name="tipoBusca">
+                              Perfil
+                         </label>
+    
+                    </div>
+             
+                     <div class="form-group container-input-e-search" style="align-items: center;">
+    
+                        <input type="text" class="form-control inputTexto" id="texto" name="texto"  >
+                        <button type="button" class="btn btn-primary" id="btnBuscar"><i class="fas fa-search"></i></button>
+                         
+    
+    
+                        <button id="btnExportarExcel" style="background-color: transparent; border: none;" class="btnExcel">
+                            <i class="fas fa-file-csv fa-lg" style="font-size: 25px;"></i>
+                        </button>
+                        <button style="margin-right: 15px; background-color: transparent; border: none;" class="btnPdf" onclick="window.print()" >
+                            <i class="fas fa-file-pdf fa-lg" style="font-size: 25px;"></i>
+                        </button>
+                      
+                     </div>
+                    
+                 </div>
+            </form>
+    
+        </section>
+
+        <div class="container-contas" style="margin-top: 120px;">
+            <h3>Usuários registrados</h3>
+
+        
+            <div class="container-table" style="overflow-y: auto; max-height: 500px;">
+                <table class="table table-hover table-responsive" style="text-align: start;" >
+                <div class="mb-3" hidden>
+                    <input type="text" class="form-control" id="id" name="id" value="<%= admAlteracao.id %>">
+                  </div>
+                <thead>
+                  <tr>
+                    <th scope="col">Usuário</th>
+                    <th scope="col" style="text-align: end; position: relative; left: 58px;">Perfil</th>
+                    <th scope="col" style="text-align: end; position: relative; left: 58px;">Ações</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <% for(let i=0;i<usuarios.length;i++) { %>
+                        <tr>
+                         
+           
+                          <% if(admAlteracao && admAlteracao.id == usuarios[i].id) { %>
+                            
+          
+                            <% if(admAlteracao && admAlteracao.id == usuario.id || usuario.id == '1') { %>
+                              
+          
+                              <% if (usuario.id == '1') { %>
+                                <td data-label="Usuário"><input type="text" class="form-control" id="usuario" name="usuario"   disabled value="<%= usuarios[i].login %>" ></td>
+                                <td data-label="Senha"><input type="password" class="form-control" id="senha" name="senha"  disabled value="<%= usuarios[i].senha %>"></td>
+                              <% } else { %>
+                                <td data-label="Usuário"><input type="text" class="form-control" id="usuario" name="usuario" value="<%= usuarios[i].login %>"></td>
+                                <td data-label="Senha"><input type="text" class="form-control" id="senha" name="senha"   value="<%= usuarios[i].senha %>"></td>
+                              <%}%>
+                              
+          
+          
+                             
+                                <td data-label="Perfil">
+                                  <select id="perfil" name="perfil" class="form-select">
+                                    <% for(let j=0;j<perfis.length;j++) { %>
+                                      <% if(perfis[j].descricao != 'Sistema') { %>
+                                        <% if(perfis[j].id == admAlteracao.perfil_id) { %>
+                                          <option selected value="<%= perfis[j].id %>"><%= perfis[j].descricao %></option>
+                                        <% } else { %>
+                                          <option value="<%= perfis[j].id %>"><%= perfis[j].descricao %></option>
+                                        <% } %>
+                                      <% } %>
+                                    <% } %>
+                                  </select>
+                                </td>
+                              
+                              
+          
+          
+                            <% } else {%>
+          
+          
+                              <td data-label="Usuário" ><input type="text" class="form-control" id="usuario" name="usuario" disabled value="<%= usuarios[i].login %>"></td>
+                              <td data-label="Senha"><input type="password" class="form-control" id="senha" name="senha" disabled value="<%= usuarios[i].senha %>"></td>
+          
+                              <td data-label="Perfil">
+                                <select id="perfil" name="perfil" class="form-select" disabled>
+                                  <% for(let j=0;j<perfis.length;j++) { %>
+                                    <% if(perfis[j].descricao != 'Sistema') { %>
+                                      <% if(perfis[j].id == admAlteracao.perfil_id) { %>
+                                        <option selected value="<%= perfis[j].id %>"><%= perfis[j].descricao %></option>
+                                      <% } else { %>
+                                        <option value="<%= perfis[j].id %>"><%= perfis[j].descricao %></option>
+                                      <% } %>
+                                    <% } %>
+                                  <% } %>
+                                </select>
+                              </td>
+          
+                            <%}%>
+                           
+
+                          <% } else { %>
+                            <td data-label="Usuário"><%= usuarios[i].login %></td>
+            
+                            <td></td>
+            
+                            <td data-label="Perfil"><%= usuarios[i].perfil_id %></td>
+                          <% } %>
+            
+                          <% if(usuarios[i].perfil_id != 'Sistema') { %>
+                            <td data-label="Ações" style="text-align: end;">
+                              <a href="/administrador/relatorio/usuarios/editar/<%= usuarios[i].id %>" class="btn-editar" style="border: none; background-color: transparent;">
+                                <i class="fas fa-edit" style="color: #74C0FC;"></i>
+                              </a>
+          
+                              <% if(admAlteracao && admAlteracao.id == usuario.id || usuario.id == '1') { %>
+                                <button type="button" class="btn-addConta" style="border: none; background-color: transparent;">
+                                  <i class="fas fa-thumbs-up" style="color: #63E6BE;"></i>
+                                </button>
+                              <% } else { %>
+                                <button hidden type="button" class="btn-addConta" style="border: none; background-color: transparent;">
+                                  <i class="fas fa-thumbs-up" style="color: #63E6BE;" ></i>
+                                </button>
+                              <%}%>
+                             
+                            </td>
+                          <% } %>
+                        </tr>
+                      <% } %>
+                    </tbody>
+                </table>
+            </div>
+
+            <table hidden id="tabelausers">
                 <thead>
                     <tr>
                         <th>Usuário</th>
                         <th>Perfil</th>
-                        
                     </tr>
                 </thead>
                 <tbody>
@@ -48,11 +273,12 @@
                         <tr>
                             <td><%= usuarios[i].login %></td>
                             <td><%= usuarios[i].perfil_id %></td>
-                        </td>
                         </tr>
-                    <% } %>
+                    <% }%>
                 </tbody>
             </table>
         </div>
-    </section>
-</main>
+    </main>
+
+<%} %>
+

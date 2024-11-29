@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
             let stringObj = JSON.stringify(obj);
 
-            fetch(`/administrador/editar/`, {
+            fetch(`/administrador/relatorio/usuarios/editar`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(function(resposta) {
                 if(resposta.ok) {
                     alert(resposta.msg);
-                    window.location.href = '/administrador';
+                    window.location.href = '/administrador/relatorio/usuarios';
                 }
                 else {
                     alert(resposta.msg);

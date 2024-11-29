@@ -178,23 +178,34 @@ class PacienteModel {
     async obter (id) {
         let sql = `select * from paciente where pac_id_paciente = ?`;
         let valores = [id];
-        let row = await db.ExecutaComando(sql,valores);
+        let resultado = await db.ExecutaComando(sql,valores);
 
-        if(row.length > 0) {
-            return new PacienteModel(
-                row[0]['pac_id_paciente'],
-                row[0]['pac_nome'],
-                row[0]['pac_telefone'],
-                row[0]['pac_email'],
-                row[0]['pac_data_nascimento'],
-                row[0]['pac_cpf'],
-                row[0]['pac_endereco'],
-                row[0]['pac_bairro'],
-                row[0]['fk_sexo_id'],
-                row[0]['pac_cidade'],
-                row[0]['fk_est_id'],
-                row[0]['pac_cep']
-            )
+        if(resultado.length > 0)
+
+        for(let i=0;i<resultado.length;i++) {
+
+            var registro = resultado[i];
+
+            let imagem = "/img/paciente/fotosemperfil.png";
+            if(registro["pac_imagem"] != null && fs.existsSync(global.CAMINHO_IMG_REAL + global.CAMINHO_IMG_NAV_PACIENTE + registro["pac_imagem"])){
+                imagem = global.CAMINHO_IMG_NAV_PACIENTE + registro["pac_imagem"]
+            }
+
+            return new PacienteModel (
+                registro['pac_id_paciente'],
+                registro['pac_nome'],
+                registro['pac_telefone'],
+                registro['pac_email'],
+                registro['pac_data_nascimento'],
+                registro['pac_cpf'],
+                registro['pac_endereco'],
+                registro['pac_bairro'],
+                registro['sexo_nome'],
+                registro['pac_cidade'],
+                registro['est_nome'],
+                registro['pac_cep'],
+                imagem
+            );
         }
         return null;
     }

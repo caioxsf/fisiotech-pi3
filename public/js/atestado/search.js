@@ -1,20 +1,31 @@
 document.addEventListener('DOMContentLoaded', function () {
 
     document.getElementById('btnBuscar').addEventListener('click', buscar);
-    
+    document.getElementById('btnBuscarDatas').addEventListener('click', buscar);
 
 
     function buscar() {
+        
         let texto = document.getElementById('texto').value;
+        let inicio = document.getElementById('inicio').value;
+        let fim = document.getElementById('fim').value
         let tipoBusca = "";
 
         if (document.querySelector("input[name='tipoBusca']:checked"))
             tipoBusca = document.querySelector("input[name='tipoBusca']:checked").value;
 
         let objetoBusca = {};
-        if (texto != "" && (tipoBusca === 'nome' || tipoBusca === 'data')) {
-            objetoBusca.texto = texto;
-            objetoBusca.tipoBusca = tipoBusca;
+        if (texto != "" || inicio != "") {
+
+            if(tipoBusca == 'nome') {
+                objetoBusca.texto = texto;
+                objetoBusca.tipoBusca = tipoBusca;
+            } else if (tipoBusca == 'data') {
+                objetoBusca.tipoBusca = tipoBusca;
+                objetoBusca.inicio = inicio;
+                objetoBusca.fim = fim;
+            } 
+
         } else if (texto === "") {
             objetoBusca.texto = texto;
         } else {
@@ -36,40 +47,25 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     for (let c of r.atestados) {
                         html += `
-                        <table class="table table-hover table-responsive">
-                <thead>
-                    <tr>
-                        <th>Nome médico</th>
-                        <th>Especialidade médica</th>
-                        <th>Data início do afastamento</th>
-                        <th>Data término do afastamento</th>
-                        <th style="text-align: center;">Foto atestado</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    
-                        <tr>
-                            <td> ${c.nome_medico} </td>
-                            <td> ${c.especialidade_medica} </td>
-                            <td> ${new Date(c.data_inicio).toLocaleDateString('pt-BR')} </td>
-                            <td> ${new Date(c.data_termino).toLocaleDateString('pt-BR') }</td>
-                            <td style="text-align: center;">
-                                <a href=" ${c.foto_atestado} " download='Atestado' style="margin-right: 15px;"><i class="fas fa-file-download fa-lg "style="font-size: 25px;" ></i></a>
-                                <img src=" ${c.foto_atestado} " alt="Foto Atestado" width="100">
+                                <tr>
+                                    <td> ${c.nome_medico} </td>
+                                    <td> ${c.especialidade_medica} </td>
+                                    <td> ${new Date(c.data_inicio).toLocaleDateString('pt-BR')} </td>
+                                    <td> ${new Date(c.data_termino).toLocaleDateString('pt-BR') }</td>
+                                    <td style="text-align: center;">
+                                        <a href=" ${c.foto_atestado} " download='Atestado' style="margin-right: 15px;"><i class="fas fa-file-download fa-lg "style="font-size: 25px;" ></i></a>
+                                        <img src="${c.foto_atestado}" alt="Foto Atestado" width="100">
 
-                                <button type="button" class="btn-excluir" data-id=" ${c.id} " data-nome=" ${c.nome_medico} " style="border: none; background-color: transparent; margin-left: 10px; ">
-                                    <i class="fas fa-trash" style="color: #d72323;"></i>
-                                  </button>
-                            </td>
-                        </tr>
-                   
-                   
-                </tbody>
-            </table>
+                                        <button type="button" class="btn-excluir" data-id=" ${c.id} " data-nome=" ${c.nome_medico} " style="border: none; background-color: transparent; margin-left: 10px; ">
+                                            <i class="fas fa-trash" style="color: #d72323;"></i>
+                                        </button>
+                                        <a href="/administrador/relatorio/atestado/editar/${c.id}"><i class="fas fa-edit" style="color: #74C0FC;"></i></a>
+                                    </td>
+                                </tr>
                         `;
                     }
 
-                    document.querySelector('.table').innerHTML = html;
+                    document.querySelector('#tabela > tbody').innerHTML = html;
 
                     ativarEventosDialog();
                 } else {

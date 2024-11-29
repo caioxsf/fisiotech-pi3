@@ -141,8 +141,7 @@
         <div class="col-md-3">
           <label for="estado" class="form-label">Estado</label>
           <select id="estado" name="estado" class="form-select" onblur="borda(this)">
-            
-            <option disabel value="0">Selecione uma opção</option>
+            <option disabled value="0">Selecione uma opção</option>
             <% for(let i=0;i<estados.length;i++) { %>
               <% if(estados[i].id == pacienteAlteracao.estado_id) { %>
                 <option selected value="<%= estados[i].id %>"><%= estados[i].nome %></option>
@@ -163,10 +162,11 @@
           <input type="file" class="form-control" id="pacienteImagem">
         </div>
 
-        <div class="form-group" id="previaImagem" style="display: none;">
+        <div class="form-group" id="previaImagem" >
           <label>Prévia da imagem:</label><br>
           <img src="<%= pacienteAlteracao.pacienteImagem %>" id="imgPrevia" width="100" />
         </div>
+        
         
         <div class="col-12 d-flex justify-content-center">
           <button type="button" class="btn btn-primary btn-container btn-add" data-alteracao="true">Atualizar</button>
