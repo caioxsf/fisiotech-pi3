@@ -37,6 +37,7 @@ CREATE TABLE paciente (
   pac_cidade varchar(45) DEFAULT NULL,
   fk_est_id int(11) DEFAULT NULL,
   pac_cep varchar(45) DEFAULT NULL,
+  pac_imagem decimal (10,5)
   PRIMARY KEY (pac_id_paciente),
   KEY fk_sexo (fk_sexo_id),
   KEY fk_est_id (fk_est_id),
@@ -159,7 +160,7 @@ CREATE TABLE atestado (
     ate_foto_atestado VARCHAR(255),
     
     FOREIGN KEY (ate_esp_medica) REFERENCES servico_consulta(serv_id)
-)
+);
 
 INSERT INTO perfil (per_desc) VALUES ('Administrador');
 INSERT INTO perfil (per_desc) VALUES ('Visitante');
