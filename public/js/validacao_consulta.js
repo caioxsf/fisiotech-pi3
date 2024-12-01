@@ -57,7 +57,7 @@ function validarHoraConsulta ()
     var horaArr = hora.replace(":","");
 
     console.log(horaArr);
-    if(horaArr >= 800 && horaArr <= 1700)
+    if(horaArr >= 700 && horaArr <= 1800)
         event.target.style.border= "1px solid green";
     else
     {

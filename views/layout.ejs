@@ -71,7 +71,7 @@
       <a href="/" class="logo d-flex align-items-center">
         <h1>Fisio<span>tech</span></h1>
       </a>
-      <nav id="navbar" class="navbar">
+      <nav id="navbar" class="navbar" style="margin-right: 150px;">
         <ul style="margin-right: 50px;">
           <li><a href="/"  style="font-weight: 500;">Inicio</a></li>
           <li><a href="/#sobre" style="font-weight: 500;">Sobre nós</a></li>
@@ -80,9 +80,21 @@
           <li><a href="/#equipe" style="font-weight: 500;">Equipe</a></li>
           <li><a href="/#contato" style="font-weight: 500;">Contato</a></li>
           <% if (usuario.perfil_id == 1 || usuario.perfil_id == 3) { %>
-            <li><a href="/paciente" style="font-weight: 500;">Paciente</a></li>
-            <li><a href="/consulta" style="font-weight: 500;">Consulta</a></li>
-            <li><a href="/administrador" style="font-weight: 500;">Administrador</a></li>
+            
+
+            <li>
+              <div class="dropdown">
+                <button class="dropdown-toggle btn btn-primary" type="button">Administrador</button>
+                <ul>
+                  <li><a href="/paciente" style="font-weight: 500;">Paciente</a></li>
+                  <li><a href="/consulta" style="font-weight: 500;">Consulta</a></li>
+                  <li><a href="/administrador/atestado" class="dropdown-item" style="font-weight: 500;">Atestado</a></li>
+                  <li><a href="/administrador/servicos" class="dropdown-item" style="font-weight: 500;">Serviços</a></li>
+                  <li><a href="/administrador/relatorio/usuarios" class="dropdown-item" style="font-weight: 500;">Usuários</a></li>
+                  <li><a href="/administrador/ponto" class="dropdown-item" style="font-weight: 500;">Ponto</a></li>
+                </ul>
+              </div>
+            </li>
           <% } %>
         </ul>  
         

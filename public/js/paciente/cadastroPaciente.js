@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let pacienteImagem = document.getElementById('pacienteImagem').files[0];
         
         if (nome.value != "" && telefone.value != "" && email.value != "" && nascimento.value != "" && cpf.value != "" && endereco.value != "" &&
-            bairro.value != "" && sexo.value != "" && cidade.value != "" && estado.value != "" && cep.value != "" ) {
+            bairro.value != "" && sexo.value != "" && cidade.value != "" && estado.value != "Selecione uma opção" && cep.value != "" ) {
         
             var data = new FormData();
             data.append("id", id.value);

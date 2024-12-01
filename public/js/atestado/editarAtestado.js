@@ -33,6 +33,7 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(r => {
                 if(r.ok) {
                     alert(r.msg);
+                    window.location.href = '/administrador/relatorio/atestado'
                 }
                 else {
                     alert(r.msg);

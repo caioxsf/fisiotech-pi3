@@ -2,6 +2,7 @@ const AtestadoModel = require('../models/AtestadoModel');
 const UserModel = require('../models/UserModel');
 const ServicosModel = require("../models/ServicosModel");
 const PerfilModel = require("../models/PerfilModel");
+const PontoModel = require('../models/PontoModel');
 
 class RelatoriosController {
 
@@ -151,6 +152,20 @@ class RelatoriosController {
             msg = 'Erro ao excluir conta';
 
         res.send({ok: resultado, msg: msg});
+    }
+
+    async pontoView (req,res) {
+        let pontoModel = new PontoModel();
+        let lista = await pontoModel.listar();
+
+        res.render('relatorios/ponto.ejs', {ponto: lista});
+    }
+
+    async pontoSearch (req,res) {
+        let pontoModel = new PontoModel();
+        let ponto = await pontoModel.listarSearch(req.body.texto, req.body.tipoBusca, req.body.inicio, req.body.fim)
+
+        res.send({ponto: ponto})
     }
    
 }

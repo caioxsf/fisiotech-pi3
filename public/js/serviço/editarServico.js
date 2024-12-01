@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(function(resposta) {
                 if(resposta.ok) {
                     alert(resposta.msg);
-                    window.location.href = '/administrador'
+                    window.location.href = '/administrador/servicos'
                 }
                 else {
                     alert(resposta.msg);

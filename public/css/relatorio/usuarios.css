@@ -24,6 +24,17 @@ main {
     margin: 0 auto;
 }
 
+.datas {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    width: 350px;
+    margin: 0 auto;
+    gap: 10px;
+}
+
+
 .container-input-e-search {
     display: flex;
     justify-content: center;

@@ -1,0 +1,99 @@
+<link rel="stylesheet" href="/css/relatorio/usuarios.css">
+<link rel="stylesheet" href="/css/print.css" media="print">
+<script src="/js/ponto/datas.js"></script>
+<script src="/js/ponto/search.js"></script>
+<script src="/js/ponto/excel.js"></script>
+<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+
+
+<section>
+    <form class="print">
+        <div class="container-search text-center">
+
+            <div class="form-group">
+                 <label for="" class="form-label" class="buscar">Buscar por:</label>
+     
+                 <label for="nomeMedico" class="form-label" style="margin-right: 14px; margin-left: 5px;">
+                     <input type="radio" value="nome" class="form-check-input" id="nome" name="tipoBusca"> 
+                     Nome
+                 </label>
+     
+                 <label for="dataInicio" class="form-label">
+                     <input type="radio" value="hora" class="form-check-input" id="dataInicio" name="tipoBusca">
+                      Hora início/saída
+                 </label>
+
+                 <div id="intervaloData" class="datas" style="margin-bottom: 12px; display: none;">
+
+                    <label for="inicio" class="form-label"></label>
+                    <input type="time" id="inicio" name="inicio" class="form-control" >
+
+                    <span class="form-label">até</span>
+
+                    
+                    <label for="fim" class="form-label"></label>
+                    <input type="time" id="fim" name="fim" class="form-control" >
+
+                    <button type="button" class="btn btn-primary" id="btnBuscarDatas" style="margin-top: 5px;"><i class="fas fa-search"></i></button>
+
+                    
+                    <button id="btnExportarExcel" style="background-color: transparent; border: none;" class="btnExcel">
+                        <i class="fas fa-file-csv fa-lg" style="font-size: 25px;"></i>
+                    </button>
+                    <button style="margin-right: 15px; background-color: transparent; border: none;" class="btnPdf" onclick="window.print()" >
+                        <i class="fas fa-file-pdf fa-lg" style="font-size: 25px;"></i>
+                    </button>
+                    
+                </div>
+
+            </div>
+     
+            <div class="form-group container-input-e-search" id="inputBusca">
+
+               
+                <input type="text" class="form-control inputTexto" id="texto" name="texto"  >
+
+                <button type="button" class="btn btn-primary" id="btnBuscar">
+                    <i class="fas fa-search"></i>
+                </button>
+
+
+                <button id="btnExportarExcel" style="background-color: transparent; border: none;" class="btnExcel">
+                    <i class="fas fa-file-csv fa-lg" style="font-size: 25px;"></i>
+                </button>
+                <button style="margin-right: 15px; background-color: transparent; border: none;" class="btnPdf" onclick="window.print()" >
+                    <i class="fas fa-file-pdf fa-lg" style="font-size: 25px;"></i>
+                </button>
+            </div>
+         </div>
+    </form>
+</section>
+
+<div class="container-contas" style="margin-top: 20px; margin-bottom: 30px;">
+    <div class="container-table" style="overflow-y: auto; max-height: 500px;">
+
+        <table class="table table-hover table-responsive" id="tabela">
+            <thead>
+                <tr>
+                    <th >Nome</th>
+                    <th>Horario entrada</th>
+                    <th>Horario saída</th>
+                    <th>Data</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(let i=0;i<ponto.length;i++) {%>
+                    <tr>
+                        <td data-label="Nome"><%= ponto[i].nome_profissional %></td>
+                        <td data-label="Hr. Entr."><%= ponto[i].hora_entrada %></td>
+                        <td data-label="Hr. Saida"><%= ponto[i].hora_saida %></td>
+                        <td data-label="Data"><%= new Date(ponto[i].data).toLocaleDateString('pt-BR') %></td>
+                    </tr>
+                <%} %>
+                
+            </tbody>
+        </table>
+    </div>
+    
+</div>
+

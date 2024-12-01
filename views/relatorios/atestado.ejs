@@ -116,6 +116,7 @@
                        
                     </tbody>
                 </table>
+                
             </div>
 
             <table class="table table-hover table-responsive" id="tabelaExcel" hidden >
@@ -143,7 +144,8 @@
         </section>
     </main>
 <%} else {%>
-    <div class="container-atestado" style="margin-top: 20px;">
+
+    <div class="container-atestado" style="margin-top: 50px; margin-bottom: 50px;">
 
         <div class="mb-3" hidden>
             <input type="text" class="form-control" id="id" name="id" value="<%= atestadoAlteracao.id %>">
@@ -192,19 +194,9 @@
           </div>
 
         <button type="button" class="btn btn-primary" id="btn-atestado" style="margin-top: 20px;">Atualizar atestado médico</button>
-
-
-        
+        <a href="/administrador/relatorio/atestado" style="margin-top: 20px;"><i class="fas fa-hospital-user"></i> Ver relátorios de atestado</a>
       </div>
 
-      <div class="container-relatorio" style="margin-top: 20px;">
-        <h3>Relatórios</h3>
-        <div class="botoes-relatorios">
-
-          <a href="/administrador/relatorio/atestado" class="btn btn-primary"><i class="fas fa-hospital-user"></i> Relatório de atestado</a>
-          <a href="/administrador/relatorio/usuarios" class="btn btn-primary"><i class="fas fa-users"></i> Relatório de usuários cadastrados</a>
-
-        </div>
-      </div> 
+      
 <%}%>
 

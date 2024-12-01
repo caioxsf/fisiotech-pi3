@@ -35,7 +35,7 @@ class LoginController {
 
     async registro (req,res) {
         let ok;
-        if(req.body.usuario && req.body.senha && req.body.usuario.length > 5 && req.body.senha > 5) {
+        if(req.body.usuario && req.body.senha) {
 
             let registro = new RegistroModel();
             let resultadoContaIgual = await registro.verificarRegistroIgual(req.body.usuario);
@@ -58,7 +58,7 @@ class LoginController {
             }
         }
         else {
-            res.send({ok: false, msg: 'O usuario e senha precisam ter mais de 5 caracteres!'});
+            res.send({ok: false, msg: 'Digite um usuário ou senha.'});
         }
     }
 

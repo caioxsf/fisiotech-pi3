@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
             data.append('dataT', dataTermino.value);
             data.append('imagem', fotoAtestado);
 
-            fetch('administrador/atestado', {
+            fetch('/administrador/atestado', {
                 method: 'POST',
                 body: data
             })

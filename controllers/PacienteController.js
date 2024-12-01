@@ -19,7 +19,7 @@ class PacienteController {
 
     async pacienteCadastro (req,res) {
         
-        if (req.body.nome && req.body.telefone && req.body.email && req.body.nascimento && req.body.cpf && req.body.endereco && req.body.bairro && req.body.sexo  && req.body.cidade  && req.body.estado &&  req.body.cep) {
+        if (req.body.nome && req.body.telefone && req.body.email && req.body.nascimento && req.body.cpf && req.body.endereco && req.body.bairro && req.body.sexo  && req.body.cidade  && req.body.estado !="Selecione uma opção" &&  req.body.cep) {
             let pacienteModel = new PacienteModel();
 
             let cpfIgual = await pacienteModel.verificarCpfCadastrado(req.body.cpf);

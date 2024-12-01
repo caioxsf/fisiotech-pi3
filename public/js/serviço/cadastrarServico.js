@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
             let stringObj = JSON.stringify(obj);
 
-            fetch('/administrador', {
+            fetch('/administrador/servicos', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(function(resposta) {
                 if(resposta.ok) {
                     alert(resposta.msg);
-                    window.location.href = '/administrador'
+                    window.location.href = '/administrador/servicos'
                 }
                 else {
                     alert(resposta.msg);

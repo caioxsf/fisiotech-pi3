@@ -162,6 +162,17 @@ CREATE TABLE atestado (
     FOREIGN KEY (ate_esp_medica) REFERENCES servico_consulta(serv_id)
 );
 
+create table ponto (
+	pon_id int not null primary key auto_increment,
+    pon_id_profissional int not null,
+    pon_hora_entrada varchar(10),
+    pon_hora_saida varchar(10),
+    pon_nome_profissional varchar(40),
+    pon_data datetime default now(),
+    
+    constraint fk_profissional foreign key (pon_id_profissional) references user_admin (user_id)
+); 
+
 INSERT INTO perfil (per_desc) VALUES ('Administrador');
 INSERT INTO perfil (per_desc) VALUES ('Visitante');
 INSERT INTO perfil (per_desc) VALUES ('Sistema');

@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if(confirm(`Tem certeza que deseja excluir o serviço de ${nome}?`)) {
             let that = this;
             if(id) {
-                fetch(`administrador/servico/excluir/${id}`)
+                fetch(`/administrador/servicos/excluir/${id}`)
                 .then(response => {
                     return response.json();
                 })

@@ -2,6 +2,7 @@ const AtestadoModel = require("../models/AtestadoModel");
 const PerfilModel = require("../models/PerfilModel");
 const ServicosModel = require("../models/ServicosModel");
 const UserModel = require("../models/UserModel");
+const PontoModel = require("../models/PontoModel");
 
 class AdmController {
 
@@ -14,6 +15,39 @@ class AdmController {
         
 
         res.render('adm/adm.ejs', {usuarios: listaUsuarios, servicos: listaServicos});
+    }
+
+    async atestadoView (req,res) {
+        let servicoModel = new ServicosModel();
+        let listaServicos = await servicoModel.listarServicos();
+
+        res.render('atestado/atestado.ejs', {servicos: listaServicos})
+    }
+
+    async cadastrarAtestado (req,res) {
+
+        if (req.body.nome && req.body.especialidade && req.file != null) {
+            let atestadoModel = new AtestadoModel();
+
+            atestadoModel.nome_medico = req.body.nome;
+            atestadoModel.especialidade_medica = req.body.especialidade;
+            atestadoModel.data_inicio = req.body.dataI;
+            atestadoModel.data_termino = req.body.dataT;
+            atestadoModel.foto_atestado = req.file.filename;
+
+            let resultado = atestadoModel.cadastrar();
+
+            if(resultado) {
+                res.send({ok: true, msg: 'Atestado médico cadastrado com sucesso!'});
+
+            }
+            else {
+                res.send({ok: false, msg: 'Erro ao cadastrar atestado médico!'});
+            }
+        }
+        else {
+            res.send({ok: false, msg: 'Parametros incorretos'});
+        }
     }
 
     async cadastrarServico (req,res) {
@@ -45,32 +79,6 @@ class AdmController {
             msg = 'Erro ao excluir serviço';
 
         res.send({ok: resultado, msg: msg});
-    }
-
-    async cadastrarAtestado (req,res) {
-
-        if (req.body.nome && req.body.especialidade && req.file != null) {
-            let atestadoModel = new AtestadoModel();
-
-            atestadoModel.nome_medico = req.body.nome;
-            atestadoModel.especialidade_medica = req.body.especialidade;
-            atestadoModel.data_inicio = req.body.dataI;
-            atestadoModel.data_termino = req.body.dataT;
-            atestadoModel.foto_atestado = req.file.filename;
-
-            let resultado = atestadoModel.cadastrar();
-
-            if(resultado) {
-                res.send({ok: true, msg: 'Atestado médico cadastrado com sucesso!'});
-
-            }
-            else {
-                res.send({ok: false, msg: 'Erro ao cadastrar atestado médico!'});
-            }
-        }
-        else {
-            res.send({ok: false, msg: 'Parametros incorretos'});
-        }
     }
 
     async editarServicoView (req,res) {
@@ -105,6 +113,35 @@ class AdmController {
             res.send({ok: false, msg: 'Erro ao atualizar serviço'});
         }
     }
+
+    async pontoView(req,res) {
+        res.render('ponto/ponto.ejs');
+    }
+
+    async ponto (req,res) {
+
+        if(req.body.nome && req.body.horaEntrada && req.body.horaSaida) {
+            let pontoModel = new PontoModel();
+
+            pontoModel.id_profissional = req.body.id;
+            pontoModel.hora_entrada = req.body.horaEntrada;
+            pontoModel.hora_saida = req.body.horaSaida;
+            pontoModel.nome_profissional = req.body.nome;
+
+            let resultado = await pontoModel.cadastrar();
+
+            if(resultado) {
+                res.send({ok: true, msg: 'Ponto registrado!'})
+            }
+            else {
+                res.send({ok: false, msg: 'Ocorreu um erro ao registrar seu ponto!'})
+            }
+        }
+        else {
+            res.send({ok: false, msg: 'Parametros incorretos!'});
+        }
+    }
+
     
 }
 

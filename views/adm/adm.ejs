@@ -28,6 +28,7 @@
                     <th scope="col"  data-label="Ações" style="text-align: end;">Ações</th>
                   </tr>
                 </thead>
+
                 <tbody> 
                   <% for(let i=0;i<servicos.length;i++) { %>
                     <tr>
@@ -43,48 +44,16 @@
                     </tr>
                   <% } %>
                 </tbody>
+
               </table>
+              
            </div>
+           
       </div>
 
 
-      <div class="container-atestado" style="margin-top: 20px;">
-        <h3>Atestado médico</h3>
-
-        <label for="" style="text-align: start;">Nome do médico:</label>
-        <input type="text" class="form-control" id="nomeMedico" name="nomeMedico">
-
-        <label for="" style="text-align: start; margin-top: 20px;">Especialidade médica:</label>
-
-        <select name="selEspecialidade" id="selEspecialidade" class="form-select"> 
-          <option value="0" disabled selected>Selecione uma opção</option>
-          <% for(let i=0;i<servicos.length;i++) {%>
-            <option value="<%= servicos[i].id %>"><%= servicos[i].nome %></option>
-          <%}%>
-          
-        </select>
-        
-        <div class="row" style="margin-top: 20px;">
-
-          <div class="col" style="text-align: start;">
-            <label for="">Data de início do afastamento:</label>
-            <input type="date" class="form-control" id="dataInicio" name="dataInicio" onblur="validarDataInicio30DiasAntes(event)">
-          </div>
-          
-          <div class="col" style="text-align: start;">
-            <label for="">Data de término do afastamento:</label>
-            <input type="date" class="form-control" id="dataTermino" name="dataTermino" onblur="validarDataFim(event)">
-          </div>
-        </div>
-
-        <label for="" style="text-align: start;margin-top: 20px;">Foto do atestado:</label>
-        <input type="file" id="fotoAtestado" name="fotoAtestado" class="form-control">
-
-        <button type="button" class="btn btn-primary" id="btn-atestado" style="margin-top: 20px;">Enviar atestado médico</button>
-
-      </div>
-
-      <div class="container-relatorio" style="margin-top: 20px;">
+      
+      <!-- <div class="container-relatorio" style="margin-top: 20px;">
         <h3>Relatórios</h3>
         <div class="botoes-relatorios">
 
@@ -93,7 +62,7 @@
 
         </div>
       </div>
-    </section>
+    </section> -->
 
 
   </main>
@@ -114,6 +83,7 @@
             <input type="text" class="form-control" id="servico" name="servico" value="<%= admAlteracao.nome %>">
             <button class="btn btn-primary btn-addEditar" style="margin-top: 12px;">Atualizar serviço</button>
 
+            <a href="/administrador/relatorio/servicos" style="margin-top: 20px;"><i class="fas fa-users"></i>Ver relátorio de serviços</a>
            <!-- <div class="container-tabela">
               <table class="table table-hover table-responsive">
                 <thead>
@@ -141,43 +111,9 @@
            </div> -->
       </div>
 
-      <!-- <div class="container-atestado" style="margin-top: 20px;">
-        <h3>Atestado médico</h3>
-
-        <label for="" style="text-align: start;">Nome do médico:</label>
-        <input type="text" class="form-control" id="nomeMedico" name="nomeMedico">
-
-        <label for="" style="text-align: start; margin-top: 20px;">Especialidade médica:</label>
-
-        <select name="selEspecialidade" id="selEspecialidade" class="form-select"> 
-          <option value="0" disabled selected>Selecione uma opção</option>
-          <% for(let i=0;i<servicos.length;i++) {%>
-            <option value="<%= servicos[i].id %>"><%= servicos[i].nome %></option>
-          <%}%>
-          
-        </select>
-        
-        <div class="row" style="margin-top: 20px;">
-
-          <div class="col" style="text-align: start;">
-            <label for="">Data de início do afastamento:</label>
-            <input type="date" class="form-control" id="dataInicio" name="dataInicio" >
-          </div>
-          
-          <div class="col" style="text-align: start;">
-            <label for="">Data de término do afastamento:</label>
-            <input type="date" class="form-control" id="dataTermino" name="dataTermino" >
-          </div>
-        </div>
-
-        <label for="" style="text-align: start;margin-top: 20px;">Foto do atestado:</label>
-        <input type="file" id="fotoAtestado" name="fotoAtestado" class="form-control">
-
-        <button type="button" class="btn btn-primary" id="btn-atestado" style="margin-top: 20px;">Enviar atestado médico</button>
-
-      </div> -->
       
-      <div class="container-relatorio" style="margin-top: 20px;">
+      
+      <!-- <div class="container-relatorio" style="margin-top: 20px;">
         <h3>Relatórios</h3>
         <div class="botoes-relatorios">
 
@@ -185,7 +121,7 @@
           <a href="/administrador/relatorio/usuarios" class="btn btn-primary"><i class="fas fa-users"></i> Relatório de usuários cadastrados</a>
 
         </div>
-      </div>
+      </div> -->
 
       
     </section>

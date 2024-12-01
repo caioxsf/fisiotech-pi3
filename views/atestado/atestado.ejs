@@ -1,0 +1,53 @@
+<link rel="stylesheet" href="/css/adm/adm.css">
+<script src="/js/atestado/verificarDatasAtestado.js"></script>
+<script src="/js/atestado/cadastroAtestado.js"></script>
+
+
+
+<div class="container-atestado" style="margin-top: 50px; margin-bottom: 50px;">
+    <h3>Atestado médico</h3>
+
+    <label for="" style="text-align: start;">Nome do médico:</label>
+    <input type="text" class="form-control" id="nomeMedico" name="nomeMedico">
+
+    <label for="" style="text-align: start; margin-top: 20px;">Especialidade médica:</label>
+
+    <select name="selEspecialidade" id="selEspecialidade" class="form-select"> 
+      <option value="0" disabled selected>Selecione uma opção</option>
+      <% for(let i=0;i<servicos.length;i++) {%>
+        <option value="<%= servicos[i].id %>"><%= servicos[i].nome %></option>
+      <%}%>
+      
+    </select>
+    
+    <div class="row" style="margin-top: 20px;">
+
+      <div class="col" style="text-align: start;">
+        <label for="">Data de início do afastamento:</label>
+        <input type="date" class="form-control" id="dataInicio" name="dataInicio" onblur="validarDataInicio30DiasAntes(event)">
+      </div>
+      
+      <div class="col" style="text-align: start;">
+        <label for="">Data de término do afastamento:</label>
+        <input type="date" class="form-control" id="dataTermino" name="dataTermino" onblur="validarDataFim(event)">
+      </div>
+    </div>
+
+    <label for="" style="text-align: start;margin-top: 20px;">Foto do atestado:</label>
+    <input type="file" id="fotoAtestado" name="fotoAtestado" class="form-control">
+
+    <button type="button" class="btn btn-primary" id="btn-atestado" style="margin-top: 20px;">Enviar atestado médico</button>
+
+    <a href="/administrador/relatorio/atestado" style="margin-top: 20px;"><i class="fas fa-hospital-user"></i> Ver relátorios de atestado</a>
+
+  </div>
+
+  <!-- <div class="container-relatorio" style="margin-top: 20px; margin-bottom: 50px;">
+    <h3>Relatórios</h3>
+    <div class="botoes-relatorios">
+
+      <a href="/administrador/relatorio/atestado" class="btn btn-primary"><i class="fas fa-hospital-user"></i> Relatório de atestado</a>
+    </div>
+  </div> -->
+
+</section>
