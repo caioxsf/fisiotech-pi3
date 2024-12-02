@@ -9,7 +9,7 @@
 
 
 <% if(typeof admAlteracao == 'undefined') {%>
-    <main>
+    <main style="margin-bottom: 50px;">
         <section>
             <form class="print">
                 <div class="container-search text-center">
@@ -50,7 +50,8 @@
             </form>
     
         </section>
-        <div class="container-contas" style="margin-top: 20px;">
+
+        <div class="container-contas" style="margin-top: 20px">
             <h3>Usuários registrados</h3>
     
             <div class="container-table" style="overflow-y: auto; max-height: 500px;">
@@ -67,9 +68,8 @@
                 <tr>
                    
                       
-                      <td data-label="Usuário" class="tbodyusuarios"><%= usuarios[i].login %></td>
-    
-                      <td data-label="Perfil" class="tbodyusuarios"><%= usuarios[i].perfil_id %></td>
+                      <td data-label="Usuário" class="tbodyusuarios"><%= usuarios[i].login %><span class="inv" >ㅤ</span></td>
+                      <td data-label="Perfil" class="tbodyusuarios"><%= usuarios[i].perfil_id %><span class="inv" >ㅤ</span></td>
     
                       <% let perfil = usuarios[i].perfil_id; %>
                       <% if(perfil != 'Sistema' ) { %>
@@ -81,10 +81,12 @@
                         <button type="button"  class="btn-excluirConta" data-id="<%= usuarios[i].id %>" data-nome="<%= usuarios[i].login %>" style="border: none; background-color: transparent;">
                           <i class="fas fa-trash" style="color: #d72323;"></i>
                         </button>
-    
+                        <span class="inv" >ㅤ</span>
                       </td>
                       <% } %>
+                      
                 </tr>
+                
                 <% } %>
               </tbody>
               </table>
@@ -231,11 +233,11 @@
                            
 
                           <% } else { %>
-                            <td data-label="Usuário"><%= usuarios[i].login %></td>
+                            <td data-label="Usuário"><%= usuarios[i].login %><span class="inv" >ㅤ</span></td>
             
                             <td></td>
             
-                            <td data-label="Perfil"><%= usuarios[i].perfil_id %></td>
+                            <td data-label="Perfil"><%= usuarios[i].perfil_id %><span class="inv" >ㅤ</span></td>
                           <% } %>
             
                           <% if(usuarios[i].perfil_id != 'Sistema') { %>
@@ -253,7 +255,7 @@
                                   <i class="fas fa-thumbs-up" style="color: #63E6BE;" ></i>
                                 </button>
                               <%}%>
-                             
+                              <span class="inv" >ㅤ</span>
                             </td>
                           <% } %>
                         </tr>

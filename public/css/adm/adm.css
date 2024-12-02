@@ -1,14 +1,11 @@
 
-
-
  .background-main {
     height: 80vh;
 }
 
 .section-adm {
     margin-top: 30px;
-    height: 73vh;
-    margin-inline: 30px;
+    height: 73vh;   
     overflow-y: auto;
 }
 
@@ -36,6 +33,7 @@
     padding: 20px;
     overflow-y: auto;
     height: 200px;
+    
 }
 
 .container-tabela {
@@ -45,17 +43,123 @@
 }
 
 
-.container-contas {
+@media (max-width: 1250px) {
 
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    margin-inline: 350px;
-    text-align: center;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-    border-radius: 6px;
-    padding: 20px;
+    .container-servicos {
+       width: 450px;
+       margin: 0 auto;
+    }
+
+    .container-tabela {
+        max-height: 300px; 
+        max-width: 400px;
+    }
+
+    .table tbody tr td:before {
+        content: attr(data-label); 
+        font-weight: bold;
+        background-color: transparent;
+        color: rgb(0, 0, 0);
+        
+    }
+
+    .table thead {
+        display: none; 
+    }
+    
+    .table tbody tr {
+        display: block;
+        margin-bottom: 30px;
+    }
+
+    .table tbody tr td {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .acoes {
+        display: flex;
+        justify-content: flex-end;
+        padding: 10px;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        border-bottom: 1px solid #ddd;
+    }
+    
+    
 }
+
+@media (max-width: 768px) {
+
+    .container-servicos {
+       width: 450px;
+       margin: 0 auto;
+    }
+
+    .container-tabela {
+        max-height: 300px; 
+        max-width: 400px;
+    }
+
+    .table tbody tr td:before {
+        content: attr(data-label); 
+        font-weight: bold;
+        background-color: transparent;
+        color: rgb(0, 0, 0);
+        
+    }
+
+    .table thead {
+        display: none; 
+    }
+    
+    .table tbody tr {
+        display: block;
+        margin-bottom: 30px;
+    }
+
+    .table tbody tr td {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .acoes {
+        display: flex;
+        justify-content: flex-end;
+        padding: 10px;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        border-bottom: 1px solid #ddd;
+    }
+    
+    
+}
+
+@media (max-width: 500px) {
+    .container-servicos {
+        width: 450px;
+        margin: 0 auto;
+       
+     }
+
+     
+}
+
+
+
+/* testes */
 
 .container-atestado {
     display: flex;
@@ -79,144 +183,14 @@
     padding: 20px;
 }
 
-@media (max-width: 1250px) {
-    .container-servicos,
-    .container-servicosEditar,
-    .container-atestado,
-    .container-relatorio {
-        margin-inline: 15px;
-        padding: 15px; 
-        
-    }
-    
-    .container-tabela {
-        max-height: 300px; 
-        
-    }
+.container-contas {
 
-    .table tbody tr td:before {
-        content: attr(data-label); 
-        font-weight: bold;
-        background-color: transparent;
-        color: rgb(0, 0, 0);
-        
-    }
-
-    .table thead {
-        display: none; 
-    }
-    
-    .table tbody tr {
-        display: block;
-        margin-bottom: 30px;
-
-    }
-
-    .table tbody tr td {
-        display: flex;
-        justify-content: space-between;
-        padding: 10px;
-        border-top: none;
-        border-left: none;
-        border-right: none;
-        border-bottom: 1px solid #ddd;
-    }
-    
-}
-
-@media (max-width: 768px) {
-   
-    .background-main {
-        height: auto;
-        padding: 20px;
-    }
-
-    
-
-    .table tbody tr td:before {
-        content: attr(data-label); 
-        font-weight: bold;
-        background-color: transparent;
-        color: rgb(0, 0, 0);
-    }
-
-    .table thead {
-        display: none; 
-    }
-    
-    .table tbody tr {
-        display: block;
-        margin-bottom: 30px;
-
-    }
-
-    .table tbody tr td {
-        display: flex;
-        justify-content: space-between;
-        padding: 10px;
-        border-top: none;
-        border-left: none;
-        border-right: none;
-        border-bottom: 1px solid #ddd;
-    }
-    
-    .section-adm {
-        margin-top: 10px;
-        height: auto;
-    }
-    
-    .container-servicos,
-    .container-servicosEditar,
-    .container-atestado,
-    .container-relatorio {
-        margin-inline: 0; 
-        padding: 10px; 
-        width: 100%; 
-    }
-
-    .container-tabela {
-        max-height: 250; 
-        overflow-x: auto;
-    }
-
-    .form-control,
-    .form-select {
-        width: 100%;
-    }
-
-    .btn {
-        width: 100%; 
-    }
-    
-}
-
-
-@media (max-width: 480px) {
-    
-    .container-servicos,
-    .container-servicosEditar,
-    .container-atestado,
-    .container-relatorio {
-        padding: 10px; 
-        width: 100%; 
-    }
-
-    
-
-    .container-tabela {
-        max-height: 250px; 
-    }
-
-    .btn {
-        width: 100%; 
-    }
-
-    
-    .form-control {
-        padding: 8px; 
-    }
-
-    .form-select {
-        padding: 8px; 
-    }
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-inline: 350px;
+    text-align: center;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    border-radius: 6px;
+    padding: 20px;
 }

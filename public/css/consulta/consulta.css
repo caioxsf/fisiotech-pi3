@@ -1,0 +1,9 @@
+@media  (max-width: 500px){
+    .form-container-div {
+        margin: 0px;
+    }
+
+    h1 {
+        font-size: 25px;
+    }
+}

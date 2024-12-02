@@ -1,5 +1,7 @@
 <link rel="stylesheet" href="/css/relatorio/atestado.css">
+<link rel="stylesheet" href="/css/atestado/atestado.css">
 <link rel="stylesheet" href="/css/print.css" media="print">
+
 <script src="/js/atestado/excluirAtestado.js"></script>
 <script src="/js/atestado/search.js"></script>
 <script src="/js/atestado/datas.js"></script>
@@ -30,7 +32,7 @@
              
                          <label for="dataInicio" class="form-label">
                              <input type="radio" value="data" class="form-check-input" id="dataInicio" name="tipoBusca">
-                              Data início/afastamento
+                              Datas
                          </label>
     
                          <div id="intervaloData" class="datas" style="margin-bottom: 12px; display: none;">
@@ -38,15 +40,12 @@
                             <label for="inicio" class="form-label"></label>
                             <input type="date" id="inicio" name="inicio" class="form-control" >
         
-                            <span class="form-label">até</span>
+                            <span class="form-label" style="margin: 0">até</span>
 
-                            
-        
                             <label for="fim" class="form-label"></label>
                             <input type="date" id="fim" name="fim" class="form-control" >
                             <button type="button" class="btn btn-primary" id="btnBuscarDatas" style="margin-top: 5px;"><i class="fas fa-search"></i></button>
 
-                            
                             <button id="btnExportarExcel" style="background-color: transparent; border: none;" class="btnExcel">
                                 <i class="fas fa-file-csv fa-lg" style="font-size: 25px;"></i>
                             </button>
@@ -54,8 +53,11 @@
                                 <i class="fas fa-file-pdf fa-lg" style="font-size: 25px;"></i>
                             </button>
                             
+                            
                         </div>
     
+                       
+
                     </div>
              
                     <div class="form-group container-input-e-search" id="inputBusca">
@@ -68,12 +70,15 @@
                         </button>
 
 
-                        <button id="btnExportarExcel" style="background-color: transparent; border: none;" class="btnExcel">
-                            <i class="fas fa-file-csv fa-lg" style="font-size: 25px;"></i>
-                        </button>
-                        <button style="margin-right: 15px; background-color: transparent; border: none;" class="btnPdf" onclick="window.print()" >
-                            <i class="fas fa-file-pdf fa-lg" style="font-size: 25px;"></i>
-                        </button>
+                        
+                            <button id="btnExportarExcel" style="background-color: transparent; border: none;" class="btnExcel">
+                                <i class="fas fa-file-csv fa-lg" style="font-size: 25px;"></i>
+                            </button>
+                            <button style="margin-right: 15px; background-color: transparent; border: none;" class="btnPdf" onclick="window.print()" >
+                                <i class="fas fa-file-pdf fa-lg" style="font-size: 25px;"></i>
+                            </button>
+                       
+                        
                     </div>
                  </div>
             </form>
@@ -87,7 +92,6 @@
                             <th>Especialidade médica</th>
                             <th>Data início do afastamento</th>
                             <th>Data término do afastamento</th>
-                            
                             <th style="text-align: center;">Foto atestado</th>
                            
                         </tr>
@@ -110,7 +114,7 @@
                                     </button>
                                     <a href="/administrador/relatorio/atestado/editar/<%= value.id %>"><i class="fas fa-edit print" style="color: #74C0FC;"></i></a>
                                 </td>
-                                <td></td>
+                                
                             </tr>
                         <% }) %>
                        

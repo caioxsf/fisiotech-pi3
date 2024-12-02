@@ -35,11 +35,15 @@
         
                       <td scope="row" style="text-align: start;" data-label="Nome" ><%= servicos[i].nome %></td>
     
-                      <td scope="row" data-label="Ações" style="text-align: end;">
+                      <td scope="row" data-label="Ações" style="text-align: end;" class="acoes">
+                        <span>ㅤ</span><span>ㅤ</span><span>ㅤ</span>
                         <a href="/administrador/servicos/editar/<%= servicos[i].id %>" class="card-link" style="background-color: transparent; border: none;"><i class="fas fa-edit" style="color: #74C0FC;"></i></a>
                         <button type="button" class="btn-excluir" data-id="<%= servicos[i].id %>" data-nome="<%= servicos[i].nome %>" style="border: none; background-color: transparent; ">
                           <i class="fas fa-trash" style="color: #d72323;"></i>
                         </button>
+                        <span>ㅤ</span>
+                        <span>ㅤ</span>
+                        <span>ㅤ</span>
                       </td>
                     </tr>
                   <% } %>

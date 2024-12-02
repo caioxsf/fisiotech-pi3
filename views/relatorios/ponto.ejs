@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="/css/relatorio/usuarios.css">
+<link rel="stylesheet" href="/css/relatorio/ponto.css">
 <link rel="stylesheet" href="/css/print.css" media="print">
 <script src="/js/ponto/datas.js"></script>
 <script src="/js/ponto/search.js"></script>
@@ -69,13 +69,13 @@
     </form>
 </section>
 
-<div class="container-contas" style="margin-top: 20px; margin-bottom: 30px;">
+<div class="container-contas" style="margin-top: -20px; margin-bottom: 30px;">
     <div class="container-table" style="overflow-y: auto; max-height: 500px;">
 
         <table class="table table-hover table-responsive" id="tabela">
             <thead>
                 <tr>
-                    <th >Nome</th>
+                    <th>Nome</th>
                     <th>Horario entrada</th>
                     <th>Horario saída</th>
                     <th>Data</th>
@@ -84,10 +84,10 @@
             <tbody>
                 <% for(let i=0;i<ponto.length;i++) {%>
                     <tr>
-                        <td data-label="Nome"><%= ponto[i].nome_profissional %></td>
-                        <td data-label="Hr. Entr."><%= ponto[i].hora_entrada %></td>
-                        <td data-label="Hr. Saida"><%= ponto[i].hora_saida %></td>
-                        <td data-label="Data"><%= new Date(ponto[i].data).toLocaleDateString('pt-BR') %></td>
+                        <td data-label="Nome"><%= ponto[i].nome_profissional %><span class="inv" >ㅤ</span></td>
+                        <td data-label="Hr. Entr."><%= ponto[i].hora_entrada %><span class="inv" >ㅤ</span></td>
+                        <td data-label="Hr. Saida"><%= ponto[i].hora_saida %><span class="inv" >ㅤ</span></td>
+                        <td data-label="Data"><%= new Date(ponto[i].data).toLocaleDateString('pt-BR') %><span class="inv" >ㅤ</span></td>
                     </tr>
                 <%} %>
                 

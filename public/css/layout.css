@@ -19,3 +19,10 @@
     display: flex;
     align-items: center;
 }
+
+@media  (min-width: 1200px) {
+    .navbar {
+        margin-right: 150px;
+    }
+}
+
