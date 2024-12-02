@@ -154,7 +154,7 @@ class RelatoriosController {
         res.send({ok: resultado, msg: msg});
     }
 
-    async pontoView (req,res) {
+    async pontoRelatorioView (req,res) {
         let pontoModel = new PontoModel();
         let lista = await pontoModel.listar();
 

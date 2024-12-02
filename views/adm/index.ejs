@@ -1,0 +1,533 @@
+<section id="hero" class="hero">
+    <div class="container position-relative">
+        <div class="row gy-5" data-aos="fade-in">
+                <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center text-center text-lg-start">
+                    <h2>Bem vindo a <span>Fisiotech</span></h2>
+                    <p>Aqui nós <span>unimos </span>fisioterapia e tecnologia para o seu <span>bem-estar</span></p>
+                </div>
+                <div class="col-lg-6 order-1 order-lg-2">
+                    <img src="/img/hero-img.png" class="img-fluid img-principal" alt="" data-aos="zoom-out" data-aos-delay="100">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<main id="main">
+
+    <!-- ======= About Us Section ======= -->
+    <section id="sobre" class="about">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-header">
+          <h2>Sobre nós</h2>
+          <p>Somos uma clínica que surgiu da ideia de oferecer uma abordagem inovadora que
+            combinasse a experiência tradicional em fisioterapia com o poder da tecnologia.</p>
+        </div>
+
+        <div class="row gy-4">
+          <div class="col-lg-6">
+            <!-- <h3>Voluptatem dignissimos provident quasi corporis</h3> -->
+            <img src="/img/about.png" class="img-fluid rounded-4 mb-4" alt="">
+            <p> Nossos profissionais altamente qualificados e dedicados não apenas
+              possuem uma rica bagagem de experiência em fisioterapia, mas também estão atualizados
+              com as mais recentes inovações tecnológicas em saúde. Incorporamos avanços como
+              inteligência artificial, monitoramento remoto e análise de dados para personalizar os
+              tratamentos de forma precisa e eficiente.</p>
+          </div>
+          <div class="col-lg-6">
+            <div class="content ps-0 ps-lg-5">
+              <p class="fst-italic">
+                Nossos principais objetivos.
+              </p>
+              <ul>
+                <li><i class="bi bi-check-circle-fill"></i>Profissionalismo</li>
+                <li><i class="bi bi-check-circle-fill"></i>Eficiência</li>
+                <li><i class="bi bi-check-circle-fill"></i>Resultados</li>
+              </ul>
+              <p>
+                Oferecemos uma variedade de serviços de fisioterapia especializados para atender às necessidades individuais de cada paciente.
+              </p>
+
+              <div class="position-relative mt-4">
+                <img src="/img/about-2.png" class="img-fluid rounded-4" alt="">
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End About Us Section -->
+
+    <!-- ======= Clients Section ======= -->
+    <section id="clients" class="clients">
+      <div class="container" data-aos="zoom-out">
+
+        <div class="clients-slider swiper">
+          <div class="swiper-wrapper align-items-center">
+            <div class="swiper-slide"><img src="/img/clients/client-1.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="/img/clients/client-2.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="/img/clients/client-3.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="/img/clients/client-4.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="/img/clients/client-5.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="/img/clients/client-6.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="/img/clients/client-7.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="/img/clients/client-8.png" class="img-fluid" alt=""></div>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End Clients Section -->
+
+    <!-- ======= Our Services Section ======= -->
+    <section id="servicos" class="services sections-bg">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-header">
+          <h2>Nossos serviços</h2>
+          <p>Cuidados especializados para cada necessidade</p>
+        </div>
+
+        <div class="row gy-4" data-aos="fade-up" data-aos-delay="100">
+
+          <% for(let i=0;i<servicos.length;i++) { %>
+            <div class="col-lg-4 col-md-6">
+              <div class="service-item  position-relative">
+                <h3><%= servicos[i].nome %></h3>
+                <p><%= servicos[i].desc %></p>
+                
+              </div>
+            </div><!-- End Service Item -->
+          <% } %>
+          
+        </div>
+
+      </div>
+    </section><!-- End Our Services Section -->
+
+
+    <!-- ======= VLibras Section ======= -->
+    <section id="vlibras" class="portfolio sections-bg">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-header">
+          <h2>Baixe o VLibras</h2>
+          <p>Recurso de acessibilidade que faz uma tradução automática, para tornar a web acessível a quem precisa da Língua de Sinais.</p>
+        </div>
+
+        <div class="portfolio-isotope" data-portfolio-filter="*" data-portfolio-layout="masonry" data-portfolio-sort="original-order" data-aos="fade-up" data-aos-delay="100">
+
+  
+
+          <div class="row gy-4 portfolio-container">
+
+            <div class="col-xl-4 col-md-6 portfolio-item filter-app">
+              <div class="portfolio-wrap">
+                <a style="cursor: pointer;" href="/v-libras"><img src="/img/portfolio/app-1.jpg" class="img-fluid" alt=""></a>
+                <div class="portfolio-info">
+                  <h4><a href="/v-libras" title="More Details">Navegador</a></h4>
+                  <p>Google Chrome e Firefox</p>
+                </div>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-xl-4 col-md-6 portfolio-item filter-product">
+              <div class="portfolio-wrap">
+                <a style="cursor: pointer;" href="/v-libras"><img src="/img/portfolio/product-1.jpg" class="img-fluid" alt=""></a>
+                <div class="portfolio-info">
+                  <h4><a href="/v-libras" title="More Details">Desktop</a></h4>
+                  <p>Windows, Addon, VLibras VDA</p>
+                </div>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-xl-4 col-md-6 portfolio-item filter-branding">
+              <div class="portfolio-wrap">
+                <a style="cursor: pointer;" href="/v-libras"><img src="/img/portfolio/branding-1.jpg" class="img-fluid" alt=""></a>
+                <div class="portfolio-info">
+                  <h4><a href="/v-libras" title="More Details">Celular / Tablet</a></h4>
+                  <p>Andriod e IOS</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Portfolio Section -->
+
+    <!-- ======= Testimonials Section ======= -->
+    <section id="equipe" class="testimonials">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-header">
+          <h2>Nossa equipe médica</h2>
+        </div>
+
+        <div class="slides-3 swiper" data-aos="fade-up" data-aos-delay="100">
+          <div class="swiper-wrapper">
+
+            <div class="swiper-slide">
+              <div class="testimonial-wrap">
+                <div class="testimonial-item">
+                  <div class="d-flex align-items-center">
+                    <img src="/img/medicos/estela.jpg" class="testimonial-img flex-shrink-0" alt="">
+                    <div>
+                      <h3>Dra. Estela</h3>
+                      <h4>Especialista em Fisioterapia Pediátrica</h4>
+                      <div class="stars">
+                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div><!-- End testimonial item -->
+
+            <div class="swiper-slide">
+              <div class="testimonial-wrap">
+                <div class="testimonial-item">
+                  <div class="d-flex align-items-center">
+                    <img src="/img/medicos/diego.jpg" class="testimonial-img flex-shrink-0" alt="">
+                    <div>
+                      <h3>Dr. Diego</h3>
+                      <h4>Especialista em Fisioterapia Ortopédica</h4>
+                      <div class="stars">
+                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div><!-- End testimonial item -->
+
+            <div class="swiper-slide">
+              <div class="testimonial-wrap">
+                <div class="testimonial-item">
+                  <div class="d-flex align-items-center">
+                    <img src="/img/medicos/picasso.jpg" class="testimonial-img flex-shrink-0" alt="">
+                    <div>
+                      <h3>Dr. Picasso</h3>
+                      <h4>Especialista em Fisioterapia Neurológica</h4>
+                      <div class="stars">
+                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div><!-- End testimonial item -->
+
+            <div class="swiper-slide">
+              <div class="testimonial-wrap">
+                <div class="testimonial-item">
+                  <div class="d-flex align-items-center">
+                    <img src="/img/medicos/beatriz.jpg" class="testimonial-img flex-shrink-0" alt="">
+                    <div>
+                      <h3>Dra. Beatriz</h3>
+                      <h4>Especialista em Fisioterapia Respiratória</h4>
+                      <div class="stars">
+                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div><!-- End testimonial item -->
+
+            <div class="swiper-slide">
+              <div class="testimonial-wrap">
+                <div class="testimonial-item">
+                  <div class="d-flex align-items-center">
+                    <img src="/img/medicos/bianca.jpg" class="testimonial-img flex-shrink-0" alt="">
+                    <div>
+                      <h3>Dra. Bianca</h3>
+                      <h4>Especialista em Fisioterapia Geriátrica</h4>
+                      <div class="stars">
+                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div><!-- End testimonial item -->
+
+            <div class="swiper-slide">
+              <div class="testimonial-wrap">
+                <div class="testimonial-item">
+                  <div class="d-flex align-items-center">
+                    <img src="/img/medicos/alcapone.jpg" class="testimonial-img flex-shrink-0" alt="">
+                    <div>
+                      <h3>Dr. Alcapone</h3>
+                      <h4>Especialista em Fisioterapia Aquática</h4>
+                      <div class="stars">
+                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div><!-- End testimonial item -->
+
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+
+      </div>
+    </section><!-- End Testimonials Section -->
+
+    <!-- ======= Our Equipe Section ======= -->
+    <section id="hicode" class="team">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-header">
+          <h2>HiCode!</h2>
+          <p>Equipe desenvolvedora</p>
+        </div>
+
+        <div class="row gy-4">
+
+          <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="100">
+            <div class="member">
+              <img src="/img/team/time1.png" class="img-fluid" alt="">
+              <h4>Caio Nobile</h4>
+              <span>Gerente de TI</span>
+              <div class="social">
+                <a href=""><i class="bi bi-twitter"></i></a>
+                <a href=""><i class="bi bi-facebook"></i></a>
+                <a href=""><i class="bi bi-instagram"></i></a>
+                <a href=""><i class="bi bi-linkedin"></i></a>
+              </div>
+            </div>
+          </div><!-- End Team Member -->
+      
+
+          <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="500">
+            <div class="member">
+              <img src="/img/team/time2.png" class="img-fluid" alt="">
+              <h4>Guilherme Orlando</h4>
+              <span>Diretor de Informática</span>
+              <div class="social">
+                <a href=""><i class="bi bi-twitter"></i></a>
+                <a href=""><i class="bi bi-facebook"></i></a>
+                <a href=""><i class="bi bi-instagram"></i></a>
+                <a href=""><i class="bi bi-linkedin"></i></a>
+              </div>
+            </div>
+
+            
+          </div><!-- End Equipe Member -->
+
+          <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="600">
+            <div class="member">
+              <img src="/img/team/time3.png" class="img-fluid" alt="">
+              <h4>Kaique Pereira</h4>
+              <span>Engenheiro de Software</span>
+              <div class="social">
+                <a href=""><i class="bi bi-twitter"></i></a>
+                <a href=""><i class="bi bi-facebook"></i></a>
+                <a href=""><i class="bi bi-instagram"></i></a>
+                <a href=""><i class="bi bi-linkedin"></i></a>
+              </div>
+            </div>
+
+            
+          </div><!-- End Equipe Member -->
+
+          
+
+            
+          </div><!-- End Equipe Member -->
+
+        </div>
+
+      </div>
+    </section><!-- End Our Equipe Section -->
+
+
+    <!-- ======= Frequently Asked Questions Section ======= -->
+    <section id="faq" class="faq">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-4">
+            <div class="content px-xl-5">
+              <h3><strong>Perguntas</strong> Frequentes</h3>
+              <p>
+                Respostas para suas dúvidas mais comuns
+              </p>
+            </div>
+          </div>
+
+          <div class="col-lg-8">
+
+            <div class="accordion accordion-flush" id="faqlist" data-aos="fade-up" data-aos-delay="100">
+
+              <div class="accordion-item">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-1">
+                    <span class="num">1.</span>
+                    Qual a importância da fisioterapia no tratamento de lesões musculoesqueléticas?
+                  </button>
+                </h3>
+                <div id="faq-content-1" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                  <div class="accordion-body">
+                    A fisioterapia desempenha um papel crucial no tratamento de lesões musculoesqueléticas, ajudando a reduzir a dor, promover a cicatrização, melhorar a mobilidade e prevenir complicações futuras.
+                  </div>
+                </div>
+              </div><!-- # Faq item-->
+
+              <div class="accordion-item">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-2">
+                    <span class="num">2.</span>
+                    Quais são os benefícios da fisioterapia para pacientes pós-operatórios?
+                  </button>
+                </h3>
+                <div id="faq-content-2" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                  <div class="accordion-body">
+                    A fisioterapia pós-operatória pode ajudar a acelerar a recuperação, restaurar a função muscular e articular, reduzir o inchaço e prevenir complicações como aderências e contraturas.
+                  </div>
+                </div>
+              </div><!-- # Faq item-->
+
+              <div class="accordion-item">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-3">
+                    <span class="num">3.</span>
+                    Como a fisioterapia pode ajudar no tratamento da dor crônica?
+                  </button>
+                </h3>
+                <div id="faq-content-3" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                  <div class="accordion-body">
+                    A fisioterapia pode ajudar no tratamento da dor crônica por meio de técnicas como exercícios terapêuticos, terapia manual, eletroterapia e educação sobre manejo da dor, visando melhorar a qualidade de vida e reduzir a dependência de medicamentos.
+                  </div>
+                </div>
+              </div><!-- # Faq item-->
+
+              <div class="accordion-item">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-4">
+                    <span class="num">4.</span>
+                    Qual a abordagem da fisioterapia para o tratamento de problemas posturais?
+                  </button>
+                </h3>
+                <div id="faq-content-4" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                  <div class="accordion-body">
+                    A fisioterapia para problemas posturais geralmente envolve avaliação da postura, correção de desalinhamentos por meio de exercícios específicos, fortalecimento muscular, alongamento e orientações para melhorar a postura no dia a dia.
+                  </div>
+                </div>
+              </div><!-- # Faq item-->
+
+              <div class="accordion-item">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-5">
+                    <span class="num">5.</span>
+                    Quais são os principais serviços oferecidos em uma clínica de fisioterapia?
+                  </button>
+                </h3>
+                <div id="faq-content-5" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                  <div class="accordion-body">
+                    Os serviços oferecidos em uma clínica de fisioterapia podem incluir fisioterapia ortopédica, neurológica, respiratória, desportiva, pediátrica, geriátrica, além de tratamentos como reabilitação vestibular, drenagem linfática, pilates e acupuntura.
+                  </div>
+                </div>
+              </div><!-- # Faq item-->
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End Frequently Asked Questions Section -->
+
+    <!-- ======= Contact Section ======= -->
+    <section id="contato" class="contact">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-header">
+          <h2>Contato</h2>
+          <p>Entre em contato para saber mais</p>
+        </div>
+
+        <div class="row gx-lg-0 gy-4">
+
+          <div class="col-lg-4">
+
+            <div class="info-container d-flex flex-column align-items-center justify-content-center">
+              <div class="info-item d-flex">
+                <i class="bi bi-geo-alt flex-shrink-0"></i>
+                <div>
+                  <h4>Localização:</h4>
+                  <p>Presidente Prudente, Centro<br>
+                    Rua Zezinho Carmargo, 54</p>
+                </div>
+              </div><!-- End Info Item -->
+
+              <div class="info-item d-flex">
+                <i class="bi bi-envelope flex-shrink-0"></i>
+                <div>
+                  <h4>Email:</h4>
+                  <p>fisiotech@gmail.com</p>
+                </div>
+              </div><!-- End Info Item -->
+
+              <div class="info-item d-flex">
+                <i class="bi bi-phone flex-shrink-0"></i>
+                <div>
+                  <h4>Telefone:</h4>
+                  <p>+55 18 99765 0351</p>
+                </div>
+              </div><!-- End Info Item -->
+
+              <div class="info-item d-flex">
+                <i class="bi bi-clock flex-shrink-0"></i>
+                <div>
+                  <h4>Aberto</h4>
+                  <p>Seg - Sex: 07:00 - 18:00</p>
+                </div>
+              </div><!-- End Info Item -->
+            </div>
+
+          </div>
+
+          <div class="col-lg-8">
+            <form action="" method="" role="form" class="php-email-form">
+              <div class="row">
+                <div class="col-md-6 form-group">
+                  <label for="name">Nome</label>
+                  <input type="text" name="name" class="form-control" id="name" placeholder="Seu nome" onblur="validarNomes(this)">
+                </div>
+                <div class="col-md-6 form-group mt-3 mt-md-0">
+                  <label for="email">Email</label>
+                  <input type="email" class="form-control" name="email" id="email" placeholder="Seu email" onblur="validarEmail(this)">
+                </div>
+              </div>
+              <div class="form-group mt-3">
+                <label for="subject">Assunto</label>
+                <input type="text" class="form-control" name="subject" id="subject" placeholder="Assunto" onblur="validarCidade(this)">
+              </div>
+              <div class="form-group mt-3">
+                <label for="name">Menssagem</label>
+                <textarea class="form-control" name="message" rows="7" placeholder="Menssagem" onblur="validarCidade(this)"></textarea>
+              </div>
+              <div class="my-3">
+                <div class="loading">Carregando</div>
+                <div class="error-message"></div>
+                <div class="sent-message">Sua menssagem foi enviada. Obrigado!</div>
+              </div>
+              <div class="text-center"><button type="submit" onclick="alert('Contato enviado com sucesso. Aguarde!')">Enviar Menssagem</button></div>
+            </form>
+          </div><!-- End Contact Form -->
+
+        </div>
+
+      </div>
+    </section><!-- End Contact Section -->
+
+  </main>

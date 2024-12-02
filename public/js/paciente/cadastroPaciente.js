@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
             data.append("cep", cep.value);
             data.append("imagem", pacienteImagem)
 
-            fetch('/paciente', {
+            fetch('paciente', {
                 method: 'POST',
                 body: data
             })
@@ -75,6 +75,7 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(r => {
                 if(r.ok) {
                     alert(r.msg);
+                    window.location.href = '/paciente';
                 }
                 else {
                     alert(r.msg);

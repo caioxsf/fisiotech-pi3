@@ -29,7 +29,7 @@
         </div>
         <div class="col-6">
           <label for="cpf" class="form-label">CPF</label>
-          <input type="text" class="form-control" id="cpf" name="cpf" onchange="mascara('###.###.###-##',this,event)">
+          <input type="text" class="form-control" id="cpf" name="cpf" onchange="mascara('###.###.###-##',this,event); validaCPFVerdadeiro(event)" >
         </div>
         <div class="col-6">
           <label for="endereco" class="form-label">Endereço</label>
@@ -82,7 +82,6 @@
 
         <div class="col-12 d-flex justify-content-center">
           <button type="button" class="btn btn-primary btn-container btn-add">Cadastrar</button>
-          
         </div>
         <a href="/paciente/lista" style="text-align: center;">Ver pacientes cadastrados</a>
     </form>

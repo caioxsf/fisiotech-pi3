@@ -8,6 +8,7 @@ CREATE TABLE cargo (
 CREATE TABLE servico_consulta (
   serv_id int(11) NOT NULL AUTO_INCREMENT,
   serv_nome varchar(50) NOT NULL,
+  serv_desc varhar(255),
   PRIMARY KEY (serv_id)
 );
 

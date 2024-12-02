@@ -50,7 +50,8 @@ router.post('/relatorio/usuarios', rela.listaSearch);
 // ponto
 router.get('/ponto', auth.validarAdmin, ctrl.pontoView);
 router.post('/ponto', auth.validarAdmin, ctrl.ponto);
-router.get('/relatorio/ponto', auth.validarAdmin, rela.pontoView)
+
+router.get('/ponto/relatorio', auth.validarAdmin, rela.pontoRelatorioView)
 router.post('/relatorio/ponto/lista', auth.validar, rela.pontoSearch)
 
 

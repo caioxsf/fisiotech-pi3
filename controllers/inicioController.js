@@ -1,8 +1,12 @@
+let ServicosModel = require('../models/ServicosModel');
 
 class inicioController {
 
-    inicio(req,res) {
-        res.render("index.ejs");
+    async inicio(req,res) {
+        let servicosModel = new ServicosModel()
+        let lista = await servicosModel.listarServicos();
+
+        res.render("index.ejs", {servicos: lista});
     }
 
 

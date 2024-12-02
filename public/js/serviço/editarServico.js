@@ -10,11 +10,13 @@ document.addEventListener('DOMContentLoaded', function() {
       
         let id = document.getElementById('id');
        let servico = document.getElementById('servico');
+       let desc = document.getElementById('desc');
         
         if (servico) {
             let obj = {
                 id: id.value,
-                servico: servico.value
+                servico: servico.value,
+                desc: desc.value
             };
         
             let stringObj = JSON.stringify(obj);

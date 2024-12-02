@@ -91,68 +91,16 @@
 
         <div class="row gy-4" data-aos="fade-up" data-aos-delay="100">
 
-          <div class="col-lg-4 col-md-6">
-            <div class="service-item  position-relative">
-              <h3>Avaliação Fisioterapêutica</h3>
-              <p>Análise do paciente, histórico médico, exames e plano terapêutico. Identificação de disfunções e definição de objetivos para reabilitação.</p>
-              
-            </div>
-          </div><!-- End Service Item -->
-
-          <div class="col-lg-4 col-md-6">
-            <div class="service-item position-relative">
-              
-              <h3>Fisioterapia Ortopédica</h3>
-              <p>Foco em lesões musculoesqueléticas, recuperação pós-cirúrgica e reabilitação funcional. Utiliza técnicas específicas para cada caso.</p>
-              
-            </div>
-          </div><!-- End Service Item -->
-
-          <div class="col-lg-4 col-md-6">
-            <div class="service-item position-relative">
-              
-              <h3>Fisioterapia Neurológica</h3>
-              <p>Especialidade que trata disfunções do sistema nervoso, como lesões cerebrais e medulares, visando reabilitação e melhora da funcionalidade.</p>
-              
-            </div>
-          </div><!-- End Service Item -->
-
-          <div class="col-lg-4 col-md-6">
-            <div class="service-item position-relative">
-              
-              <h3>Fisioterapia Respiratória</h3>
-              <p>Área especializada que trata disfunções pulmonares e respiratórias, utilizando técnicas para melhorar a ventilação e a função pulmonar.</p>
-              
-            </div>
-          </div><!-- End Service Item -->
-
-          <div class="col-lg-4 col-md-6">
-            <div class="service-item position-relative">
-             
-              <h3>Fisioterapia Geriátrica</h3>
-              <p>Especialidade voltada para o atendimento de idosos, visando promover a saúde, prevenir doenças e melhorar a qualidade de vida por meio de exercícios e tratamentos específicos.</p>
-            
-            </div>
-          </div><!-- End Service Item -->
-
-          <div class="col-lg-4 col-md-6">
-            <div class="service-item position-relative">
-              
-              <h3>Fisioterapia Pediátrica</h3>
-              <p>Área que se dedica ao tratamento de crianças, focando no desenvolvimento motor, reabilitação de lesões e cuidados específicos para cada faixa etária.</p>
-              
-            </div>
-          </div><!-- End Service Item -->
-
-          <div class="col-lg-4 col-md-6">
-            <div class="service-item position-relative">
-              
-              <h3>Fisioterapia Aquática</h3>
-              <p>Modalidade terapêutica realizada em ambiente aquático, visando a reabilitação e o tratamento de diversas condições, aproveitando os benefícios da água para promover a melhora da funcionalidade e qualidade de vida dos pacientes.</p>
-             
-            </div>
-          </div><!-- End Service Item -->
-
+          <% for(let i=0;i<servicos.length;i++) { %>
+            <div class="col-lg-4 col-md-6">
+              <div class="service-item  position-relative">
+                <h3><%= servicos[i].nome %></h3>
+                <p><%= servicos[i].desc %></p>
+                
+              </div>
+            </div><!-- End Service Item -->
+          <% } %>
+          
         </div>
 
       </div>

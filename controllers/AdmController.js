@@ -55,6 +55,8 @@ class AdmController {
         if(req.body.servico) {
             let servicoModel = new ServicosModel();
             servicoModel.nome = req.body.servico;
+            servicoModel.desc = req.body.desc;
+            
             let resultado = await servicoModel.cadastrarServico();
             if(resultado) {
                 res.send({ok: true, msg: 'Serviço cadastrado com sucesso!'});

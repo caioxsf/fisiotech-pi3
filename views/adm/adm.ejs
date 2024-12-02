@@ -17,7 +17,12 @@
       
       <div class="container-servicos">
         <h3>Serviços cadastrados</h3>
+        
+            <label for="" class="form-label" style="text-align: start;">Nome do serviço:</label>
             <input type="text" class="form-control" id="servico" name="servico">
+            <label for="" class="form-label" style="text-align: start;">Descrição do serviço:</label>
+            <input type="text" class="form-control" id="desc" name="desc">
+
             <button class="btn btn-primary btn-add" style="margin-top: 12px;">Cadastrar serviço</button>
 
            <div class="container-tabela">
@@ -84,10 +89,13 @@
             <input type="text" class="form-control" id="id" name="id" value="<%= admAlteracao.id %>">
           </div>
           
+            <label for="" class="form-label" style="text-align: start;">Nome do serviço:</label>
             <input type="text" class="form-control" id="servico" name="servico" value="<%= admAlteracao.nome %>">
+            <label for="" class="form-label" style="text-align: start;">Descrição do serviço:</label>
+            <input type="text" class="form-control" id="desc" name="desc" value="<%= admAlteracao.desc %>">
+
             <button class="btn btn-primary btn-addEditar" style="margin-top: 12px;">Atualizar serviço</button>
 
-            <a href="/administrador/relatorio/servicos" style="margin-top: 20px;"><i class="fas fa-users"></i>Ver relátorio de serviços</a>
            <!-- <div class="container-tabela">
               <table class="table table-hover table-responsive">
                 <thead>

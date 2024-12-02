@@ -5,10 +5,12 @@ class ServicosModel {
 
     #id
     #nome
+    #desc
 
-    constructor(id,nome) {
+    constructor(id,nome, desc) {
         this.#id = id;
         this.#nome = nome;
+        this.#desc = desc;
     }
 
     get id () {return this.#id}
@@ -17,27 +19,30 @@ class ServicosModel {
     get nome () {return this.#nome}
     set nome (value) {this.#nome = value}
 
+    get desc () {return this.#desc}
+    set desc (value) {this.#desc = value}
+
     async listarServicos () {
         let sql = `select * from servico_consulta`;
         let lista = [];
         let colunas = await db.ExecutaComando(sql);
         for(let i=0;i<colunas.length;i++) {
             let coluna = colunas[i];
-            lista.push(new ServicosModel(coluna['serv_id'],coluna['serv_nome']));
+            lista.push(new ServicosModel(coluna['serv_id'],coluna['serv_nome'], coluna['serv_desc']));
         }
         return lista;
     }
 
     async cadastrarServico () {
-        let sql = `insert into servico_consulta (serv_nome) values (?)`;
-        let valores = [this.#nome];
+        let sql = `insert into servico_consulta (serv_nome, serv_desc) values (?,?)`;
+        let valores = [this.#nome, this.#desc];
         let resultado = await db.ExecutaComandoNonQuery(sql,valores);
         return resultado;
     }
 
     async atualizarServico () {
-        let sql = `update servico_consulta set serv_nome = ? where serv_id = ?`;
-        let valores = [ this.#nome, this.#id];
+        let sql = `update servico_consulta set serv_nome = ?, serv_desc = ? where serv_id = ?`;
+        let valores = [ this.#nome, this.#desc, this.#id];
         let resultado = await db.ExecutaComandoNonQuery(sql,valores);
         return resultado;
     }
@@ -57,7 +62,8 @@ class ServicosModel {
         if(colunas.length > 0) {
 
             return new ServicosModel(   colunas[0]['serv_id'], 
-                                        colunas[0]['serv_nome']
+                                        colunas[0]['serv_nome'],
+                                        colunas[0]['serv_desc']
             )
             
         }

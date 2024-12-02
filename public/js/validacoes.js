@@ -91,6 +91,80 @@ function mascara(m,t,e){
     }
   }
 
+  function validaCPFVerdadeiro(event) {
+    
+    let cpf = event.target.value;
+    let op = false;
+
+    var Soma = 0;
+    var Resto;
+
+    // Remover caracteres não numéricos
+    var strCPF = String(cpf).replace(/\D/g, '');
+
+    // Verificar se o CPF tem 11 dígitos
+    if (strCPF.length !== 11) {
+        event.target.style.border = "1px solid red";
+        event.target.setAttribute('placeholder', 'Digite um CPF verdadeiro!');
+        alert('Digite um CPF verdadeiro!');
+        event.target.value = "";
+        return false;
+    }
+
+    // Verificar se o CPF é uma sequência de números repetidos
+    if (['00000000000', '11111111111', '22222222222', '33333333333', '44444444444',
+        '55555555555', '66666666666', '77777777777', '88888888888', '99999999999']
+        .indexOf(strCPF) !== -1) {
+        event.target.style.border = "1px solid red";
+        event.target.setAttribute('placeholder', 'Digite um CPF verdadeiro!');
+        alert('Digite um CPF verdadeiro!');
+        event.target.value = "";
+        return false;
+    }
+
+    // Cálculo do primeiro dígito verificador
+    for (let i = 0; i < 9; i++) {
+        Soma += parseInt(strCPF.charAt(i)) * (10 - i);
+    }
+
+    Resto = (Soma * 10) % 11;
+    if (Resto === 10 || Resto === 11) {
+        Resto = 0;
+    }
+
+    if (Resto !== parseInt(strCPF.charAt(9))) {
+        event.target.style.border = "1px solid red";
+        event.target.setAttribute('placeholder', 'Digite um CPF verdadeiro!');
+        alert('Digite um CPF verdadeiro!');
+        event.target.value = "";
+        return false;
+    }
+
+    // Cálculo do segundo dígito verificador
+    Soma = 0;
+    for (let i = 0; i < 10; i++) {
+        Soma += parseInt(strCPF.charAt(i)) * (11 - i);
+    }
+
+    Resto = (Soma * 10) % 11;
+    if (Resto === 10 || Resto === 11) {
+        Resto = 0;
+    }
+
+    if (Resto !== parseInt(strCPF.charAt(10))) {
+        event.target.style.border = "1px solid red";
+        event.target.setAttribute('placeholder', 'Digite um CPF verdadeiro!');
+        alert('Digite um CPF verdadeiro!');
+        event.target.value = "";
+        return false;
+    }
+
+    // Se passar por todas as validações
+    event.target.style.border = "1px solid green";
+    return true;
+}
+
+
 // validarEmail() usado para fazer a verificação do campo Email.
 function validarEmail ()
 {

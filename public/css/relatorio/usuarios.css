@@ -1,5 +1,4 @@
 .table-container {
-    
     margin-top: 10px;
     margin-inline: 150px;
     max-height: 600px;     
@@ -8,6 +7,10 @@
 
 main {
     height: 600px;
+}
+
+.container-servicosEditar {
+    background-color: red;
 }
 
 .container-search {
