@@ -117,20 +117,54 @@ class AdmController {
     }
 
     async pontoView(req,res) {
-        res.render('ponto/ponto.ejs');
+        
+        let id = req.cookies.usuarioLogado
+        let pontoModel = new PontoModel();
+
+        let pontoExistente = await pontoModel.verificarPontoBatido(id);
+        
+        let pontoEntrada = await pontoModel.verificarEntrada(id);
+        let pontoSaidaAlmoco = await pontoModel.verificarSaidaAlmoco(id);
+        let pontoRetornoAlmoco = await pontoModel.verificarRetornoAlmoco(id);
+        let pontoSaida = await pontoModel.verificarSaida(id);
+
+        res.render('ponto/ponto.ejs', {pontoExistente: pontoExistente, pontoEntrada: pontoEntrada, pontoSaidaAlmoco: pontoSaidaAlmoco, pontoRetornoAlmoco: pontoRetornoAlmoco, pontoSaida: pontoSaida});
     }
 
+
     async ponto (req,res) {
+        // if(req.body.nome && req.body.horaEntrada && req.body.horaSaida && req.body.saidaAlmoco && req.body.retornoAlmoco) {
 
-        if(req.body.nome && req.body.horaEntrada && req.body.horaSaida) {
+        //     let pontoModel = new PontoModel();
+
+        //     pontoModel.id_profissional = req.body.id;
+        //     pontoModel.hora_entrada = req.body.horaEntrada;
+        //     pontoModel.hora_saida = req.body.horaSaida;
+        //     pontoModel.nome_profissional = req.body.nome;
+        //     pontoModel.saida_almoco = req.body.saidaAlmoco;
+        //     pontoModel.retorno_almoco = req.body.retornoAlmoco;
+
+        //     let resultado = await pontoModel.cadastrar();
+
+        //     if(resultado) {
+        //         res.send({ok: true, msg: 'Ponto registrado!'})
+        //     }
+        //     else {
+        //         res.send({ok: false, msg: 'Ocorreu um erro ao registrar seu ponto!'})
+        //     }
+        // }
+        // else {
+        //     res.send({ok: false, msg: 'Parametros incorretos!'});
+        // }
+
+        if(req.body.nome && req.body.horaEntrada != '' && req.body.saidaAlmoco == '' && req.body.retornoAlmoco == '' && req.body.horaSaida == '') {
+
             let pontoModel = new PontoModel();
-
             pontoModel.id_profissional = req.body.id;
             pontoModel.hora_entrada = req.body.horaEntrada;
-            pontoModel.hora_saida = req.body.horaSaida;
             pontoModel.nome_profissional = req.body.nome;
 
-            let resultado = await pontoModel.cadastrar();
+            let resultado = await pontoModel.cadastrarEntrada();
 
             if(resultado) {
                 res.send({ok: true, msg: 'Ponto registrado!'})
@@ -139,10 +173,62 @@ class AdmController {
                 res.send({ok: false, msg: 'Ocorreu um erro ao registrar seu ponto!'})
             }
         }
-        else {
-            res.send({ok: false, msg: 'Parametros incorretos!'});
+
+        if(req.body.nome && req.body.horaEntrada != '' && req.body.saidaAlmoco != '' && req.body.retornoAlmoco == '' && req.body.horaSaida == '') {
+            let pontoModel = new PontoModel();
+            pontoModel.id_profissional = req.body.id;
+            pontoModel.hora_entrada = req.body.horaEntrada;
+            pontoModel.saida_almoco = req.body.saidaAlmoco;
+            pontoModel.nome_profissional = req.body.nome;
+
+            let resultado = await pontoModel.cadastrarSaidaAlmoco();
+
+            if(resultado) {
+                res.send({ok: true, msg: 'Ponto registrado!'})
+            }
+            else {
+                res.send({ok: false, msg: 'Ocorreu um erro ao registrar seu ponto!'})
+            }
         }
-    }
+
+        if(req.body.nome && req.body.horaEntrada != '' && req.body.saidaAlmoco != '' && req.body.retornoAlmoco != '' && req.body.horaSaida == '') {
+            let pontoModel = new PontoModel();
+            pontoModel.id_profissional = req.body.id;
+            pontoModel.hora_entrada = req.body.horaEntrada;
+            pontoModel.saida_almoco = req.body.saidaAlmoco;
+            pontoModel.retorno_almoco = req.body.retornoAlmoco;
+            pontoModel.nome_profissional = req.body.nome;
+
+            let resultado = await pontoModel.cadastrarRetornoAlmoco();
+
+            if(resultado) {
+                res.send({ok: true, msg: 'Ponto registrado!'})
+            }
+            else {
+                res.send({ok: false, msg: 'Ocorreu um erro ao registrar seu ponto!'})
+            }
+        }
+
+        if(req.body.nome && req.body.horaEntrada != '' && req.body.saidaAlmoco != '' && req.body.retornoAlmoco != '' && req.body.horaSaida != '') {
+            let pontoModel = new PontoModel();
+            pontoModel.id_profissional = req.body.id;
+            pontoModel.hora_entrada = req.body.horaEntrada;
+            pontoModel.saida_almoco = req.body.saidaAlmoco;
+            pontoModel.retorno_almoco = req.body.retornoAlmoco;
+            pontoModel.nome_profissional = req.body.nome;
+            pontoModel.hora_saida = req.body.horaSaida;
+
+            let resultado = await pontoModel.cadastrarSaida();
+
+            if(resultado) {
+                res.send({ok: true, msg: 'Ponto registrado!'})
+            }
+            else {
+                res.send({ok: false, msg: 'Ocorreu um erro ao registrar seu ponto!'})
+            }
+        }
+    
+     }
 
     
 }

@@ -44,7 +44,7 @@ class UserModel {
         let row = await db.ExecutaComando(sql, valores);
 
         if(row.length > 0) {
-            return new UserModel(row[0]["user_id"],
+            return new UserModel(   row[0]["user_id"],
                                     row[0]["user_login"],
                                     row[0]["user_senha"],
                                     row[0]['per_id'],

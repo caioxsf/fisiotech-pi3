@@ -48,7 +48,7 @@ router.get('/relatorio/usuarios/excluir/:id', auth.validarAdmin, rela.excluirUsu
 router.post('/relatorio/usuarios', rela.listaSearch);
 
 // ponto
-router.get('/ponto', auth.validarAdmin, ctrl.pontoView);
+router.get('/ponto/', auth.validarAdmin, ctrl.pontoView);
 router.post('/ponto', auth.validarAdmin, ctrl.ponto);
 
 router.get('/ponto/relatorio', auth.validarAdmin, rela.pontoRelatorioView)

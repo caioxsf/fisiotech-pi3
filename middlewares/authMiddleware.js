@@ -43,6 +43,7 @@ class AuthMiddleware {
     }
 
     async validarAdmin(req, res, next) {
+        
         if(req.cookies.usuarioLogado) {
             let idUsuario = req.cookies.usuarioLogado;
             let usuario = new UserModel();

@@ -53,7 +53,6 @@ class PacienteController {
             else {
                 res.send({ok: false, msg: 'Já existem pacientes com esse CPF!'})
             }
-            
         }
         else {
             res.send({ok: false, msg: 'Parametros incorretos'});

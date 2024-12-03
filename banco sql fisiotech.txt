@@ -1,32 +1,32 @@
 CREATE TABLE cargo (
-  car_id_cargo int(11) NOT NULL AUTO_INCREMENT,
+  car_id_cargo int NOT NULL AUTO_INCREMENT,
   car_nome varchar(100) NOT NULL,
   car_descricao varchar(100) DEFAULT NULL,
   PRIMARY KEY (car_id_cargo)
 );
 
 CREATE TABLE servico_consulta (
-  serv_id int(11) NOT NULL AUTO_INCREMENT,
+  serv_id int NOT NULL AUTO_INCREMENT,
   serv_nome varchar(50) NOT NULL,
-  serv_desc varhar(255),
+  serv_desc varchar(255),
   PRIMARY KEY (serv_id)
 );
 
 CREATE TABLE sexo (
-  sexo_id int(11) NOT NULL AUTO_INCREMENT,
+  sexo_id int NOT NULL AUTO_INCREMENT,
   sexo_nome varchar(10) DEFAULT NULL,
   PRIMARY KEY (sexo_id)
 );
 
 CREATE TABLE estado (
-  est_id int(11) NOT NULL AUTO_INCREMENT,
+  est_id int NOT NULL AUTO_INCREMENT,
   est_nome varchar(50) NOT NULL,
   PRIMARY KEY (est_id)
 );
 
 
 CREATE TABLE paciente (
-  pac_id_paciente int(11) NOT NULL AUTO_INCREMENT,
+  pac_id_paciente int NOT NULL AUTO_INCREMENT,
   pac_nome varchar(100) NOT NULL,
   pac_telefone varchar(15) DEFAULT NULL,
   pac_email varchar(100) DEFAULT NULL,
@@ -34,11 +34,11 @@ CREATE TABLE paciente (
   pac_cpf varchar(45) DEFAULT NULL,
   pac_endereco varchar(255) DEFAULT NULL,
   pac_bairro varchar(255) DEFAULT NULL,
-  fk_sexo_id int(11) DEFAULT NULL,
+  fk_sexo_id int DEFAULT NULL,
   pac_cidade varchar(45) DEFAULT NULL,
-  fk_est_id int(11) DEFAULT NULL,
+  fk_est_id int DEFAULT NULL,
   pac_cep varchar(45) DEFAULT NULL,
-  pac_imagem decimal (10,5)
+  pac_imagem decimal (10,5),
   PRIMARY KEY (pac_id_paciente),
   KEY fk_sexo (fk_sexo_id),
   KEY fk_est_id (fk_est_id),
@@ -48,14 +48,14 @@ CREATE TABLE paciente (
 
 
 CREATE TABLE consulta (
-  con_id int(11) NOT NULL AUTO_INCREMENT,
+  con_id int NOT NULL AUTO_INCREMENT,
   con_telefone varchar(20) DEFAULT NULL,
   con_email varchar(50) DEFAULT NULL,
-  fk_serv_id int(11) DEFAULT NULL,
+  fk_serv_id int DEFAULT NULL,
   con_data date DEFAULT NULL,
   con_hora time DEFAULT NULL,
   con_obs varchar(100) DEFAULT NULL,
-  fk_pac_id_paciente int(11) DEFAULT NULL,
+  fk_pac_id_paciente int DEFAULT NULL,
   PRIMARY KEY (con_id),
   KEY fk_serv_id (fk_serv_id),
   KEY fk_pac_id_paciente (fk_pac_id_paciente),
@@ -64,16 +64,16 @@ CREATE TABLE consulta (
 );
 
 CREATE TABLE procedimento (
-  proc_id_procedimento int(11) NOT NULL AUTO_INCREMENT,
+  proc_id_procedimento int NOT NULL AUTO_INCREMENT,
   proc_nome varchar(100) NOT NULL,
   proc_descricao varchar(100) DEFAULT NULL,
   PRIMARY KEY (proc_id_procedimento)
 );
 
 CREATE TABLE exame (
-  exa_id_exame int(11) NOT NULL AUTO_INCREMENT,
-  exa_id_paciente int(11) NOT NULL,
-  exa_id_procedimento int(11) NOT NULL,
+  exa_id_exame int NOT NULL AUTO_INCREMENT,
+  exa_id_paciente int NOT NULL,
+  exa_id_procedimento int NOT NULL,
   exa_data_exame date DEFAULT NULL,
   exa_resultado varchar(100) DEFAULT NULL,
   PRIMARY KEY (exa_id_exame),
@@ -84,7 +84,7 @@ CREATE TABLE exame (
 );
 
 CREATE TABLE fornecedor (
-  forn_id_fornecedor int(11) NOT NULL AUTO_INCREMENT,
+  forn_id_fornecedor int NOT NULL AUTO_INCREMENT,
   forn_nome varchar(100) NOT NULL,
   forn_endereco varchar(255) DEFAULT NULL,
   forn_telefone varchar(15) DEFAULT NULL,
@@ -93,7 +93,7 @@ CREATE TABLE fornecedor (
 );
 
 CREATE TABLE laboratorio (
-  lab_id_laboratorio int(11) NOT NULL AUTO_INCREMENT,
+  lab_id_laboratorio int NOT NULL AUTO_INCREMENT,
   lab_nome varchar(100) NOT NULL,
   lab_endereco varchar(255) DEFAULT NULL,
   lab_telefone varchar(15) DEFAULT NULL,
@@ -101,10 +101,10 @@ CREATE TABLE laboratorio (
 );
 
 CREATE TABLE material_produto (
-  mat_id_material int(11) NOT NULL AUTO_INCREMENT,
+  mat_id_material int NOT NULL AUTO_INCREMENT,
   mat_nome varchar(100) NOT NULL,
   mat_descricao varchar(100) DEFAULT NULL,
-  mat_id_fornecedor int(11) NOT NULL,
+  mat_id_fornecedor int NOT NULL,
   PRIMARY KEY (mat_id_material),
   KEY mat_id_fornecedor (mat_id_fornecedor),
   CONSTRAINT material_produto_ibfk_1 FOREIGN KEY (mat_id_fornecedor) REFERENCES fornecedor (forn_id_fornecedor)
@@ -112,7 +112,7 @@ CREATE TABLE material_produto (
 
 
 CREATE TABLE perfil (
-  per_id int(11) NOT NULL AUTO_INCREMENT,
+  per_id int NOT NULL AUTO_INCREMENT,
   per_desc varchar(50) DEFAULT NULL,
   PRIMARY KEY (per_id)
 );
@@ -120,9 +120,9 @@ CREATE TABLE perfil (
 
 
 CREATE TABLE procedimento_laboratorio (
-  proc_lab_id_procedimento_lab int(11) NOT NULL AUTO_INCREMENT,
-  proc_lab_id_procedimento int(11) NOT NULL,
-  proc_lab_id_laboratorio int(11) NOT NULL,
+  proc_lab_id_procedimento_lab int NOT NULL AUTO_INCREMENT,
+  proc_lab_id_procedimento int NOT NULL,
+  proc_lab_id_laboratorio int NOT NULL,
   PRIMARY KEY (proc_lab_id_procedimento_lab),
   KEY proc_lab_id_procedimento (proc_lab_id_procedimento),
   KEY proc_lab_id_laboratorio (proc_lab_id_laboratorio),
@@ -131,22 +131,22 @@ CREATE TABLE procedimento_laboratorio (
 );
 
 CREATE TABLE profissional (
-  pro_id_profissional int(11) NOT NULL AUTO_INCREMENT,
+  pro_id_profissional int NOT NULL AUTO_INCREMENT,
   pro_nome varchar(100) NOT NULL,
   pro_cpf varchar(11) NOT NULL,
   pro_telefone varchar(15) DEFAULT NULL,
   pro_email varchar(100) DEFAULT NULL,
-  pro_id_cargo int(11) NOT NULL,
+  pro_id_cargo int NOT NULL,
   PRIMARY KEY (pro_id_profissional),
   KEY pro_id_cargo (pro_id_cargo),
   CONSTRAINT profissional_ibfk_1 FOREIGN KEY (pro_id_cargo) REFERENCES cargo (car_id_cargo)
 );
 
 CREATE TABLE user_admin (
-  user_id int(11) NOT NULL AUTO_INCREMENT,
+  user_id int NOT NULL AUTO_INCREMENT,
   user_login varchar(50) NOT NULL,
   user_senha varchar(50) NOT NULL,
-  per_id int(11) DEFAULT NULL,
+  per_id int DEFAULT NULL,
   PRIMARY KEY (user_id),
   KEY fk_per_id (per_id),
   CONSTRAINT fk_per_id FOREIGN KEY (per_id) REFERENCES perfil (per_id)
@@ -170,6 +170,8 @@ create table ponto (
     pon_hora_saida varchar(10),
     pon_nome_profissional varchar(40),
     pon_data datetime default now(),
+    pon_saida_almoco varchar(10),
+    pon_retorno_almoco varchar(10),
     
     constraint fk_profissional foreign key (pon_id_profissional) references user_admin (user_id)
 ); 
@@ -218,3 +220,4 @@ INSERT INTO estado (est_id, est_nome) VALUES (24, 'Santa Catarina');
 INSERT INTO estado (est_id, est_nome) VALUES (25, 'São Paulo');
 INSERT INTO estado (est_id, est_nome) VALUES (26, 'Sergipe');
 INSERT INTO estado (est_id, est_nome) VALUES (27, 'Tocantins');
+

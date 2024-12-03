@@ -80,6 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(function(resposta) {
                 if(resposta.ok) {
                     alert(resposta.msg);
+                    window.location.href = '/login'
                 }
                 else {
                     alert(resposta.msg);

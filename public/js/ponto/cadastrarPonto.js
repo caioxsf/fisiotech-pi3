@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
 
+
     document.getElementById('btn-ponto').addEventListener('click', cadastrar);
 
     function cadastrar () {
@@ -7,7 +8,10 @@ document.addEventListener('DOMContentLoaded', function() {
         let nome = document.getElementById('nome');
         let horaEntrada = document.getElementById('horaEntrada');
         let horaSaida = document.getElementById('horaSaida');
+        let saidaAlmoco = document.getElementById('saidaAlmoco');
+        let retornoAlmoco = document.getElementById('retornoAlmoco');
         let id = document.getElementById('id');
+
 
         if(nome && horaEntrada && horaSaida) {
 
@@ -15,6 +19,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 nome: nome.value,
                 horaEntrada: horaEntrada.value,
                 horaSaida: horaSaida.value,
+                saidaAlmoco: saidaAlmoco.value,
+                retornoAlmoco: retornoAlmoco.value,
                 id: id.value
             }
 
@@ -33,6 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(r => {
                 if(r.ok){
                     alert(r.msg)
+                    window.location.href = '/administrador/ponto';
                 }
                 else{
                     alert(r.msg)

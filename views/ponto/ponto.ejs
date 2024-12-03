@@ -1,6 +1,7 @@
 <link rel="stylesheet" href="/css/ponto/ponto.css">
 <script src="/js/ponto/cadastrarPonto.js"></script>
 
+
 <div class="container-atestado" style="margin-top: 50px; margin-bottom: 50px;">
     <h3>Registrar horário de ponto</h3>
 
@@ -11,20 +12,142 @@
 
     <div class="row" style="margin-top: 20px;">
 
+      <% if (pontoExistente) { %> 
+        <div class="col" style="text-align: start;">
+        <label for="">Entrada:</label>
+        <input type="time" class="form-control" id="horaEntrada" name="horaEntrada" disabled value="<%= pontoExistente.hora_entrada %>" onchange="validarHoraConsulta(event)">
+      </div>
+
       <div class="col" style="text-align: start;">
-        <label for="">Horário de entrada:</label>
-        <input type="time" class="form-control" id="horaEntrada" name="horaEntrada" onchange="validarHoraConsulta(event)">
+        <label for="">Saída Alm.</label>
+        <input type="time" class="form-control" id="saidaAlmoco" name="saidaAlmoco"  disabled value="<%= pontoExistente.saida_almoco %>" onchange="validarHoraConsulta(event)">
+      </div>
+
+      <div class="col" style="text-align: start;">
+        <label for="">Retorno Alm.</label>
+        <input type="time" class="form-control" id="retornoAlmoco" name="retornoAlmoco" disabled  value="<%= pontoExistente.retorno_almoco %>" onchange="validarHoraConsulta(event)">
       </div>
       
       <div class="col" style="text-align: start;">
-        <label for="">Horário de saída:</label>
-        <input type="time" class="form-control" id="horaSaida" name="horaSaida" onchange="validarHoraConsulta(event)">
+        <label for="">Saída:</label>
+        <input type="time" class="form-control" id="horaSaida" name="horaSaida"  disabled value="<%= pontoExistente.hora_saida %>"onchange="validarHoraConsulta(event)">
       </div>
+      <button type="button" class="btn btn-dark" id="btn-ponto" style="margin-top: 20px;" disabled>Bater ponto</button>
     </div>
+    <% } else if (!pontoEntrada) { %>
+      <div class="col" style="text-align: start;">
+        <label for="">Entrada:</label>
+        <input type="time" class="form-control" id="horaEntrada" name="horaEntrada"  onchange="validarHoraConsulta(event)">
+      </div>
 
+      <div class="col" style="text-align: start;">
+        <label for="">Saída Alm.</label>
+        <input type="time" class="form-control" id="saidaAlmoco" name="saidaAlmoco"  disabled  onchange="validarHoraConsulta(event)">
+      </div>
 
-    <button type="button" class="btn btn-primary" id="btn-ponto" style="margin-top: 20px;">Bater ponto</button>
+      <div class="col" style="text-align: start;">
+        <label for="">Retorno Alm.</label>
+        <input type="time" class="form-control" id="retornoAlmoco" name="retornoAlmoco" disabled   onchange="validarHoraConsulta(event)">
+      </div>
+      
+      <div class="col" style="text-align: start;">
+        <label for="">Saída:</label>
+        <input type="time" class="form-control" id="horaSaida" name="horaSaida"  disabled onchange="validarHoraConsulta(event)">
+      </div>
+      <button type="button" class="btn btn-primary" id="btn-ponto" style="margin-top: 20px;" >Bater ponto</button>
+    </div>
+    <% } else if(!pontoSaidaAlmoco){ %>
+      <div class="col" style="text-align: start;">
+        <label for="">Entrada:</label>
+        <input type="time" class="form-control" id="horaEntrada" name="horaEntrada" disabled value="<%= pontoEntrada.hora_entrada %>"  onchange="validarHoraConsulta(event)">
+      </div>
 
+      <div class="col" style="text-align: start;">
+        <label for="">Saída Alm.</label>
+        <input type="time" class="form-control" id="saidaAlmoco" name="saidaAlmoco"    onchange="validarHoraConsulta(event)">
+      </div>
+
+      <div class="col" style="text-align: start;">
+        <label for="">Retorno Alm.</label>
+        <input type="time" class="form-control" id="retornoAlmoco" name="retornoAlmoco" disabled   onchange="validarHoraConsulta(event)">
+      </div>
+      
+      <div class="col" style="text-align: start;">
+        <label for="">Saída:</label>
+        <input type="time" class="form-control" id="horaSaida" name="horaSaida"  disabled onchange="validarHoraConsulta(event)">
+      </div>
+      <button type="button" class="btn btn-primary" id="btn-ponto" style="margin-top: 20px;" >Bater ponto</button>
+    </div>
+    <%} else if (!pontoRetornoAlmoco) { %>
+      <div class="col" style="text-align: start;">
+        <label for="">Entrada:</label>
+        <input type="time" class="form-control" id="horaEntrada" name="horaEntrada" disabled value="<%= pontoEntrada.hora_entrada %>"  onchange="validarHoraConsulta(event)">
+      </div>
+
+      <div class="col" style="text-align: start;">
+        <label for="">Saída Alm.</label>
+        <input type="time" class="form-control" id="saidaAlmoco" name="saidaAlmoco"  disabled  value="<%= pontoSaidaAlmoco.saida_almoco %>" onchange="validarHoraConsulta(event)">
+      </div>
+
+      <div class="col" style="text-align: start;">
+        <label for="">Retorno Alm.</label>
+        <input type="time" class="form-control" id="retornoAlmoco" name="retornoAlmoco"   onchange="validarHoraConsulta(event)">
+      </div>
+      
+      <div class="col" style="text-align: start;">
+        <label for="">Saída:</label>
+        <input type="time" class="form-control" id="horaSaida" name="horaSaida"  disabled onchange="validarHoraConsulta(event)">
+      </div>
+      <button type="button" class="btn btn-primary" id="btn-ponto" style="margin-top: 20px;" >Bater ponto</button>
+    </div>
+    <%} else if (!pontoSaida) { %>
+      <div class="col" style="text-align: start;">
+        <label for="">Entrada:</label>
+        <input type="time" class="form-control" id="horaEntrada" name="horaEntrada" disabled value="<%= pontoEntrada.hora_entrada %>"  onchange="validarHoraConsulta(event)">
+      </div>
+
+      <div class="col" style="text-align: start;">
+        <label for="">Saída Alm.</label>
+        <input type="time" class="form-control" id="saidaAlmoco" name="saidaAlmoco"  disabled  value="<%= pontoSaidaAlmoco.saida_almoco %>" onchange="validarHoraConsulta(event)">
+      </div>
+
+      <div class="col" style="text-align: start;">
+        <label for="">Retorno Alm.</label>
+        <input type="time" class="form-control" id="retornoAlmoco" name="retornoAlmoco"  disabled value="<%= pontoRetornoAlmoco.retorno_almoco %>" onchange="validarHoraConsulta(event)">
+      </div>
+      
+      <div class="col" style="text-align: start;">
+        <label for="">Saída:</label>
+        <input type="time" class="form-control" id="horaSaida" name="horaSaida"  onchange="validarHoraConsulta(event)">
+      </div>
+      <button type="button" class="btn btn-primary" id="btn-ponto" style="margin-top: 20px;" >Bater ponto</button>
+    </div>
+    <%} else { %>
+      <div class="col" style="text-align: start;">
+        <label for="">Entrada:</label>
+        <input type="time" class="form-control" id="horaEntrada" name="horaEntrada" disabled value="<%= pontoEntrada.hora_entrada %>"  onchange="validarHoraConsulta(event)">
+      </div>
+
+      <div class="col" style="text-align: start;">
+        <label for="">Saída Alm.</label>
+        <input type="time" class="form-control" id="saidaAlmoco" name="saidaAlmoco"  disabled  value="<%= pontoSaidaAlmoco.saida_almoco %>" onchange="validarHoraConsulta(event)">
+      </div>
+
+      <div class="col" style="text-align: start;">
+        <label for="">Retorno Alm.</label>
+        <input type="time" class="form-control" id="retornoAlmoco" name="retornoAlmoco"  disabled  onchange="validarHoraConsulta(event)">
+      </div>
+      
+      <div class="col" style="text-align: start;">
+        <label for="">Saída:</label>
+        <input type="time" class="form-control" id="horaSaida" name="horaSaida" disabled onchange="validarHoraConsulta(event)">
+      </div>
+      <button type="button" class="btn btn-dark" id="btn-ponto" style="margin-top: 20px;" disabled>Bater ponto</button>
+    </div>
+    <%}%>
+
+   
+    
     <a href="/administrador/ponto/relatorio" style="margin-top: 20px;"><i class="fas fa-hospital-user"></i> Ver relátorios de ponto</a>
 
   </div>
@@ -38,3 +161,4 @@
   </div> -->
 
 </section>
+
