@@ -19,14 +19,16 @@ class LoginController {
             }
             else{
                 msg = "Erro ao realizar autenticação! Confira as credenciais enviadas."
-                res.render("login.ejs", {retorno: msg, layout: false});
             }
 
         }
         else{
             msg = "Erro ao realizar autenticação! Confira as credenciais enviadas."
-            res.render("login.ejs", {retorno: msg, layout: false});
+            
         }
+        
+        res.render("login.ejs", {retorno: msg, layout: false});
+        msg = ""
     }
 
     registroView (req,res) {

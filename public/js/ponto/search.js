@@ -51,6 +51,8 @@ document.addEventListener('DOMContentLoaded', function () {
                             <tr>
                                 <td> ${p.nome_profissional} </td>
                                 <td> ${p.hora_entrada} </td>
+                                <td> ${p.saida_almoco} </td>
+                                <td> ${p.retorno_almoco} </td>
                                 <td> ${p.hora_saida} </td>
                                 <td> ${new Date(p.data).toLocaleDateString('pt-BR')} </td>
                             </tr>

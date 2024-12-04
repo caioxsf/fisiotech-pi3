@@ -80,19 +80,25 @@
                     <th>Saída almoço</th>
                     <th>Retorno almoço</th>
                     <th>Saída</th>
-                    <th>Data</th>
+                    <th>Data</th>   
                 </tr>
             </thead>
             <tbody>
+
+                
                 <% for(let i=0;i<ponto.length;i++) {%>
-                    <tr>
-                        <td data-label="Nome"><%= ponto[i].nome_profissional %><span class="inv" >ㅤ</span></td>
-                        <td data-label="Entr."><%= ponto[i].hora_entrada %><span class="inv" >ㅤ</span></td>
-                        <td data-label="Saida almoço"><%= ponto[i].saida_almoco %><span class="inv" >ㅤ</span></td>
-                        <td data-label="Retorno almoço"><%= ponto[i].retorno_almoco %><span class="inv" >ㅤ</span></td>
-                        <td data-label="Saida"><%= ponto[i].hora_saida %><span class="inv" >ㅤ</span></td>
-                        <td data-label="Data"><%= new Date(ponto[i].data).toLocaleDateString('pt-BR') %><span class="inv" >ㅤ</span></td>
-                    </tr>
+
+                    <% if(ponto[i].nome_profissional == usuario.login || usuario.perfil_id == 3)  { %>
+                        <tr>
+                            <td data-label="Nome"><%= ponto[i].nome_profissional %><span class="inv" >ㅤ</span></td>
+                            <td data-label="Entr."><%= ponto[i].hora_entrada %><span class="inv" >ㅤ</span></td>
+                            <td data-label="Saida almoço"><%= ponto[i].saida_almoco %><span class="inv" >ㅤ</span></td>
+                            <td data-label="Retorno almoço"><%= ponto[i].retorno_almoco %><span class="inv" >ㅤ</span></td>
+                            <td data-label="Saida"><%= ponto[i].hora_saida %><span class="inv" >ㅤ</span></td>
+                            <td data-label="Data"><%= new Date(ponto[i].data).toLocaleDateString('pt-BR') %><span class="inv" >ㅤ</span></td>
+                        </tr>
+                    <% } %>
+                    
                 <%} %>
                 
             </tbody>

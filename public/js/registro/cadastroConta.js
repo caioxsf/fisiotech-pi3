@@ -1,51 +1,8 @@
 
 
-function validarSenha (senha) {
-
-    let arraySenha = senha.split('');
-    let alfabeto = [
-        'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
-        'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
-        'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
-        'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
-    ];
-
-    let numeros = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-
-    let caracterEspecial = ['!', '@', '#', '%', '&', '*'];
-
-    let alfabetoCount = 0;
-    let numerosCount = 0
-    let caracterEspecialCount = 0;
-    
-    for(let i=0;i<senha.length;i++) {
-        
-        for(let alfa=0;alfa<alfabeto.length;alfa++) {
-            if(arraySenha[i] == alfabeto[alfa]) {
-                alfabetoCount++;
-            }
-        }
-
-        for(let num=0;num<numeros.length;i++) {
-            if(arraySenha[i] == numeros[num]) {
-                numerosCount++;
-            }
-        }
-
-        for(let caract=0;caract<caracterEspecial.length;i++) {
-            if(arraySenha[i] == caracterEspecial[caract]) {
-                caracterEspecialCount++;
-            }
-        }
-        
-    }
-
-    if(alfabetoCount >= 5 && numerosCount >= 1 && caracterEspecial >= 1) {
-        return true;
-    }
-
-    return false;
-
+function validarSenha(senha) {
+    const regex = /^(?=.*[a-zA-Z]{5,})(?=.*\d)(?=.*[!@#%&*.]).{7,}$/;
+    return regex.test(senha);
 }
 
 
@@ -58,7 +15,23 @@ document.addEventListener('DOMContentLoaded', function() {
         
        let usuario = document.getElementById('usuario');
        let senha = document.getElementById('senha');
-        
+
+       let op = validarSenha(senha.value);
+
+       document.getElementById('msgErro').innerHTML = '';
+       document.getElementById('msgUser').innerHTML = '';
+
+       if(senha.value == '' || usuario.value == '') {
+            document.getElementById('msgErro').innerHTML = 'Digite um usuario ou senha!';
+            document.getElementById('msgUser').innerHTML = '';
+            return false;
+       }
+
+       if(op == false && usuario.value) {
+            document.getElementById('msgErro').innerHTML = 'A senha precisa ter pele menos 7 digitos, 1 caracter especial e um número!';
+            document.getElementById('msgUser').innerHTML = '';
+            return false;
+       }
         if (usuario && senha) {
             let obj = {
               usuario: usuario.value,
@@ -83,13 +56,15 @@ document.addEventListener('DOMContentLoaded', function() {
                     window.location.href = '/login'
                 }
                 else {
-                    alert(resposta.msg);
+                    document.getElementById('msgUser').innerHTML = resposta.msg;
+                    document.getElementById('msgErro').innerHTML = '';
                 }
             })
             .catch (function(e) {
                 console.error('erro no fatch' + e);
             })
-            
-        }
+       }
+        
+        
     }
 })

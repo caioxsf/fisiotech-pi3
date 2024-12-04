@@ -112,12 +112,17 @@
     <h2>Login</h2>
     <form action="/login" method="POST" class="formulario-login">
         <div class="input-group">
-            <input type="text" id="usuario" name="usuario" placeholder="Usuário" required>
+            <input type="text" id="usuario" name="usuario" placeholder="Usuário" >
         </div>
+
         <div class="input-group">
-            <input type="password" id="senha" name="senha" placeholder="Senha" required>
+            <input type="password" id="senha" name="senha" placeholder="Senha" >
         </div>
+
         <button type="submit" class="btn-login" style="margin-bottom: 10px;">Entrar</button>
+        <% if(typeof retorno != 'undefined') { %>
+          <span style="text-align: center; color: lightcoral;"><%= retorno %></span><br>
+        <% } %>
         <a href="/login/registro">Não possui uma conta? Registre-se</a>
     </form>
 </div>
