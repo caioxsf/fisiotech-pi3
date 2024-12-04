@@ -1,4 +1,5 @@
 
+
 document.addEventListener('DOMContentLoaded', function(){
 
     let btn = document.querySelectorAll('.btn-add');
@@ -9,8 +10,6 @@ document.addEventListener('DOMContentLoaded', function(){
         else
             btn[i].addEventListener('click', cadastrarConsulta);
     }
-
-    
 
     function cadastrarConsulta () {
         

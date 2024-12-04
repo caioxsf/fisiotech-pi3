@@ -1,5 +1,6 @@
 <body background="/img/background/bg.png">
 <script src="/js/paciente/cadastroPaciente.js"></script>
+
 <link rel="stylesheet" href="/css/paciente/paciente.css">
 
 
@@ -33,11 +34,11 @@
         </div>
         <div class="col-6">
           <label for="endereco" class="form-label">Endereço</label>
-          <input type="text" class="form-control" id="endereco" name="endereco" onblur="validarNomes(this)">
+          <input type="text" class="form-control" id="endereco" name="endereco" disabled onblur="validarNomes(this)">
         </div>
         <div class="col-6">
           <label for="bairro" class="form-label">Bairro</label>
-          <input type="text" class="form-control" id="bairro" name="bairro" onblur="validarBairro(this)">
+          <input type="text" class="form-control" id="bairro" name="bairro" disabled onblur="validarBairro(this)">
         </div>
         <div class="col-md-3">
           <label for="sexo" class="form-label">Sexo</label>
@@ -52,11 +53,11 @@
         </div>
         <div class="col-md-3">
           <label for="cidade" class="form-label">Cidade</label>
-          <input type="text" class="form-control" id="cidade" name="cidade" onblur="validarCidade(this)">
+          <input type="text" class="form-control" id="cidade" name="cidade" disabled onblur="validarCidade(this)">
         </div>
         <div class="col-md-3">
           <label for="estado" class="form-label">Estado</label>
-          <select id="estado" name="estado" class="form-select" onblur="borda(this)">
+          <select id="estado" name="estado" class="form-select" disabled onblur="borda(this)">
             
             <option disabled selected>Selecione uma opção</option>
             <% for(let i=0;i<estados.length;i++) { %>
@@ -67,7 +68,7 @@
         </div>
         <div class="col-md-3">
           <label for="cep" class="form-label">CEP</label>
-          <input type="text" class="form-control" id="cep" name="cep" onchange="mascara('#####-###',this,event)">
+          <input type="text" class="form-control" id="cep" name="cep" onchange="mascara('########',this,event)">
         </div>
 
         <div class="col-12">
@@ -117,11 +118,11 @@
         </div>
         <div class="col-6">
           <label for="endereco" class="form-label">Endereço</label>
-          <input type="text" class="form-control" id="endereco" name="endereco" onblur="validarNomes(this)" value="<%=pacienteAlteracao.endereco%>">
+          <input type="text" class="form-control" id="endereco" name="endereco" disabled  onblur="validarNomes(this)" value="<%=pacienteAlteracao.endereco%>">
         </div>
         <div class="col-6">
           <label for="bairro" class="form-label">Bairro</label>
-          <input type="text" class="form-control" id="bairro" name="bairro" onblur="validarBairro(this)" value="<%=pacienteAlteracao.bairro%>">
+          <input type="text" class="form-control" id="bairro" name="bairro" disabled onblur="validarBairro(this)" value="<%=pacienteAlteracao.bairro%>">
         </div>
         <div class="col-md-3">
           <label for="sexo" class="form-label">Sexo</label>
@@ -140,11 +141,11 @@
         </div>
         <div class="col-md-3">
           <label for="cidade" class="form-label">Cidade</label>
-          <input type="text" class="form-control" id="cidade" name="cidade" onblur="validarCidade(this)" value="<%=pacienteAlteracao.cidade%>">
+          <input type="text" class="form-control" id="cidade" name="cidade" disabled onblur="validarCidade(this)" value="<%=pacienteAlteracao.cidade%>">
         </div>
         <div class="col-md-3">
           <label for="estado" class="form-label">Estado</label>
-          <select id="estado" name="estado" class="form-select" onblur="borda(this)">
+          <select id="estado" name="estado" class="form-select" onblur="borda(this)" disabled>
             <option disabled value="0">Selecione uma opção</option>
             <% for(let i=0;i<estados.length;i++) { %>
               <% if(estados[i].id == pacienteAlteracao.estado_id) { %>
@@ -158,7 +159,7 @@
         </div>
         <div class="col-md-3">
           <label for="cep" class="form-label">CEP</label>
-          <input type="text" class="form-control" id="cep" name="cep" onchange="mascara('#####-###',this,event)" value="<%=pacienteAlteracao.cep%>">
+          <input type="text" class="form-control" id="cep" name="cep" onchange="mascara('########',this,event)" value="<%=pacienteAlteracao.cep%>">
         </div>
 
         <div class="col-12">
@@ -187,3 +188,4 @@
 </body>
 
 
+<script src="/js/paciente/cepAPI.js"></script>
