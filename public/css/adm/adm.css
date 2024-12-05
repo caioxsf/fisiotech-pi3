@@ -45,6 +45,13 @@
 
 @media (max-width: 1250px) {
 
+    .container-servicosEditar {
+        display: flex;
+        height: 400px;
+        max-width: 450px;
+        margin: 0 auto;
+    }
+
     .container-servicos {
        width: 450px;
        margin: 0 auto;
@@ -102,6 +109,14 @@
        margin: 0 auto;
     }
 
+    .container-servicosEditar {
+        display: flex;
+        height: 400px;
+        max-width: 450px;
+        margin: 0 auto;
+    }
+
+
     .container-tabela {
         max-height: 300px; 
         max-width: 400px;
@@ -153,6 +168,14 @@
         margin: 0 auto;
        
      }
+
+     .container-servicosEditar {
+        display: flex;
+        height: 400px;
+        max-width: 350px;
+        margin: 0 auto;
+    }
+
 
      
 }

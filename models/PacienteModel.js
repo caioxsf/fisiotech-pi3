@@ -83,6 +83,7 @@ class PacienteModel {
         let sql = `select * from paciente pac
         inner join sexo sex on pac.fk_sexo_id = sex.sexo_id
         inner join estado est on pac.fk_est_id = est.est_id
+        order by pac.pac_nome asc
         `;
         let resultado = await db.ExecutaComando(sql);
         let listaPaciente = [];
