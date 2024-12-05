@@ -43,6 +43,13 @@ main {
     gap: 10px;
 }
 
+.centralizar-pdf {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
 @media (max-width: 1200px) {
 
     .table-container {

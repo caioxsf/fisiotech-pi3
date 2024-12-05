@@ -87,7 +87,7 @@
             
     
             
-                    <div class="table-container">
+                    <div class="table-container print">
                         <table class="table table-hover table-responsive" id="tabela">
                             <thead>
                                 <tr>
@@ -133,6 +133,7 @@
            
             
 
+                <!-- TABLE PARA EXPORTAR COM EXCEL -->
             <table class="table table-hover table-responsive" id="tabelaExcel" hidden >
                 <thead>
                     <tr>
@@ -154,6 +155,51 @@
                    
                 </tbody>
             </table>
+
+            <!-- TABLE PARA EXPORTAR COM PDF -->
+
+            <div class="tab" style="display: none; text-align: center; margin: 0 auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nome médico</th>
+                            <th>Especialidade médica</th>
+                            <th>Data início do afastamento</th>
+                            <th>Data término do afastamento</th>
+                            <th style="text-align: center;">Foto atestado</th>
+                           
+                        </tr>
+                    </thead>
+                    <tbody>
+                            
+                        <% atestado.map(function(value) { %>
+                            <% if (value.nome_medico == usuario.login || usuario.perfil_id == 3) { %>
+                                <tr>
+                                <td data-label="Nome médico"><%= value.nome_medico %></td>
+                                <td data-label="Esp. médica"><%= value.especialidade_medica %></td>
+                                <td data-label="Dt. Inicio"><%= new Date(value.data_inicio).toLocaleDateString('pt-BR') %></td>
+                                <td data-label="Dt. Term."><%= new Date(value.data_termino).toLocaleDateString('pt-BR') %></td>
+                                
+                                <td style="text-align: center;">
+    
+                                    <a href="<%= value.foto_atestado %>" download='Atestado' class="print" style="margin-right: 15px;"><i class="fas fa-file-download fa-lg" style="font-size: 25px;" ></i></a>
+                                    <img src="<%= value.foto_atestado %>" alt="Foto Atestado"  width="100">
+    
+                                    <button type="button" class="btn-excluir print" data-id="<%= value.id %>" data-nome="<%= value.nome_medico %>" style="border: none; background-color: transparent; margin-left: 10px; ">
+                                        <i class="fas fa-trash" style="color: #d72323;"></i>
+                                    </button>
+                                    <a href="/administrador/relatorio/atestado/editar/<%= value.id %>"><i class="fas fa-edit print" style="color: #74C0FC;"></i></a>
+                                </td>
+                                
+                            </tr>
+                            <%}%>
+                            
+                        <% }) %>
+                       
+                    </tbody>
+                </table>
+            </div>
+            
 
         </section>
     </main>
