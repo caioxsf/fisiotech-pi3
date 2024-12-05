@@ -70,6 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     ativarEventosDialog();
                 } else {
                     alert('Esse atestado não existe!');
+                    window.location.href = '/administrador/relatorio/atestado'
                 }
             })
             .catch((e) => {
