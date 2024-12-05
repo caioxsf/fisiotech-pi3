@@ -11,6 +11,7 @@ class ConsultaController {
         let pacienteModel = new PacienteModel();
         let listaPaciente = await pacienteModel.listarPaciente();
 
+
         res.render('consulta/consulta.ejs', {serv: listaServicos, lista_pacientes: listaPaciente})
     }
 
@@ -82,12 +83,15 @@ class ConsultaController {
         let pacienteModel = new PacienteModel();
         let listaPaciente = await pacienteModel.listarPaciente();
 
-        res.render('consulta/consulta.ejs', {serv: listaServicos, consultaAlteracao: consultaModel, lista_pacientes: listaPaciente});
+        let listaConsulta = new ConsultaModel();
+        listaConsulta = await listaConsulta.listarConsulta()
+
+        res.render('consulta/consulta.ejs', {serv: listaServicos, consultaAlteracao: consultaModel, lista_pacientes: listaPaciente, hora: listaConsulta});
     }
 
     async editarConsulta (req,res) {
         let ok;
-        if(req.body.nome && req.body.telefone && req.body.email && req.body.servico && req.body.data && req.body.hora) {
+        if(req.body.nome && req.body.telefone && req.body.email && req.body.servico && req.body.data && req.body.hora != 'Selecione um horário') {
             let consulta = new ConsultaModel();
             consulta.id = req.body.id;
             consulta.nome_id = req.body.nome;

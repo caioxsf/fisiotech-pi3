@@ -90,7 +90,7 @@
                <div class="col-md-6">
                 
               <label for="nomepacientes" class="form-label">Paciente</label>
-              <select name="nomepacientes" id="nomepacientes" class="form-select" style="width: 265px" onchange="preencherDadosPaciente()">
+              <select name="nomepacientes" id="nomepacientes" class="form-select" disabled style="width: 265px" onchange="preencherDadosPaciente()">
 
                 <% for(let i=0;i<lista_pacientes.length;i++) { %>
                     <% if (lista_pacientes[i].id == consultaAlteracao.nome_id) { %>
@@ -107,11 +107,11 @@
             </div>
             <div class="col-md-6">
               <label for="telefone" class="form-label">Telefone</label>
-              <input type="text" class="form-control" id="telefone" name="telefone" value="<%= consultaAlteracao.telefone %>" onchange="mascara('(##)#####-####',this,event)">
+              <input type="text" class="form-control" id="telefone"disabled  name="telefone" value="<%= consultaAlteracao.telefone %>" onchange="mascara('(##)#####-####',this,event)">
             </div>
             <div class="col-6">
               <label for="email" class="form-label">E-mail</label>
-              <input type="text" class="form-control" id="email" name="email" onblur="validarEmail(this)" value="<%= consultaAlteracao.email %>">
+              <input type="text" class="form-control" id="email" name="email" disabled onblur="validarEmail(this)" value="<%= consultaAlteracao.email %>">
             </div>
       
             <div class="col-6">
@@ -137,25 +137,31 @@
               <!-- <input type="time" class="form-control" id="hora" name="hora"onblur="validarHoraConsulta(this)"> -->
               <select name="hora" id="hora" class="form-select">
                 <option disabled selected>Selecione um horário</option>
-                <option value="08:00">08:00</option>
-                <option value="08:30">08:30</option>
-                <option value="09:00">09:00</option>
-                <option value="09:30">09:30</option>
-                <option value="10:00">10:00</option>
-                <option value="10:30">10:30</option>
-                <option value="11:00">11:00</option>
-                <option value="11:30">11:30</option>
-                <option value="12:00">12:00</option>
-                <option value="12:30">12:30</option>
-                <option value="13:00">13:00</option>
-                <option value="13:30">13:30</option>
-                <option value="14:00">14:00</option>
-                <option value="14:30">14:30</option>
-                <option value="15:00">15:00</option>
-                <option value="15:30">15:30</option>
-                <option value="16:00">16:00</option>
-                <option value="16:30">16:30</option>
-                <option value="17:00">17:00</option>
+                <% for(let i=0;i<hora.length;i++) { %>
+                  <% if(hora[i].hora == consultaAlteracao.hora) { %>
+                     <option selected value="<%= hora[i].hora%>"><%= hora[i].hora %></option>
+                  <% } else { %>
+                    <option value="08:00">08:00</option>
+                    <option value="08:30">08:30</option>
+                    <option value="09:00">09:00</option>
+                    <option value="09:30">09:30</option>
+                    <option value="10:00">10:00</option>
+                    <option value="10:30">10:30</option>
+                    <option value="11:00">11:00</option>
+                    <option value="11:30">11:30</option>
+                    <option value="12:00">12:00</option>
+                    <option value="12:30">12:30</option>
+                    <option value="13:00">13:00</option>
+                    <option value="13:30">13:30</option>
+                    <option value="14:00">14:00</option>
+                    <option value="14:30">14:30</option>
+                    <option value="15:00">15:00</option>
+                    <option value="15:30">15:30</option>
+                    <option value="16:00">16:00</option>
+                    <option value="16:30">16:30</option>
+                    <option value="17:00">17:00</option>
+                  <% } %>
+                  <% } %>
             </select>
             
             </div>

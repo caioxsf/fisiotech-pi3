@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
             objetoBusca.texto = texto;
         } else {
             alert('Escolha o tipo da busca!');
+            window.location.href = '/consulta/lista'
             return;
         }
 
@@ -106,6 +107,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     ativarEventosDialog();
                 } else {
                     alert('Essa consulta não existe!');
+                    window.location.href = '/consulta/lista'
                 }
             })
             .catch((e) => {
