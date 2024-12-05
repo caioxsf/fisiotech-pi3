@@ -113,6 +113,8 @@ class PontoModel {
             lista.push(new PontoModel ( coluna['pon_id'],
                                         coluna['pon_id_profissional'],
                                         coluna['pon_hora_entrada'],
+                                        coluna['pon_saida_almoco'],
+                                        coluna['pon_retorno_almoco'],
                                         coluna['pon_hora_saida'],
                                         coluna['pon_nome_profissional'],
                                         coluna['pon_data'],
@@ -296,11 +298,11 @@ class PontoModel {
             "id": this.#id,
             "id_profissional": this.#id_profissional,
             "hora_entrada": this.#hora_entrada,
+            "saida_almoco": this.#saida_almoco,
+            "retorno_almoco": this.#retorno_almoco,
             "hora_saida": this.#hora_saida,
             "nome_profissional": this.#nome_profissional,
-            "data": this.#data,
-            "saida_almoco": this.#saida_almoco,
-            "retorno_almoco": this.#retorno_almoco
+            "data": this.#data  
         }
     }
 }
