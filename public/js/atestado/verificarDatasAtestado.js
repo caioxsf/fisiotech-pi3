@@ -20,11 +20,11 @@ function validarDataInicio30DiasAntes(event) {
 
  
     const dataLimite = new Date();
-    dataLimite.setDate(dataAtual.getDate() - 30);
+    dataLimite.setDate(dataAtual.getDate() - 2);
 
   
     if (dataInicio < dataLimite || dataInicio > dataAtual) {
-        alert("A data deve estar dentro dos últimos 30 dias.");
+        alert("A data deve estar dentro das últimas 48 horas.");
         event.target.value = ""; 
         return;
     }
