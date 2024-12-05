@@ -56,7 +56,7 @@
         </div>
     </form>
 
-    <div class="container-lista">
+    <div class="container-lista print">
         <% for(let i=0; i<consultas.length; i++) { %>
             <% if (consultas[i].data) { %>
                 <% 
@@ -85,6 +85,7 @@
             </div>
         <% } %>
 
+        <!-- EXPORTAR TABELA COM EXCEL -->
             <table id="tabela" hidden>
                 <thead>
                     <tr>
@@ -113,7 +114,41 @@
                 </tbody>
             </table>
 
+            
     </div>
+
+    <!-- EXPORTAR TABELA COM PDF -->
+
+    
+        <table class="tab table table-striped" style="display: none;">
+            <h3 class="tab" style="display: none;">Consultas marcadas</h3>
+            <thead>
+                <tr>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Data</th>
+                    <th scope="col">Horario</th>
+                    <th scope="col">Telefone</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Serviço</th>
+                    <th scope="col">Obs</th>
+                </tr>
+            </thead>
+            <% for(let i=0;i<consultas.length;i++) {%>
+            <tbody>
+                <tr>
+                    <td><%= consultas[i].nome_id %></td>
+                    <td><%= consultas[i].data %></td>
+                    <td><%= consultas[i].hora %></td>
+                    <td><%= consultas[i].telefone %></td>
+                    <td><%= consultas[i].email %></td>
+                    <td><%= consultas[i].servico_id %></td>
+                    <td><%= consultas[i].obs %></td>
+                </tr>
+            </tbody>
+            <%} %>
+        </table>
+    
+
 <% } else { %>
     <div class="container-lista">
         <h2 style="margin-top: 220px;">Nenhuma consulta cadastrada!</h2>

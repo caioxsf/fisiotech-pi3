@@ -52,10 +52,10 @@
         </section>
 
         <div class="container-contas print">
-            <h3>Usuários registrados</h3>
+            <h3 class="print">Usuários registrados</h3>
     
             <div class="container-table">
-              <table class="table table-hover table-responsive" style="text-align: start;" id="tabelausers">
+              <table class="table tabelacss table-hover table-responsive" style="text-align: start;" id="tabelausers">
                 <thead>
                   <tr>
                     <th scope="col">Usuário</th>
@@ -113,48 +113,31 @@
 
 
 
-        <div class="tab" style="display: none;">
-          <h3>Usuários registrados</h3>
-  
-          <div class="container-table">
-            <table class="table table-hover table-responsive" style="text-align: start;" id="tabelausers">
-              <thead>
-                <tr>
-                  <th scope="col">Usuário</th>
-                  <th scope="col">Perfil</th>
-                  <th scope="col" style="text-align: end;"  class="print">Ações</th>
-                </tr>
-              </thead>
-              <tbody>
-                <% for(let i=0;i<usuarios.length;i++) { %>
+        <!-- EXPORTAR TABELA POR PDF -->
+
+      
+          <table class="tab table table-striped" style="display: none;">
+            <h3 class="tab" style="display: none; text-align: start;">Usuários registrados</h3>
+            <thead>
               <tr>
-                 
-                    
-                    <td data-label="Usuário" class="tbodyusuarios"><%= usuarios[i].login %><span class="inv" >ㅤ</span></td>
-                    <td data-label="Perfil" class="tbodyusuarios"><%= usuarios[i].perfil_id %><span class="inv" >ㅤ</span></td>
-  
-                    <% let perfil = usuarios[i].perfil_id; %>
-                    <% if(perfil != 'Sistema' ) { %>
-                    <td data-label="Ações" class="tbodyusuarios print" style=" text-align: end;">
-  
-                      <a href="/administrador/relatorio/usuarios/editar/<%= usuarios[i].id %>" class="btn-editar" style="border: none; background-color: transparent; ">
-                        <i class="fas fa-edit" style="color: #74C0FC;"></i>
-                      </a>
-                      <button type="button"  class="btn-excluirConta" data-id="<%= usuarios[i].id %>" data-nome="<%= usuarios[i].login %>" style="border: none; background-color: transparent;">
-                        <i class="fas fa-trash" style="color: #d72323;"></i>
-                      </button>
-                      <span class="inv" >ㅤ</span>
-                    </td>
-                    <% } %>
-                    
+                <th scope="col">Usuário</th>
+                <th scope="col">Perfil</th>
+                <th scope="col" class="print">Ações</th>
               </tr>
-              
+            </thead>
+          
+            <tbody>
+              <% for(let i=0;i<usuarios.length;i++) { %>
+              <tr>
+                <td data-label="Usuário"><%= usuarios[i].login %></span></td>
+                <td data-label="Perfil"><%= usuarios[i].perfil_id %></span></td>
+              </tr>
               <% } %>
             </tbody>
-            </table>
-          </div>
-      </div>
+          </table>
 
+        
+        
 
      
 

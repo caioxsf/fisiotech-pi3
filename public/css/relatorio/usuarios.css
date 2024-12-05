@@ -60,6 +60,8 @@ main {
     padding: 20px;
 }
 
+
+
 .container-table {
     overflow-y: auto;
 }
@@ -73,7 +75,7 @@ main {
         height: 400px;
     }
 
-    .table tbody tr td:before {
+    .tabelacss tbody tr td:before {
         content: attr(data-label); 
         font-weight: bold;
         background-color: transparent;
@@ -84,16 +86,16 @@ main {
         text-align: start;
     }
 
-    .table thead {
+    .tabelacss thead {
         display: none; 
     }
     
-    .table tbody tr {
+    .tabelacss tbody tr {
         display: block;
         margin-bottom: 30px;
     }
 
-    .table tbody tr td {
+    .tabelacss tbody tr td {
         display: flex;
         justify-content: space-between;
         padding: 10px;
@@ -124,6 +126,5 @@ main {
     .inv {
         display: inline;
     }
-
 
 }
