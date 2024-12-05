@@ -69,9 +69,56 @@
     </form>
 </section>
 
-<div class="container-contas" style="margin-top: -20px; margin-bottom: 30px;">
+<div class="container-contas print" style="margin-top: -20px; margin-bottom: 30px;">
+    
     <div class="container-table" style="overflow-y: auto; max-height: 500px;">
+        <h3>Relatório de pontos</h3>
+        <table class="table table-hover table-responsive" id="tabela">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Entrada</th>
+                    <th>Saída almoço</th>
+                    <th>Retorno almoço</th>
+                    <th>Saída</th>
+                    <th>Data</th>   
+                </tr>
+            </thead>
+            <tbody>
 
+                
+                <% for(let i=0;i<ponto.length;i++) {%>
+
+                    <% if(ponto[i].nome_profissional == usuario.login || usuario.perfil_id == 3)  { %>
+                        <tr>
+                            <td data-label="Nome"><%= ponto[i].nome_profissional %><span class="inv" >ㅤ</span></td>
+                            <td data-label="Entr."><%= ponto[i].hora_entrada %><span class="inv" >ㅤ</span></td>
+                            <td data-label="Saida almoço"><%= ponto[i].saida_almoco %><span class="inv" >ㅤ</span></td>
+                            <td data-label="Retorno almoço"><%= ponto[i].retorno_almoco %><span class="inv" >ㅤ</span></td>
+                            <td data-label="Saida"><%= ponto[i].hora_saida %><span class="inv" >ㅤ</span></td>
+                            <td data-label="Data"><%= new Date(ponto[i].data).toLocaleDateString('pt-BR') %><span class="inv" >ㅤ</span></td>
+                        </tr>
+                    <% } %>
+                    
+                <%} %>
+                
+            </tbody>
+        </table>
+    </div>
+    
+</div>
+
+
+
+
+
+<!-- TABELA PARA EXPORTAR COMO PDF -->
+
+
+<div class="tab" style="margin-top: 20px; margin-bottom: 30px; display: none">
+    
+    <div class="">
+        <h3>Relatório de pontos</h3>
         <table class="table table-hover table-responsive" id="tabela">
             <thead>
                 <tr>

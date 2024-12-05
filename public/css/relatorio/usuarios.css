@@ -33,6 +33,11 @@ main {
     gap: 10px;
 }
 
+.container-contas {
+    height: 400px;
+    overflow-y: auto;
+}
+
 #btnExportarExcel {
     display: flex;
     align-items: center;
@@ -53,7 +58,10 @@ main {
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     border-radius: 6px;
     padding: 20px;
-    
+}
+
+.container-table {
+    overflow-y: auto;
 }
 
 @media (max-width: 1250px) {
