@@ -47,7 +47,7 @@
     </form>
 
 
-    <div class="modal-container">
+    <div class="modal-container print">
             <% for(let i=0;i<pacientes.length;i++) { %>
                     <div class="card-modal" id="search-aqui">
                         <div class="card" style="width: 18rem;">
@@ -141,6 +141,43 @@
             
         </div>
         
+
+        <table class="tab" style="display: none;">
+            <legend class="tab" style="display: none;">Pacientes cadastrados</legend>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Telefone</th>
+                    <th>Email</th>
+                    <th>Data de nascimento</th>
+                    <th>CPF</th>
+                    <th>Sexo</th>
+                    <th>Endereço</th>
+                    <th>Bairro</th>
+                    <th>Cidade</th>
+                    <th>Estado</th>
+                    <th>CEP</th>
+                </tr>
+                
+            </thead>
+            <% for(let i=0;i<pacientes.length;i++) {%>
+                <tbody>
+                    <td><%= pacientes[i].nome %></td>
+                    <td><%= pacientes[i].telefone %></td>
+                    <td><%= pacientes[i].email %></td>
+                    <td><%= pacientes[i].nascimento%></td>
+                    <td><%= pacientes[i].cpf %></td>
+                    <td><%= pacientes[i].sexo_id %></td>
+                    <td><%= pacientes[i].endereco %></td>
+                    <td><%= pacientes[i].bairro %></td>
+                    <td><%= pacientes[i].cidade %></td>
+                    <td><%= pacientes[i].estado_id %></td>
+                    <td><%= pacientes[i].cep %></td>
+                </tbody>
+            <%} %>
+            
+        </table>
+
     
     <div class="container-lista">       
     </div>
