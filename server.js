@@ -28,6 +28,6 @@ global.CAMINHO_IMG_NAV_ATESTADO = "/img/atestado/";
 global.CAMINHO_IMG_NAV_PACIENTE = "/img/paciente/";
 global.CAMINHO_IMG_REAL = __dirname + "/public";
 
-app.listen(5000, function() {
+app.listen(3000, function() {
     console.log("servidor iniciado!");
 })
