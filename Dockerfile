@@ -31,6 +31,9 @@ USER node
 # Copy the rest of the source files into the image.
 COPY . .
 
+# Corrigir permissões para o usuário node
+RUN mkdir -p public/img/paciente && chown -R node:node public/img
+
 # Expose the port that the application listens on.
 EXPOSE 2525
 
