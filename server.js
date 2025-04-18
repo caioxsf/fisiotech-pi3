@@ -7,7 +7,7 @@ const routerAdm = require('./routes/admRoute');
 const expressEjsLayout = require('express-ejs-layouts');
 const cookieParser = require('cookie-parser');
 const app = express();
-import dotenv from 'dotenv';
+const dotenv = require('dotenv');
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 app.use(cookieParser());
