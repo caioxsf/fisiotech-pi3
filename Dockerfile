@@ -12,16 +12,15 @@ RUN --mount=type=bind,source=package.json,target=package.json \
     --mount=type=cache,target=/root/.npm \
     npm ci --omit=dev
 
-# Copia os arquivos com root
+# Copia arquivos com root
 COPY . .
 
-# Cria pasta de upload com permissões adequadas
-RUN mkdir -p public/img/paciente
+# Cria pasta de upload e dá permissão só nela
+RUN mkdir -p public/img/paciente && chown -R node:node public/img/paciente
 
-# Só agora troca para o usuário 'node'
+# Troca pro usuário não-root
 USER node
 
 EXPOSE 2525
 
-# Usa array no CMD pra evitar erro de sinal (aviso que o log mostrou)
 CMD ["npm", "start"]
