@@ -7,10 +7,11 @@ const routerAdm = require('./routes/admRoute');
 const expressEjsLayout = require('express-ejs-layouts');
 const cookieParser = require('cookie-parser');
 const app = express();
-
+import dotenv from 'dotenv';
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 app.use(cookieParser());
+dotenv.config();
 
 app.set("view engine", "ejs");
 app.set("layout", "./layout");
